@@ -41,7 +41,7 @@ async function calibrateCpu(url = 'http://www.example.com') {
 
   const benchmarkIndex = calibrationResult.environment.benchmarkIndex;
   const cpuSlowdownMultiplier = benchmarkIndex / 500;
-  debug('calibration')({ benchmarkIndex, cpuSlowdownMultiplier });
+  debug('pagespeed:calibration')({ benchmarkIndex, cpuSlowdownMultiplier });
 
   return cpuSlowdownMultiplier;
 }
@@ -52,13 +52,13 @@ async function getPageSpeedScore(url, options = {}) {
   const config = getConfig(metrics, cpuSlowdownMultiplier);
   
   const result = await runLighthouse(url, opts, config);
-
-  debug('result')(result);
   Object.values(result.audits).forEach(({id, displayValue, score}) => 
-    debug('metrics')(`${id}: ${displayValue} (${formatScore(score)})`)
+    debug('pagespeed:metrics')(`${id}: ${displayValue} (${formatScore(score)})`)
   );
 
-  return formatScore(result.categories.performance.score);
+  const score = formatScore(result.categories.performance.score);
+  debug('pagespeed:score')(score);
+  return score;
 }
 
 if (require.main === module) {
