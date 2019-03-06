@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const lighthouse = require('lighthouse');
 const chromeLauncher = require('chrome-launcher');
 const debug = require('debug');
@@ -40,7 +42,7 @@ async function calibrateCpu(url = 'http://www.example.com') {
   const calibrationResult = await runLighthouse(url, opts, config);
 
   const benchmarkIndex = calibrationResult.environment.benchmarkIndex;
-  const cpuSlowdownMultiplier = benchmarkIndex / 500;
+  const cpuSlowdownMultiplier = benchmarkIndex / 600;
   debug('pagespeed:calibration')({ benchmarkIndex, cpuSlowdownMultiplier });
 
   return cpuSlowdownMultiplier;

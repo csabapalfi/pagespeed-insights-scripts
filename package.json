@@ -2,6 +2,9 @@
   "name": "pagespeed-score",
   "version": "0.1.1",
   "description": "",
+  "bin": { 
+    "pagespeed-score" : "index.js" 
+  },
   "main": "index.js",
   "author": "Csaba Palfi",
   "license": "MIT",
