@@ -1,0 +1,11 @@
+{
+  "name": "pagespeed-score",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Csaba Palfi",
+  "license": "MIT",
+  "dependencies": {
+    "lighthouse": "^4.1.0"
+  }
+}
