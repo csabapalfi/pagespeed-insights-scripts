@@ -13,7 +13,7 @@ async function runLighthouse(url, opts, config = null) {
   });
 }
 
-const metrics = [
+const METRICS = [
   'first-contentful-paint',
   'first-meaningful-paint',
   'speed-index',
@@ -21,16 +21,15 @@ const metrics = [
   'first-cpu-idle'
 ];
 
-const opts = {
-  chromeFlags: ['--headless']
-};
+const getOptions = (cpuSlowdownMultiplier = 1) => ({
+  chromeFlags: ['--headless'],
+  blockedUrlPatterns: [],
+  throttling: {cpuSlowdownMultiplier}
+});
 
-const getConfig = (onlyAudits, cpuSlowdownMultiplier = 1) => ({
+const getConfig = (onlyAudits = []) => ({
   extends: 'node_modules/lighthouse/lighthouse-core/config/lr-mobile-config.js',
-  settings: {
-    onlyAudits,
-    throttling: {cpuSlowdownMultiplier}
-  }
+  settings: {onlyAudits}
 });
 
 function formatScore(score) {
@@ -38,7 +37,9 @@ function formatScore(score) {
 }
 
 async function calibrateCpu(url = 'http://www.example.com') {
-  const config = getConfig(metrics[0]);
+  const opts = getOptions();
+  const config = getConfig();
+  //TODO calibrate without a separate run
   const calibrationResult = await runLighthouse(url, opts, config);
 
   const benchmarkIndex = calibrationResult.environment.benchmarkIndex;
@@ -51,16 +52,32 @@ async function calibrateCpu(url = 'http://www.example.com') {
 async function getPageSpeedScore(url, options = {}) {
   const cpuSlowdownMultiplier =
     options.cpuSlowdownMultiplier || await calibrateCpu();
-  const config = getConfig(metrics, cpuSlowdownMultiplier);
+  const opts = getOptions(cpuSlowdownMultiplier);
+  const config = getConfig(METRICS);
+  const verbose = options.verbose;
+  const silly = options.silly;
   
-  const result = await runLighthouse(url, opts, config);
-  Object.values(result.audits).forEach(({id, displayValue, score}) => 
+  const lighthouseResult = await runLighthouse(url, opts, config);
+  const metrics = Object.values(lighthouseResult.audits)
+    .map(({id, displayValue, rawValue, score}) => 
+      ({id, displayValue, rawValue, score}));
+
+  metrics.forEach(({id, displayValue, score}) =>
     debug('pagespeed:metrics')(`${id}: ${displayValue} (${formatScore(score)})`)
   );
 
-  const score = formatScore(result.categories.performance.score);
+  const score = formatScore(lighthouseResult.categories.performance.score);
   debug('pagespeed:score')(score);
-  return score;
+
+  const result = {score};
+  if (verbose || silly) {
+    result.metrics = metrics;
+  }
+  if (silly) {
+    result.lighthouseResult = lighthouseResult;
+  }
+
+  return result;
 }
 
 if (require.main === module) {
@@ -69,7 +86,8 @@ if (require.main === module) {
     if (!/^https?:\/\//i.test(url)) {
         url = 'http://' + url;
     }
-    console.log(await getPageSpeedScore(url))
+    const {score} = await getPageSpeedScore(url);
+    console.log(score);
   })();
 } else {
   module.exports = {
