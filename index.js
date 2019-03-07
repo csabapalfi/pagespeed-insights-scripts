@@ -65,7 +65,10 @@ async function getPageSpeedScore(url, options = {}) {
 
 if (require.main === module) {
   (async() => {
-    const [,,url] = process.argv;
+    let [,,url] = process.argv;
+    if (!/^https?:\/\//i.test(url)) {
+        url = 'http://' + url;
+    }
     console.log(await getPageSpeedScore(url))
   })();
 } else {
