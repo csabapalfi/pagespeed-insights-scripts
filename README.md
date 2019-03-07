@@ -1,8 +1,64 @@
 # pagespeed-score
 
-Get a Google PageSpeed Insights score locally.
+Get a Google PageSpeed Insights (PSI) score by running Lighthouse locally.
+
+## Command Line
 
 ```
 $ npx pagespeed-score www.google.com
 100
 ```
+
+## Module
+
+```js
+const {getPageSpeedScore} = require('pagespeed-score');
+
+const result = getPageSpeedScore('https://www.google.com', {
+  // optional, default: calibrated, CPU throttling
+  cpuSlowdownMultiplier: 2,
+
+  // optional, default: false, return metrics
+  metrics: true,
+
+  // optional, default: false, return complete Lighthouse result
+  result: true
+});
+
+const {
+  // Performance score, always returned
+  score,
+
+  // The metrics that are used to calculate performance score
+  // (only returned if options.metrics=true)
+  metrics,
+
+
+  // Full Lighthouse results
+  // (only returned if options.result=true)
+  lighthouseResult
+} = result;
+```
+
+## Why?
+
+The goal is to get a PSI score:
+
+* in CI and without public URL (e.g. staging environment on a private network)
+* faster (the Google API takes seconds to respond)
+* more stable (i.e. less noise) to allow comparison tests
+
+## How
+
+* using the same version of LightHouse as PSI
+* using LightRider config from the `lighthouse` module
+* calibrating CPU throttling using benchmark index
+* faster run by only getting metrics needed for the performance score
+
+## Ideas
+
+* multiple runs to reduce noise
+* support blocking URLs
+* calibrate CPU throttling without doing a separate run first
+* support more options (available via the module) in cli
+* maybe support all Lighthouse cli options?

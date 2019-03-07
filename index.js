@@ -54,8 +54,6 @@ async function getPageSpeedScore(url, options = {}) {
     options.cpuSlowdownMultiplier || await calibrateCpu();
   const opts = getOptions(cpuSlowdownMultiplier);
   const config = getConfig(METRICS);
-  const verbose = options.verbose;
-  const silly = options.silly;
   
   const lighthouseResult = await runLighthouse(url, opts, config);
   const metrics = Object.values(lighthouseResult.audits)
@@ -70,10 +68,10 @@ async function getPageSpeedScore(url, options = {}) {
   debug('pagespeed:score')(score);
 
   const result = {score};
-  if (verbose || silly) {
+  if (options.metrics) {
     result.metrics = metrics;
   }
-  if (silly) {
+  if (options.result) {
     result.lighthouseResult = lighthouseResult;
   }
 
