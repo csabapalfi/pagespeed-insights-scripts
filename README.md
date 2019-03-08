@@ -55,6 +55,7 @@ The goal is to get a PSI score:
 * using [LightRider mobile config](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/config/lr-mobile-config.js) from the `lighthouse` module
 * calibrating CPU throttling using benchmark index (based on the typical LightRider benchmark index of 600)
 * faster run by only getting metrics needed for the performance score
+* doing multiple runs and taking the median
 
 ## Ideas/TODO
 

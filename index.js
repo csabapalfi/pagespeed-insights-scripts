@@ -95,7 +95,7 @@ function median(values = []) {
 
 if (require.main === module) {
   (async() => {
-    let [,,url, runs = 1] = process.argv;
+    let [,,url, runs = 3] = process.argv;
     if (!/^https?:\/\//i.test(url)) {
         url = 'http://' + url;
     }
