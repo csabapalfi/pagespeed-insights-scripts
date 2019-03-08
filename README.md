@@ -59,9 +59,11 @@ The goal is to get a PSI score:
 
 ## Ideas/TODO
 
+* output multiple run details (as csv?, maybe JSON)
 * get more data on LightRider benchmarkIndex variance
 * throw error if benchmarkIndex lower than calibration target (600)
 * support blocking URLs (great for comparison tests, i.e. quantifying impact of certain resources)
 * calibrate CPU throttling without doing a separate run first
 * support more options (available via the module) in cli
+* support multiple runs when using module
 * maybe support all Lighthouse cli options?
