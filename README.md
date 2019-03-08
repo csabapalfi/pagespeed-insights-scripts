@@ -46,8 +46,8 @@ const {
 The goal is to get a PSI score:
 
 * in CI and without public URL (e.g. staging environment on a private network)
-* faster (the Google API takes seconds to respond)
 * more stable (i.e. less noise) to allow comparison tests
+* faster if possible (the Google API takes long to respond)
 
 ## How
 
