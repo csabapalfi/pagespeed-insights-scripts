@@ -78,14 +78,34 @@ async function getPageSpeedScore(url, options = {}) {
   return result;
 }
 
+function median(values = []) {
+  values.sort((a,b) => a - b);
+
+  const length = values.length;
+  const half = Math.floor(length / 2);
+
+  if (length === 0) {
+    return 0;
+  }
+
+  return length % 2 ?
+    values[half] :
+    Math.round((values[half - 1] + values[half]) / 2.0);
+}
+
 if (require.main === module) {
   (async() => {
-    let [,,url] = process.argv;
+    let [,,url, runs = 1] = process.argv;
     if (!/^https?:\/\//i.test(url)) {
         url = 'http://' + url;
     }
-    const {score} = await getPageSpeedScore(url);
-    console.log(score);
+    const scores = [];
+    for (runs; runs > 0; runs--) {
+      const {score} = await getPageSpeedScore(url);
+      scores.push(score);
+    }
+
+    console.log(median(scores));
   })();
 } else {
   module.exports = {

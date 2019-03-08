@@ -4,9 +4,10 @@ Get a Google PageSpeed Insights (PSI) score by running Lighthouse locally.
 
 ## Command Line
 
-```
-$ npx pagespeed-score www.google.com
-100
+```sh
+# pagespeed-score <url> <number-of-runs>
+$ npx pagespeed-score www.google.com 5
+100 # median pagespeed score
 ```
 
 ## Module
@@ -57,7 +58,6 @@ The goal is to get a PSI score:
 
 ## Ideas/TODO
 
-* multiple runs to reduce noise
 * get more data on LightRider benchmarkIndex variance
 * throw error if benchmarkIndex lower than calibration target (600)
 * support blocking URLs (great for comparison tests, i.e. quantifying impact of certain resources)
