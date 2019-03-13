@@ -66,4 +66,4 @@ The goal is to get a PSI score:
 * calibrate CPU throttling without doing a separate run first
 * support more options (available via the module) in cli
 * support multiple runs when using module
-* maybe support all Lighthouse cli options?
+* maybe support all Lighthouse cli optionsfrom `lighthouse-cli/cli-flags.js`?
