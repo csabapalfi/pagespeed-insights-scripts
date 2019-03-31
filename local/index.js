@@ -1,6 +1,6 @@
 import lighthouse from 'lighthouse';
 import {launch} from 'chrome-launcher';
-import {AUDITS} from './metrics';
+import {AUDITS} from '../metrics';
 
 const getOptions = (cpuSlowdownMultiplier = 4) => ({
   saveAssets: true,
