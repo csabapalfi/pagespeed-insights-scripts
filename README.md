@@ -21,4 +21,4 @@ The goal is to get a PSI score that has less variance than using the [PageSpeed 
 
 ## Ideas/TODO
 
-This module has an [local version](/local) (alpha quality) that tries to replicate PageSpeed Insights scoring locally using Lighthouse.
+This module has an [local version](/local) (alpha quality) that tries to replicate PSI scoring using local Lighthouse runs.
