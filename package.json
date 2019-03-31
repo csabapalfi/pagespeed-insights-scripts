@@ -9,7 +9,12 @@
   "author": "Csaba Palfi",
   "license": "MIT",
   "dependencies": {
+    "chrome-launcher": "^0.10.5",
     "debug": "^4.1.1",
-    "lighthouse": "^4.1.0"
+    "esm": "^3.2.22",
+    "lighthouse": "^4.1.0",
+    "simple-statistics": "^7.0.2",
+    "wreck": "^14.2.0",
+    "yargs": "^13.2.2"
   }
 }
