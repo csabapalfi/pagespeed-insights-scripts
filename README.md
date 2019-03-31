@@ -1,6 +1,6 @@
 # pagespeed-score
 
-Get a Google PageSpeed Insights (PSI) score.
+Get a less noisy Google PageSpeed Insights (PSI) score.
 
 ## Command Line
 
