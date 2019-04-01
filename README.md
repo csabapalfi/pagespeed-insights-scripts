@@ -7,7 +7,7 @@ Get a less noisy Google PageSpeed Insights (PSI) score.
 ```sh
 # pagespeed-score --runs <N> <url>
 $ npx pagespeed-score https://www.google.com
-92 # median pagespeed score based on <N> runs 
+92 # median pagespeed score based on <N> runs (N=9 by default)
 ```
 
 ## Why?
