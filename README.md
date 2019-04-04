@@ -5,10 +5,15 @@ Get a less noisy Google PageSpeed Insights (PSI) score.
 ## Command Line
 
 ```sh
-# pagespeed-score --runs <N> <url>
+# pagespeed-score <url>
 $ npx pagespeed-score https://www.google.com
-92 # median pagespeed score based on <N> runs (N=9 by default)
+92 # median pagespeed score based on 9 runs
 ```
+
+* `--runs N` sets the number of runs. e.g. `pagespeed-score --runs 3 <url>`
+* `-v` outputs performance score and metrics from all runs. e.g.
+
+
 
 ## Why?
 
@@ -21,4 +26,4 @@ The goal is to get a PSI score that has less variance than using the [PageSpeed 
 
 ## Ideas/TODO
 
-This module has an [local version](/local) (alpha quality) that tries to replicate PSI scoring using local Lighthouse runs.
+This module has a [local mode](/local) (alpha quality) that tries to replicate PSI scoring using local Lighthouse runs.

@@ -14,10 +14,10 @@ export async function main() {
   const test = local ? localTest : apiTest;
 
   const results = [];
-  verbose && console.log('score,FCP,FMP,SI,FCI,TTI,benchmarkIndex,fetchTime')
+  verbose && console.log('score\tFCP\tFMP\tSI\tFCI\tTTI\tbenchmarkIndex\tfetchTime')
   for (let runsLeft = runs; runsLeft > 0; runsLeft--) {
     const result = getMetrics(await test(url));
-    verbose && console.log(result.join(','));
+    verbose && console.log(result.join('\t'));
     results.push(result);
   }
 
