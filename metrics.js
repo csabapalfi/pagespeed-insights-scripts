@@ -1,4 +1,5 @@
 export const AUDITS = [
+  'time-to-first-byte',
   'first-contentful-paint',
   'first-meaningful-paint',
   'speed-index',
@@ -10,7 +11,8 @@ function getValue({rawValue, displayValue}) {
   if (rawValue) {
     return (rawValue / 1000).toFixed(1);
   }
-  return parseFloat(displayValue.replace(' s', '')).toFixed(1);
+  const number = parseFloat(displayValue.replace(/[^0-9-.]/g, ''));
+  return displayValue.includes('ms') ? number : number.toFixed(1);
 }
 
 export default function getMetrics(result) {
