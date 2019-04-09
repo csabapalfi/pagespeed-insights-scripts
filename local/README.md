@@ -2,14 +2,6 @@
 
 Get a Google PageSpeed Insights (PSI) score by running Lighthouse locally.
 
-## Command Line
-
-```sh
-# pagespeed-score --local --runs <N> <url>
-$ npx pagespeed-score --local www.google.com
-92 # median pagespeed score based on <N> local Lighthouse audits
-```
-
 ## Why?
 
 The goal is to get a PSI score:
