@@ -11,16 +11,15 @@ export async function main() {
     .default('skippedRuns', 0)
     .default('runs', 9)
     .argv;
-  console.log(argv);
+
   const {local, v: verbose, skippedRuns, runs, _:[url]} = argv;
   const test = local ? localTest : apiTest;
 
   const results = [];
   verbose && console.log('score\tTTFB\tFCP\tFMP\tSI\tFCI\tTTI\tbenchmarkIndex\tfetchTime')
   for (let runsLeft = runs + skippedRuns; runsLeft > 0; runsLeft--) {
-    console.log(runsLeft, runs);
     const result = getMetrics(await test(url));
-    if (runsLeft < runs) {
+    if (runsLeft <= runs) {
       verbose && console.log(result.join('\t'));
       results.push(result);
     } else {
