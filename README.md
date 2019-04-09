@@ -26,4 +26,4 @@ The goal is to get a PSI score that has less variance than using the [PageSpeed 
 
 ## Ideas/TODO
 
-This module has an experimental [local mode](/local) that tries to replicate PSI scoring using local Lighthouse runs. Not recommended to try just yet.
+This module has an experimental [local mode](/local) that tries to replicate PSI scoring using local Lighthouse runs. Not recommended to try just yet and not even published with the module.

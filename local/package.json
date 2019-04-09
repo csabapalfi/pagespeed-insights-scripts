@@ -1,6 +1,6 @@
 {
-  "name": "pagespeed-score",
-  "version": "0.5.2",
+  "name": "pagespeed-score/local",
+  "version": "0.0.1",
   "description": "",
   "bin": {
     "pagespeed-score": "index.js"
@@ -9,9 +9,7 @@
   "author": "Csaba Palfi",
   "license": "MIT",
   "dependencies": {
-    "esm": "^3.2.22",
-    "simple-statistics": "^7.0.2",
-    "wreck": "^14.2.0",
-    "yargs": "^13.2.2"
+    "chrome-launcher": "^0.10.5",
+    "lighthouse": "^4.1.0"
   }
 }
