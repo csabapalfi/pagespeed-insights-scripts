@@ -1,6 +1,6 @@
 {
   "name": "pagespeed-score",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "",
   "bin": {
     "pagespeed-score": "index.js"
