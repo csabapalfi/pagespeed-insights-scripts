@@ -1,19 +1,16 @@
 import {median} from 'simple-statistics';
-import apiTest from './api';
-import localTest from './local';
+import test from './api';
 import getMetrics from './metrics';
 import yargs from 'yargs';
 
 export async function main() {
   const argv = yargs
-    .boolean('local')
     .boolean('v')
     .default('skippedRuns', 0)
     .default('runs', 9)
     .argv;
 
-  const {local, v: verbose, skippedRuns, runs, _:[url]} = argv;
-  const test = local ? localTest : apiTest;
+  const {v: verbose, skippedRuns, runs, _:[url]} = argv;
 
   const results = [];
   verbose && console.log('score\tTTFB\tFCP\tFMP\tSI\tFCI\tTTI\tbenchmarkIndex\tfetchTime')
