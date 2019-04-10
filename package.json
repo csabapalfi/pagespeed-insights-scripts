@@ -1,7 +1,7 @@
 {
   "name": "pagespeed-score",
   "version": "0.7.0",
-  "description": "",
+  "description": "Google PageSpeed Insights score and metrics in your terminal",
   "bin": {
     "pagespeed-score": "index.js"
   },
