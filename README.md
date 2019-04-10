@@ -19,7 +19,21 @@ max     	96	0.9	1.0	1.1	3.4	3.9
 
 Note: most pages have much higher variability in their score.
 
-See [what each metric is below](#metrics).
+## Metrics
+
+* `fetchTime` is simply the time of the day (in UTC) when the run completed.
+
+* `score` is the PageSpeed score based on [LightHouse perfomance scoring](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) calculated using FCP, FMP, SI, FCI and TTI.
+
+* `FCP` is [First Contentful Paint](https://github.com/csabapalfi/awesome-web-performance-metrics#first-contentful-paint-fcp)
+
+* `FMP` is [First Meaningful Paint](https://github.com/csabapalfi/awesome-web-performance-metrics#first-meaningful-paint-fmp)
+
+* `SI` is [Speed Index](https://github.com/csabapalfi/awesome-web-performance-metrics#speed-index)
+
+* `FCI` is [First CPU Idle](https://github.com/csabapalfi/awesome-web-performance-metrics#first-cpu-idle)
+
+* `TTI` is [Time to Interactive](https://github.com/csabapalfi/awesome-web-performance-metrics#time-to-interactive-tti)
 
 ## Command Line Options
 
@@ -38,34 +52,14 @@ Output:
   --jsonl  Output as JSON Lines                       [boolean] [default: false]
 ```
 
-Futher explanation:
-
 * `--warmupRuns <N>` makes N warmup runs before, these excluded from stats (e.g. to allow CDN or other caches to warm up)
 
-* `--userTimingMarks.<alias> <name>` adds the User Timing mark named `name` to your metrics with the name `alias` (e.g. `--userTimingMarks.DPA=datepicker.active`)
+* `--userTimingMarks.<alias>=<name>` adds any User Timing mark named to your metrics with the name `alias` (e.g. `--userTimingMarks.DPA=datepicker.active`)
 
-* `--jsonl` outputs results and statistics in [JSON Lines](http://jsonlines.org/) format
+* `--ttfb` adds [Time to First Byte](https://developers.google.com/web/tools/lighthouse/audits/ttfb) to your metrics - can help identifying if a run was affected by your server response time variability
 
-## Metrics
+* `--benchmark` adds the Lighthouse CPU/memory power [benchmarkIndex](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154) to your metrics - can help identifying if a run was affected by PSI server-side variability or resource contention
 
-* `fetchTime` is simply the time of the day (in UTC) when the run completed.
+* `--stats` outputs result statistics (median, stddev, min, max)
 
-* `score` is the PageSpeed score based on [LightHouse perfomance scoring](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) and calculated using FCP, FMP, SI, FCI and TTI (and nothing else).
-
-* `FCP` is [First Contentful Paint](https://github.com/csabapalfi/awesome-web-performance-metrics#first-contentful-paint-fcp)
-
-* `FMP` is [First Meaningful Paint](https://github.com/csabapalfi/awesome-web-performance-metrics#first-meaningful-paint-fmp)
-
-* `SI` is [Speed Index](https://github.com/csabapalfi/awesome-web-performance-metrics#speed-index)
-
-* `FCI` is [First CPU Idle](https://github.com/csabapalfi/awesome-web-performance-metrics#first-cpu-idle)
-
-* `TTI` is [Time to Interactive](https://github.com/csabapalfi/awesome-web-performance-metrics#time-to-interactive-tti)
-
-## Additional metrics
-
-These are not captured/logged by default.
-
-* `TTFB` is [Time to First Byte](https://developers.google.com/web/tools/lighthouse/audits/ttfb) - can help identifying if a run was affected by your server response time variability
-
-* `benchmark` is the Lighthouse CPU/memory power [benchmarkIndex](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154) - can help identifying if a run was affected by PSI server-side variability or resource contention
+* `--jsonl` outputs results (and statistics) as [JSON Lines](http://jsonlines.org/)
