@@ -32,17 +32,20 @@ fetchTime	score	TTFB	FCP	FMP	SI	FCI	TTI	benchmark
 96
 ```
 
-`fetchTime` is simply the time of the day (in UTC) when the run completed.
+* `fetchTime` is simply the time of the day (in UTC) when the run completed.
 
-The PageSpeed `score` is based on [LightHouse perfomance scoring](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) and calculated using the following 5 metrics (and nothing else):
+* `score` is the PageSpeed score based on [LightHouse perfomance scoring](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) and calculated using FCP, FMP, SI, FCI and TTI (and nothing else).
 
-* [First Contentful Paint (`FCP`)](https://github.com/csabapalfi/awesome-web-performance-metrics#first-contentful-paint-fcp)
-* [First Meaningful Paint (`FMP`)](https://github.com/csabapalfi/awesome-web-performance-metrics#first-meaningful-paint-fmp)
-* [Speed Index (`SI`)](https://github.com/csabapalfi/awesome-web-performance-metrics#speed-index)
-* [First CPU Idle (`FCI`)](https://github.com/csabapalfi/awesome-web-performance-metrics#first-cpu-idle)
-* [Time to Interactive (`TTI`)](https://github.com/csabapalfi/awesome-web-performance-metrics#time-to-interactive-tti)
+* `TTFB` is [Time to First Byte](https://developers.google.com/web/tools/lighthouse/audits/ttfb) - can help identifying if a run was affected by your server response time variability
 
-The following metrics are also returned as they can highlight sources of variabilty:
+* `FCP` is [First Contentful Paint](https://github.com/csabapalfi/awesome-web-performance-metrics#first-contentful-paint-fcp)
 
-* Time to First Byte (`TTFB`) - [The time at which your server sends a response](https://developers.google.com/web/tools/lighthouse/audits/ttfb)- can help identifying if a run was affected by your server response time variability
-* Benchmark Index (`benchmark`) - Lighthouse [CPU/memory power benchmark](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154)) - can help identifying if a run was affected by PSI server-side variability or resource contention
+* `FMP` is [First Meaningful Paint](https://github.com/csabapalfi/awesome-web-performance-metrics#first-meaningful-paint-fmp)
+
+* `SI` is [Speed Index](https://github.com/csabapalfi/awesome-web-performance-metrics#speed-index)
+
+* `FCI` is [First CPU Idle](https://github.com/csabapalfi/awesome-web-performance-metrics#first-cpu-idle)
+
+* `TTI` is [Time to Interactive](https://github.com/csabapalfi/awesome-web-performance-metrics#time-to-interactive-tti)
+
+* `benchmark` is the Lighthouse [CPU/memory power benchmark index](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154)) - can help identifying if a run was affected by PSI server-side variability or resource contention
