@@ -1,8 +1,7 @@
 # pagespeed-score
 
-Get a less noisy Google PageSpeed Insights (PSI) score.
+Get a [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) score with less variability.
 
-## Command Line
 
 ```sh
 # pagespeed-score <url>
@@ -10,12 +9,16 @@ $ npx pagespeed-score https://www.google.com
 92 # median pagespeed score based on 9 runs
 ```
 
+## Command Line Arguments
+
 * `--runs <number-of-runs>` number of runs
 * `-v` output a table of metrics from all runs
 * `--userTimingMarks.<alias>=<name>` add the User Timing mark startTime of a mark named `name` to your metrics table under a column named `alias`
 * `--warmupRuns <number-of-warmup-runs>` number additional warmup runs excluded from the score median calculation (e.g. to allow CDN or other caches to warm up)
 
-Example verbose output:
+## Metrics in verbose mode
+
+See example verbose (`-v`) output here:
 
 ```sh
 $ npx pagespeed-score -v --runs 3 https://www.google.com
@@ -29,17 +32,17 @@ fetchTime	score	TTFB	FCP	FMP	SI	FCI	TTI	benchmark
 96
 ```
 
-(`benchmark` is the [CPU/memory power benchmark](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154) as measured by LightHouse and can correlate with outliers in the score)
+`fetchTime` is simply the time of the day (in UTC) when the run completed.
 
-## Why?
+The PageSpeed `score` is based on [LightHouse perfomance scoring](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) and calculated using the following 5 metrics (and nothing else):
 
-The goal is to get a PSI score that has less variance than using the [PageSpeed Insights website](https://developers.google.com/speed/pagespeed/insights/).
+* [First Contentful Paint (`FCP`)](https://github.com/csabapalfi/awesome-web-performance-metrics#first-contentful-paint-fcp)
+* [First Meaningful Paint (`FMP`)](https://github.com/csabapalfi/awesome-web-performance-metrics#first-meaningful-paint-fmp)
+* [Speed Index (`SI`)](https://github.com/csabapalfi/awesome-web-performance-metrics#speed-index)
+* [First CPU Idle (`FCI`)](https://github.com/csabapalfi/awesome-web-performance-metrics#first-cpu-idle)
+* [Time to Interactive (`TTI`)](https://github.com/csabapalfi/awesome-web-performance-metrics#time-to-interactive-tti)
 
-## How
+The following metrics are also returned as they can highlight sources of variabilty:
 
-* doing multiple runs and taking the median based on score
-* adding a cache-busting query param to avoid cached responses by the Google API
-
-## Ideas/TODO
-
-This module has an experimental [local mode](/local) that tries to replicate PSI scoring using local Lighthouse runs. Not recommended to try just yet and not even published with the module.
+* Time to First Byte (`TTFB`) - [The time at which your server sends a response](https://developers.google.com/web/tools/lighthouse/audits/ttfb)- can help identifying if a run was affected by your server response time variability
+* Benchmark Index (`benchmark`) - Lighthouse [CPU/memory power benchmark](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154)) - can help identifying if a run was affected by PSI server-side variability or resource contention
