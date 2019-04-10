@@ -12,13 +12,14 @@ $ npx pagespeed-score https://www.google.com
 ## Command Line Arguments
 
 * `--runs <number-of-runs>` number of runs
-* `-v` output a table of metrics from all runs
+* `--table` output all metrics as a table
+* `--jsonl` output all metrics as [JSON Lines](http://jsonlines.org/)
 * `--userTimingMarks.<alias>=<name>` add the User Timing mark startTime of a mark named `name` to your metrics table under a column named `alias`
 * `--warmupRuns <number-of-warmup-runs>` number additional warmup runs excluded from the score median calculation (e.g. to allow CDN or other caches to warm up)
 
-## Metrics in verbose mode
+## Metrics
 
-See example verbose (`-v`) output here:
+See example `--table` output below:
 
 ```sh
 $ npx pagespeed-score -v --runs 3 https://www.google.com
