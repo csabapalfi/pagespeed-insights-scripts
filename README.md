@@ -15,6 +15,8 @@ $ npx pagespeed-score https://www.google.com
 * `--userTimingMarks.<alias>=<name>` add the User Timing mark startTime of a mark named `name` to your metrics table under a column named `alias`
 * `--warmupRuns <number-of-warmup-runs>` number additional warmup runs excluded from the score median calculation (e.g. to allow CDN or other caches to warm up)
 
+Example verbose output:
+
 ```sh
 $ npx pagespeed-score -v --runs 3 https://www.google.com
 
@@ -26,6 +28,8 @@ fetchTime	score	TTFB	FCP	FMP	SI	FCI	TTI	benchmark
 
 96
 ```
+
+(`benchmark` is the [CPU/memory power benchmark](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154) as measured by LightHouse and can correlate with outliers in the score)
 
 ## Why?
 
