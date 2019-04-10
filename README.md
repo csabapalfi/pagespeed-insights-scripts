@@ -2,12 +2,24 @@
 
 Get a [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) score with less variability.
 
+See example run below: 
 
-```sh
-# pagespeed-score <url>
-$ npx pagespeed-score https://www.google.com
-92 # median pagespeed score based on 9 runs
 ```
+$ npx pagespeed-score --runs 3 https://www.google.com
+fetchTime	score	TTFB	FCP	FMP	SI	FCI	TTI	benchmark
+19:41:58	96	0.08	0.9	1.0	1.1	3.2	3.8	627
+19:42:04	96	0.08	0.9	1.0	1.0	3.2	3.8	626
+19:42:10	96	0.08	0.9	1.0	0.9	3.1	3.9	695
+
+Median  	96	0.08	0.9	1.0	1.0	3.2	3.8	627.0
+Std Dev 	0	0.00	0.00	0.00	0.10	0.06	0.06	39.6
+Minimum 	96	0.08	0.9	1.0	0.9	3.1	3.8	626.0
+Maximum 	96	0.08	0.9	1.0	1.1	3.2	3.9	695.0
+```
+
+Note: most pages have much higher variability in their score.
+
+See [what each metric is below](#metrics).
 
 ## Command Line Arguments
 
@@ -34,20 +46,6 @@ Futher explanation:
 * `--format jsonl` outputs metrics and stats in [JSON Lines](http://jsonlines.org/) format
 
 ## Metrics
-
-See example tsv output below:
-
-```sh
-$ npx pagespeed-score -v --runs 3 https://www.google.com
-
-fetchTime	score	TTFB	FCP	FMP	SI	FCI	TTI	benchmark
-12:32:28	96	0.09	0.9	1.0	1.0	3.1	3.9	708
-12:32:34	95	0.09	0.9	1.0	1.1	3.3	3.9	627
-12:32:39	96	0.10	0.9	1.0	0.9	3.1	3.7	646
-
-
-96
-```
 
 * `fetchTime` is simply the time of the day (in UTC) when the run completed.
 

@@ -98,12 +98,14 @@ const STATS = {
 export function statsRows(results, MARKS) {
   return entries(STATS).map(([name, getValue]) => statRow({
     name,
-    score: getValue(results.map(({score}) => score)).toFixed(1),
+    score: round(getValue(results.map(({score}) => score))),
     metrics: Object.keys(METRICS).map(key => {
-      return getValue(results.map(({metrics}) => parseFloat(metrics[key]))).toFixed(1)
+      return getValue(results.map(({metrics}) => parseFloat(metrics[key])))
+        .toFixed((key === 'TTFB' || name === 'Std Dev ') ? 2 : 1)
     }),
     userTimingMarks: Object.keys(MARKS).map(key => {
-      return getValue(results.map(({userTimingMarks}) => parseFloat(userTimingMarks[key]))).toFixed(1)
+      return getValue(results.map(({userTimingMarks}) => 
+        parseFloat(userTimingMarks[key]))).toFixed(2)
     }),
     benchmarkIndex: getValue(results.map(({benchmarkIndex}) => benchmarkIndex)).toFixed(1),
   }));
