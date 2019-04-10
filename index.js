@@ -2,6 +2,6 @@
 
 require = require('esm')(module, {await: true});
 
-const {main} = require('./main.js');
+const {main} = require('./lib/main.js');
 
 (async() => await main())();
