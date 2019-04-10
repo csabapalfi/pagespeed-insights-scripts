@@ -28,7 +28,7 @@ Options:
 
 ## Metrics
 
-See example `--table` output below:
+See example tsv output below:
 
 ```sh
 $ npx pagespeed-score -v --runs 3 https://www.google.com
