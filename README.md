@@ -1,6 +1,6 @@
 # pagespeed-score
 
-Get a [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) score with less variability.
+[Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) score and metrics in your terminal
 
 See example run below: 
 
