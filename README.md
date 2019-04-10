@@ -48,4 +48,4 @@ fetchTime	score	TTFB	FCP	FMP	SI	FCI	TTI	benchmark
 
 * `TTI` is [Time to Interactive](https://github.com/csabapalfi/awesome-web-performance-metrics#time-to-interactive-tti)
 
-* `benchmark` is the Lighthouse CPU/memory power [benchmarkIndex](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154)) - can help identifying if a run was affected by PSI server-side variability or resource contention
+* `benchmark` is the Lighthouse CPU/memory power [benchmarkIndex](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154) - can help identifying if a run was affected by PSI server-side variability or resource contention
