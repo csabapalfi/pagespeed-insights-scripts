@@ -15,7 +15,7 @@ function formatTime(value) {
   return format(parse(value), 'HH:mm:ss');
 }
 
-function formatScore(value) {
+function formatScore(value, warmupRun) {
   return round(value * 100)
 }
 
@@ -42,9 +42,10 @@ function mapUserTimingMarkValue(audits, name) {
   return mark ? formatMs(mark.startTime) : NaN;
 }
 
-export default function mapResult(result, userTimingMarks) {
+export default function mapResult(result, userTimingMarks, warmupRun) {
   const {fetchTime, categories, environment, audits} = result;
   return {
+    warmupRun,
     fetchTime: formatTime(fetchTime),
     score: formatScore(categories.performance.score),
     benchmarkIndex: environment.benchmarkIndex,
@@ -62,10 +63,9 @@ export function tableHeading(userTimingMarks) {
   ]
 }
 
-export function tableRow(
-  {fetchTime, score, benchmarkIndex, metrics, userTimingMarks},
-  warmupRun
-) {
+export function tableRow({
+  warmupRun, fetchTime, score, benchmarkIndex, metrics, userTimingMarks
+}) {
   return [
     fetchTime,
     warmupRun ? `(${score})` : score, 
