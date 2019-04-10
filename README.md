@@ -1,8 +1,6 @@
 # pagespeed-score
 
-[Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) score and metrics in your terminal
-
-See example run below: 
+Google PageSpeed Insights (PSI) score and metrics in your terminal.
 
 ```
 $ npx pagespeed-score --runs 3 https://www.google.com
@@ -58,7 +56,7 @@ Output:
 
 * `--ttfb` adds [Time to First Byte](https://developers.google.com/web/tools/lighthouse/audits/ttfb) to your metrics - can help identifying if a run was affected by your server response time variability
 
-* `--benchmark` adds the Lighthouse CPU/memory power [benchmarkIndex](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154) to your metrics - can help identifying if a run was affected by PSI server-side variability or resource contention
+* `--benchmark` adds the Lighthouse CPU/memory power [benchmarkIndex](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154) to your metrics - can help identifying if a run was affected by Google server-side variability or resource contention
 
 * `--stats` outputs result statistics (median, stddev, min, max)
 
