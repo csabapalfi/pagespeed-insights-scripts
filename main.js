@@ -1,7 +1,7 @@
 import getOptions from './cli-options';
 import test from './api';
 import {median} from 'simple-statistics';
-import mapResult, {tableHeading, tableRow} from './map-result';
+import mapResult, {tableHeading, tableRow, statsRows} from './map-result';
 
 export async function main({
   url, runs, warmupRuns, stats, tsv, jsonl, userTimingMarks
@@ -22,8 +22,10 @@ export async function main({
     }
   }
 
-  if (stats) {
-    const medianScore = median(results.map(({score}) => score));
-    console.log(`Median ${medianScore}`);
+  if (stats && runs > 1) {
+    console.log();
+    statsRows(results, userTimingMarks)
+      .map(r => r.join('\t'))
+      .forEach(r => console.log(r));
   }
 }

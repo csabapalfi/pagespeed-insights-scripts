@@ -1,4 +1,5 @@
 import {parse, format} from 'date-fns';
+import {median, min, max, sampleStandardDeviation} from 'simple-statistics';
 const {round} = Math;
 const {entries} = Object;
 
@@ -74,5 +75,40 @@ export function tableRow({
     benchmarkIndex
   ];
 }
+
+function statRow({
+  name, score, benchmarkIndex, metrics = {}, userTimingMarks = {}
+}) {
+  return [
+    name,
+    score,
+    ...Object.values(metrics),
+    ...Object.values(userTimingMarks),
+    benchmarkIndex
+  ];
+}
+
+const STATS = {
+  'Median  ': median,
+  'Std Dev ': sampleStandardDeviation,
+  'Minimum ': min,
+  'Maximum ': max,
+}
+
+export function statsRows(results, MARKS) {
+  return entries(STATS).map(([name, getValue]) => statRow({
+    name,
+    score: getValue(results.map(({score}) => score)).toFixed(1),
+    metrics: Object.keys(METRICS).map(key => {
+      return getValue(results.map(({metrics}) => parseFloat(metrics[key]))).toFixed(1)
+    }),
+    userTimingMarks: Object.keys(MARKS).map(key => {
+      return getValue(results.map(({userTimingMarks}) => parseFloat(userTimingMarks[key]))).toFixed(1)
+    }),
+    benchmarkIndex: getValue(results.map(({benchmarkIndex}) => benchmarkIndex)).toFixed(1),
+  }));
+}
+
+
 
 

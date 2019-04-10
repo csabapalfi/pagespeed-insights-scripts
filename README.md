@@ -23,8 +23,15 @@ Options:
                              [string] [choices: "jsonl", "tsv"] [default: "tsv"]
 ```
 
-* `--userTimingMarks.<alias>=<name>` add the User Timing mark startTime of a mark named `name` to your metrics table under a column named `alias`
-* `--warmupRuns <number-of-warmup-runs>` number additional warmup runs excluded from the score median calculation (e.g. to allow CDN or other caches to warm up)
+Futher explanation:
+
+* `--stats` output median, standard deviation, min and max for each metric
+
+* `--warmupRuns <N>` makes N warmup runs before, these excluded from stats (e.g. to allow CDN or other caches to warm up)
+
+* `--userTimingMarks.<alias> <name>` adds the User Timing mark named `name` to your metrics with the name `alias` (e.g. `--userTimingMarks.DPA=datepicker.active`)
+
+* `--format jsonl` outputs metrics and stats in [JSON Lines](http://jsonlines.org/) format
 
 ## Metrics
 
