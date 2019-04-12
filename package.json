@@ -6,7 +6,7 @@
     "pagespeed-score": "index.js"
   },
   "scripts": {
-    "test": "eslint lib"
+    "test": "eslint ."
   },
   "main": "index.js",
   "author": "Csaba Palfi",
