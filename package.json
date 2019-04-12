@@ -5,6 +5,9 @@
   "bin": {
     "pagespeed-score": "index.js"
   },
+  "scripts": {
+    "test": "eslint lib"
+  },
   "main": "index.js",
   "author": "Csaba Palfi",
   "license": "MIT",
@@ -14,5 +17,8 @@
     "simple-statistics": "^7.0.2",
     "wreck": "^14.2.0",
     "yargs": "^13.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
   }
 }
