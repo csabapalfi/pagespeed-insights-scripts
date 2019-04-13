@@ -2,17 +2,15 @@
 
 exports[`cli-options parseArgs returns defaults based on argv 1`] = `
 Object {
+  "jsonl": false,
   "metrics": Object {
     "benchmark": false,
     "ttfb": false,
     "user-timing-marks": Object {},
     "userTimingMarks": Object {},
   },
-  "output": Object {
-    "jsonl": false,
-    "stats": true,
-  },
   "runs": 9,
+  "stats": true,
   "url": "https://www.google.com",
   "warmupRuns": 0,
 }
