@@ -1,4 +1,5 @@
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: ["lib/*.js"]
+  collectCoverageFrom: ["lib/*.js"],
+  restoreMocks: true
 };
