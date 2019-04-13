@@ -1,4 +1,4 @@
-const {results, stats} = require('../lib/tsv');
+const {format} = require('../lib/tsv');
 
 describe('tsv formatter', () => {
   describe('results', () => {
@@ -14,17 +14,17 @@ describe('tsv formatter', () => {
     };
 
     it('are formatted as expected', () => {
-      expect(results([result]))
+      expect(format([result], {}))
         .toMatchSnapshot();
     });
   
     it('heading row added before first result', () => {
-      expect(results([result], true))
+      expect(format([result], {first: true}))
         .toMatchSnapshot();
     });
 
     it('userTimingMark uses default number format precision (2 digits)', () => {
-      expect(results([{...result, DPA: 1.25}]))
+      expect(format([{...result, DPA: 1.25}], {}))
         .toMatchSnapshot();
     });
   });
@@ -42,12 +42,12 @@ describe('tsv formatter', () => {
     };
    
     it('stats are formatted as expected', () => {
-      expect(stats([statistic]))
+      expect(format([statistic]))
         .toMatchSnapshot();
     });
 
     it('stddev uses custom precision for score (1 digit)', () => {
-      expect(stats([{...statistic, name: 'stddev'}]))
+      expect(format([{...statistic, name: 'stddev'}]))
         .toMatchSnapshot();
     });
   });

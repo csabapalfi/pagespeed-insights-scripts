@@ -10,7 +10,7 @@ Object {
     "userTimingMarks": Object {},
   },
   "runs": 9,
-  "stats": true,
+  "stats": undefined,
   "url": "https://www.google.com",
   "warmupRuns": 0,
 }

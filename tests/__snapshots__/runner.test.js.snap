@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`runner resolves with result  and stats if last run and enough samples 1`] = `
+Object {
+  "done": false,
+  "value": Array [
+    Object {
+      "metric": 1,
+    },
+    Object {
+      "metric": 1.5,
+      "name": "median",
+      "type": "statistic",
+    },
+    Object {
+      "metric": 0.7071067811865476,
+      "name": "stddev",
+      "type": "statistic",
+    },
+    Object {
+      "metric": 1,
+      "name": "min",
+      "type": "statistic",
+    },
+    Object {
+      "metric": 2,
+      "name": "max",
+      "type": "statistic",
+    },
+  ],
+}
+`;

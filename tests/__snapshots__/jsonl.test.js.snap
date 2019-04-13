@@ -1,13 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`jsonl formatter results are JSON.stringify-ed 1`] = `
+exports[`jsonl formatter entries are JSON.stringify-ed 1`] = `
 Array [
   "{\\"type\\":\\"result\\",\\"fetchTime\\":\\"21:48:05\\",\\"score\\":95,\\"FCP\\":0.9,\\"FMP\\":1,\\"SI\\":1.1,\\"FCI\\":3.2,\\"TTI\\":4}",
-]
-`;
-
-exports[`jsonl formatter stats are JSON.stringify-ed 1`] = `
-Array [
-  "{\\"type\\":\\"statistic\\",\\"name\\":\\"stddev\\",\\"score\\":95,\\"FCP\\":0.9,\\"FMP\\":1,\\"SI\\":1.1,\\"FCI\\":3.2,\\"TTI\\":4}",
 ]
 `;
