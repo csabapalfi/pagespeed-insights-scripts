@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cli-options parseArgs returns defaults based on argv 1`] = `
+Object {
+  "metrics": Object {
+    "benchmark": false,
+    "ttfb": false,
+    "user-timing-marks": Object {},
+    "userTimingMarks": Object {},
+  },
+  "output": Object {
+    "jsonl": false,
+    "stats": true,
+  },
+  "runs": 9,
+  "url": "https://www.google.com",
+  "warmupRuns": 0,
+}
+`;
