@@ -1,4 +1,4 @@
-const {results, stats} = require('./jsonl');
+const {results, stats} = require('../lib/jsonl');
 
 describe('jsonl formatter', () => {
   it('results are JSON.stringify-ed', () => {

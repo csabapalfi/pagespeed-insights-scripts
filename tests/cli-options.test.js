@@ -1,4 +1,4 @@
-const {check, parseArgs} = require('./cli-options');
+const {check, parseArgs} = require('../lib/cli-options');
 
 describe('cli-options', () => {
   const url = 'https://www.google.com';

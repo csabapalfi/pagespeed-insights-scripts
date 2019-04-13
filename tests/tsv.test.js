@@ -1,4 +1,4 @@
-const {results, stats} = require('./tsv');
+const {results, stats} = require('../lib/tsv');
 
 describe('tsv formatter', () => {
   describe('results', () => {

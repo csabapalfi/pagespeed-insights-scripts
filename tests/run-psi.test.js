@@ -1,4 +1,4 @@
-const {runPagespeed} = require('./run-psi');
+const {runPagespeed} = require('../lib/run-psi');
 const wreck = require('wreck');
 
 describe('run-psi', () => {

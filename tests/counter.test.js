@@ -1,5 +1,5 @@
 const fc = require('fast-check');
-const {Counter} = require('./counter');
+const {Counter} = require('../lib/counter');
 
 describe('Counter', () => {
   it('returns a single first and last flag in the correct positions', () => {

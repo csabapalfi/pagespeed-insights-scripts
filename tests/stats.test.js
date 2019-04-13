@@ -1,4 +1,4 @@
-const {getStats} = require('./stats');
+const {getStats} = require('../lib/stats');
 
 describe('stats', () => {
   const mockSample = (data) => ({
