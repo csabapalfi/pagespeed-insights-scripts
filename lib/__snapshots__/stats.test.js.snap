@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`stats returns expected stats 1`] = `
+Array [
+  Object {
+    "FCI": 5.5,
+    "FCP": 1.5,
+    "FMP": 2.5,
+    "SI": 2.5,
+    "TTI": 6.5,
+    "name": "median",
+    "score": 85,
+    "type": "statistic",
+  },
+  Object {
+    "FCI": 0.7071067811865476,
+    "FCP": 0.7071067811865476,
+    "FMP": 0.7071067811865476,
+    "SI": 0.7071067811865476,
+    "TTI": 0.7071067811865476,
+    "name": "stddev",
+    "score": 7.0710678118654755,
+    "type": "statistic",
+  },
+  Object {
+    "FCI": 5,
+    "FCP": 1,
+    "FMP": 2,
+    "SI": 2,
+    "TTI": 6,
+    "name": "min",
+    "score": 80,
+    "type": "statistic",
+  },
+  Object {
+    "FCI": 6,
+    "FCP": 2,
+    "FMP": 3,
+    "SI": 3,
+    "TTI": 7,
+    "name": "max",
+    "score": 90,
+    "type": "statistic",
+  },
+]
+`;
