@@ -49,7 +49,6 @@ Additional metrics:
   --benchmark        Benchmark index                  [boolean] [default: false]
 
 Output:
-  --stats  Output result statistics                    [boolean] [default: true]
   --jsonl  Output as JSON Lines                       [boolean] [default: false]
 ```
 
