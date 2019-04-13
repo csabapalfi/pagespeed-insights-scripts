@@ -1,5 +1,8 @@
 # pagespeed-score
 
+[![Build Status](https://travis-ci.org/csabapalfi/pagespeed-score.svg?branch=master)](https://travis-ci.org/csabapalfi/pagespeed-score/)
+<!-- [![Coverage Status](https://coveralls.io/repos/github/csabapalfi/pagespeed-score/badge.svg?1)](https://coveralls.io/github/csabapalfi/pagespeed-score) -->
+
 Google PageSpeed Insights (PSI) score and metrics in your terminal.
 
 ```
