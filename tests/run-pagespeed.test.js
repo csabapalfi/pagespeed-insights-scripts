@@ -1,4 +1,4 @@
-const {runPagespeed} = require('../lib/run-psi');
+const {runPagespeed} = require('../lib/run-pagespeed');
 const wreck = require('wreck');
 
 describe('run-psi', () => {
@@ -12,8 +12,6 @@ describe('run-psi', () => {
     wreck.get = jest.fn()
       .mockResolvedValue({payload: {lighthouseResult}});
   
- 
-    
     expect(await runPagespeed('https://www.google.com'))
       .toBe(lighthouseResult);
     expect(wreck.get).toHaveBeenCalledTimes(1)
