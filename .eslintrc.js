@@ -1,17 +1,16 @@
 module.exports = {
-    "env": {
+    env: {
         "es6": true,
-        "node": true
+        "node": true,
     },
-    "extends": "eslint:recommended",
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
+    extends: [ 
+        "eslint:recommended",
+        "plugin:jest/recommended",
+    ],
+    parserOptions: {
         "ecmaVersion": 2018,
-        "sourceType": "module"
+        "sourceType": "module",
     },
-    "rules": {
-    }
+    rules: {},
+    plugins: ["jest"],
 };

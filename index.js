@@ -1,8 +1,15 @@
 #!/usr/bin/env node
 
-/* eslint-disable-next-line no-global-assign */
-require = require('esm')(module, {await: true});
-
 const {main} = require('./lib/main.js');
+const {parseArgs} = require('./lib/cli-options.js');
 
-(async() => await main())();
+const options = parseArgs(process.argv);
+
+(async() => {
+  for await (const lines of main(options)) {
+    /* eslint-disable-next-line no-console */
+    lines.forEach(line => console.log(line));
+  }
+})();
+
+
