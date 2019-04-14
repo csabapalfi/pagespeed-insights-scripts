@@ -14,7 +14,9 @@
   "author": "Csaba Palfi",
   "license": "MIT",
   "dependencies": {
+    "chrome-launcher": "^0.10.5",
     "date-fns": "^1.30.1",
+    "lighthouse": "4.1.0",
     "simple-statistics": "^7.0.2",
     "wreck": "^14.2.0",
     "yargs": "^13.2.2"
@@ -31,6 +33,7 @@
     "pagespeed",
     "cli",
     "score",
-    "google"
+    "google",
+    "lighthouse"
   ]
 }

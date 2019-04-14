@@ -24,14 +24,7 @@ describe('cli-options', () => {
   describe('parseArgs', () => {
     const argv = mockArgv([url]);
     it('returns defaults based on argv', () => {
-      /* eslint-disable-next-line no-unused-vars */
-      const {$0, ...args} = parseArgs({argv})
-      expect(args).toMatchSnapshot();
-    });
-
-    it('options can be overriden', () => {
-      /* eslint-disable-next-line no-unused-vars */
-      const {$0, ...args} = parseArgs({argv, options: {}});
+      const args = parseArgs({argv})
       expect(args).toMatchSnapshot();
     });
   });

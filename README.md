@@ -44,12 +44,22 @@ Runs:
   --warmupRuns  Number of warmup runs                      [number] [default: 0]
 
 Additional metrics:
-  --userTimingMarks  Specified User Timing marks                   [default: {}]
-  --ttfb             TTFB                             [boolean] [default: false]
-  --benchmark        Benchmark index                  [boolean] [default: false]
+  --userTimingMarks,                        User Timing marks
+  --metrics.userTimingMarks                                        [default: {}]
+  --ttfb, --metrics.ttfb                    TTFB      [boolean] [default: false]
+  --benchmark, --metrics.benchmark          Benchmark index
+                                                      [boolean] [default: false]
 
 Output:
   --jsonl  Output as JSON Lines                       [boolean] [default: false]
+
+Lighthouse:
+  --local, --lighthouse.enabled             Switch to local Lighthouse
+                                                      [boolean] [default: false]
+  --lighthousePath,                         Lighthouse module path
+  --lighthouse.modulePath                       [string] [default: "lighthouse"]
+  --cpuSlowDown, --lighthouse.cpuSlowDown   CPU slowdown multiplier
+                                                           [number] [default: 4]
 ```
 
 * `--warmupRuns <N>` makes N warmup runs before, these excluded from stats (e.g. to allow CDN or other caches to warm up)
@@ -60,6 +70,8 @@ Output:
 
 * `--benchmark` adds the Lighthouse CPU/memory power [benchmarkIndex](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154) to your metrics - can help identifying if a run was affected by Google server-side variability or resource contention
 
-* `--stats` outputs result statistics (median, stddev, min, max)
-
 * `--jsonl` outputs results (and statistics) as [JSON Lines](http://jsonlines.org/)
+
+### Local mode
+
+* `--local` switches to running Lighthouse locally instead of calling the PSI API
