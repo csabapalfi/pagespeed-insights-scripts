@@ -2,7 +2,6 @@
 
 exports[`cli-options parseArgs options can be overriden 1`] = `
 Object {
-  "$0": "node_modules/jest-worker/build/workers/processChild.js",
   "_": Array [
     "node",
     "pagespeed-score",
@@ -14,7 +13,6 @@ Object {
 
 exports[`cli-options parseArgs returns defaults based on argv 1`] = `
 Object {
-  "$0": "node_modules/jest-worker/build/workers/processChild.js",
   "_": Array [
     "node",
     "pagespeed-score",

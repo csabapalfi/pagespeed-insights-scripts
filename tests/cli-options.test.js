@@ -24,13 +24,15 @@ describe('cli-options', () => {
   describe('parseArgs', () => {
     const argv = mockArgv([url]);
     it('returns defaults based on argv', () => {
-      expect(parseArgs({argv}))
-        .toMatchSnapshot();
+      /* eslint-disable-next-line no-unused-vars */
+      const {$0, ...args} = parseArgs({argv})
+      expect(args).toMatchSnapshot();
     });
 
     it('options can be overriden', () => {
-      expect(parseArgs({argv, options: {}}))
-        .toMatchSnapshot();
+      /* eslint-disable-next-line no-unused-vars */
+      const {$0, ...args} = parseArgs({argv, options: {}});
+      expect(args).toMatchSnapshot();
     });
   });
 });
