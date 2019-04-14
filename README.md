@@ -98,4 +98,6 @@ $ LANTERN_DEBUG=true npx pagespeed-score \
 --local --saveAssets --runs 1 https://www.google.com
 ```
 
-You can open any of these traces in the Chrome Devtools Performance tab.
+You can open any of these traces in the Chrome Devtools Performance tab. 
+
+See also [lighthouse#5844 Better visualization of Lantern simulation](https://github.com/GoogleChrome/lighthouse/issues/5844).
