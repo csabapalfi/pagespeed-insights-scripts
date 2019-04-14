@@ -24,7 +24,12 @@ describe('cli-options', () => {
   describe('parseArgs', () => {
     const argv = mockArgv([url]);
     it('returns defaults based on argv', () => {
-      expect(parseArgs(argv))
+      expect(parseArgs({argv}))
+        .toMatchSnapshot();
+    });
+
+    it('options can be overriden', () => {
+      expect(parseArgs({argv, options: {}}))
         .toMatchSnapshot();
     });
   });

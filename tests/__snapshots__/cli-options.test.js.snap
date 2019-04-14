@@ -1,7 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`cli-options parseArgs options can be overriden 1`] = `
+Object {
+  "$0": "node_modules/jest-worker/build/workers/processChild.js",
+  "_": Array [
+    "node",
+    "pagespeed-score",
+    "https://www.google.com",
+  ],
+  "url": "https://www.google.com",
+}
+`;
+
 exports[`cli-options parseArgs returns defaults based on argv 1`] = `
 Object {
+  "$0": "node_modules/jest-worker/build/workers/processChild.js",
+  "_": Array [
+    "node",
+    "pagespeed-score",
+    "https://www.google.com",
+  ],
+  "benchmark": false,
   "jsonl": false,
   "metrics": Object {
     "benchmark": false,
@@ -10,8 +29,11 @@ Object {
     "userTimingMarks": Object {},
   },
   "runs": 9,
-  "stats": undefined,
+  "ttfb": false,
   "url": "https://www.google.com",
+  "user-timing-marks": Object {},
+  "userTimingMarks": Object {},
+  "warmup-runs": 0,
   "warmupRuns": 0,
 }
 `;
