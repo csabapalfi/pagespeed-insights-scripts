@@ -51,7 +51,10 @@ Additional metrics:
                                                       [boolean] [default: false]
 
 Output:
-  --jsonl  Output as JSON Lines                       [boolean] [default: false]
+  --jsonl, --output.jsonl            Output as JSON Lines
+                                                      [boolean] [default: false]
+  --saveAssets, --output.saveAssets  Save Lighthouse reports
+                                                      [boolean] [default: false]
 
 Lighthouse:
   --local, --lighthouse.enabled             Switch to local Lighthouse
@@ -62,7 +65,9 @@ Lighthouse:
                                                            [number] [default: 4]
 ```
 
-* `--warmupRuns <N>` makes N warmup runs before, these excluded from stats (e.g. to allow CDN or other caches to warm up)
+* `--runs <N>` overrides the number of runs (default: 9)
+
+* `--warmupRuns <N>` add warmup runs that are excluded from stats (e.g. to allow CDN or other caches to warm up)
 
 * `--userTimingMarks.<alias>=<name>` adds any User Timing mark named to your metrics with the name `alias` (e.g. `--userTimingMarks.DPA=datepicker.active`)
 
@@ -70,7 +75,9 @@ Lighthouse:
 
 * `--benchmark` adds the Lighthouse CPU/memory power [benchmarkIndex](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154) to your metrics - can help identifying if a run was affected by Google server-side variability or resource contention
 
-* `--jsonl` outputs results (and statistics) as [JSON Lines](http://jsonlines.org/)
+* `--jsonl` outputs results (and statistics) as [JSON Lines](http://jsonlines.org/) instead of TSV
+
+* `--saveAssets` saves a report for each run
 
 ### Local mode
 
@@ -81,3 +88,5 @@ Lighthouse:
   * allows throttling of CPU with `--lighthouse.cpuSlowDown` (default 4x)
 
 Local results will still differ from the PSI API because of local hardware and network variability.
+
+`--saveAssets` will save trace and devtoolslog (along with a report) for each run. To look at how metrics were simulated combine this option with `LANTERN_DEBUG=true` that will save a trace for each metric simulation.
