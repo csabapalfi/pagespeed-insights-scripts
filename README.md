@@ -53,7 +53,7 @@ Additional metrics:
 Output:
   --jsonl, --output.jsonl            Output as JSON Lines
                                                       [boolean] [default: false]
-  --saveAssets, --output.saveAssets  Save Lighthouse reports
+  --saveAssets, --output.saveAssets  Save reports and traces
                                                       [boolean] [default: false]
 
 Lighthouse:
