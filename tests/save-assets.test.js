@@ -49,11 +49,8 @@ describe('save-assets', () => {
     expectToSaveReport();
 
     expect(saveAssets).toHaveBeenCalledTimes(1);
-    expect(saveAssets.mock.calls[0][0])
-      .toBe(artifacts);
-    expect(saveAssets.mock.calls[0][1])
-      .toBe(audits);
-    expect(saveAssets.mock.calls[0][2])
-      .toBe(resolvedPath);
+    expect(saveAssets.mock.calls[0][0]).toBe(artifacts);
+    expect(saveAssets.mock.calls[0][1]).toBe(audits);
+    expect(saveAssets.mock.calls[0][2]).toBe(resolvedPath);
   });
 });
