@@ -1,6 +1,6 @@
 {
   "name": "pagespeed-score",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "description": "Google PageSpeed Insights (PSI) score and metrics CLI",
   "bin": {
     "pagespeed-score": "index.js"
