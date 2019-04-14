@@ -15,13 +15,13 @@ describe('main', () => {
   });
 
   it('runner.getResult calls getLighthouseResult then mapResult', async () => {
-    const lighthouseResult = {
+    const result = {
       categories: {performance: {score: 1}},
       audits: {}
     };
 
     const {getLighthouseResult} = options;
-    getLighthouseResult.mockResolvedValue(lighthouseResult);
+    getLighthouseResult.mockResolvedValue({result});
         
     const runner = main(options);
     const mappedResult = await runner.getResult();

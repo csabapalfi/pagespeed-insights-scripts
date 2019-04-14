@@ -9,13 +9,19 @@ describe('run-lighthouse', () => {
   it('runLightHouse launches chrome and runs Lighthouse', async () => {
     const url = 'https://www.google.com';
     const lighthouseResult = {};
+    const lighthouseArtifacts = {};
     const options = {modulePath: 'lighthouse', cpuSlowDown: 4};
     const chrome = {port: 1234, kill: jest.fn()};
     launch.mockResolvedValue(chrome);
-    lighthouse.mockResolvedValue({lhr: lighthouseResult});
+    lighthouse.mockResolvedValue({
+      lhr: lighthouseResult, 
+      artifacts: lighthouseArtifacts
+    });
 
-    await expect(runLighthouse(options, url))
-      .resolves.toBe(lighthouseResult);
+    const {result, artifacts} = await runLighthouse(options, url);
+
+    expect(result).toBe(lighthouseResult);
+    expect(artifacts).toBe(lighthouseArtifacts);
 
     expect(launch).toHaveBeenCalledTimes(1);
     expect(launch.mock.calls[0]).toMatchSnapshot();

@@ -17,7 +17,8 @@ Object {
   },
   "output": Object {
     "jsonl": false,
-    "reports": false,
+    "save-assets": false,
+    "saveAssets": false,
   },
   "runs": 9,
   "url": "https://www.google.com",
