@@ -7,8 +7,13 @@ Runner {
     "run": 0,
     "warmupRuns": 0,
   },
-  "format": [Function],
-  "getResult": [Function],
+  "fetcher": Fetcher {
+    "getLighthouseResult": [Function],
+    "mapResult": [Function],
+  },
+  "formatter": Formatter {
+    "format": [Function],
+  },
   "samples": Array [],
 }
 `;

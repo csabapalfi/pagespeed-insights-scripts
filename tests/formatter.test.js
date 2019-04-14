@@ -1,7 +1,7 @@
-const {outputFormatter, tsvFormat, jsonlFormat} = 
-  require('../lib/format-output');
+const {Formatter, tsvFormat, jsonlFormat} = 
+  require('../lib/formatter');
 
-describe('format-output', () => {
+describe('formatter', () => {
   describe('tsv format', () => {
     describe('results', () => {
       const result = {
@@ -72,11 +72,11 @@ describe('format-output', () => {
 
   describe('output formatter', () => {
     it('return jsonlFormat if jsonl enabled', () => {
-      expect(outputFormatter(true)).toBe(jsonlFormat);
+      expect(new Formatter(true).format).toBe(jsonlFormat);
     });
 
     it('return tsvFormat if jsonl disabled', () => {
-      expect(outputFormatter(false)).toBe(tsvFormat);
+      expect(new Formatter(false).format).toBe(tsvFormat);
     });
   });
 });

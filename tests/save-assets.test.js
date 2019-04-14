@@ -1,8 +1,8 @@
 const {resolve} = require('path');
 const {writeFileSync} = require('fs');
 const {getFilenamePrefix} = require('lighthouse/lighthouse-core/lib/file-namer');
-const assetSaver = require('lighthouse/lighthouse-core/lib/asset-saver');
-const {saveAssets} = require('../lib/save-assets');
+const {saveAssets} = require('lighthouse/lighthouse-core/lib/asset-saver');
+const {assetSaver} = require('../lib/save-assets');
 
 jest.mock('path');
 jest.mock('fs');
@@ -34,7 +34,7 @@ describe('save-assets', () => {
     getFilenamePrefix.mockReturnValue(fileNamePrefix);
     resolve.mockReturnValue(resolvedPath);
     
-    await saveAssets(result);
+    await assetSaver('lighthouse')(result);
 
     expectToSaveReport();
   });
@@ -44,16 +44,16 @@ describe('save-assets', () => {
     getFilenamePrefix.mockReturnValue(fileNamePrefix);
     resolve.mockReturnValue(resolvedPath);
     
-    await saveAssets(result, artifacts);
+    await assetSaver('lighthouse')(result, artifacts);
 
     expectToSaveReport();
 
-    expect(assetSaver.saveAssets).toHaveBeenCalledTimes(1);
-    expect(assetSaver.saveAssets.mock.calls[0][0])
+    expect(saveAssets).toHaveBeenCalledTimes(1);
+    expect(saveAssets.mock.calls[0][0])
       .toBe(artifacts);
-    expect(assetSaver.saveAssets.mock.calls[0][1])
+    expect(saveAssets.mock.calls[0][1])
       .toBe(audits);
-    expect(assetSaver.saveAssets.mock.calls[0][2])
+    expect(saveAssets.mock.calls[0][2])
       .toBe(resolvedPath);
   });
 });
