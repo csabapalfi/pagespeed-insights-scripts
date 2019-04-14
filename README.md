@@ -74,4 +74,10 @@ Lighthouse:
 
 ### Local mode
 
-* `--local` switches to running Lighthouse locally instead of calling the PSI API
+`--local` switches to running Lighthouse locally instead of calling the PSI API. This can be useful for non-public URLs (e.g. staging environment on a private network). To ensure the local results are close to the PSI API results this module:
+
+  * uses the same version of LightHouse as PSI
+  * uses the [LightRider mobile config](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/config/lr-mobile-config.js)
+  * allows throttling of CPU with `--lighthouse.cpuSlowDown` (default 4x)
+
+Local results will still differ from the PSI API because of local hardware and network variability.
