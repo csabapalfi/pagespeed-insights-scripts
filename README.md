@@ -89,4 +89,13 @@ Lighthouse:
 
 Local results will still differ from the PSI API because of local hardware and network variability.
 
-`--saveAssets` will save trace and devtoolslog (along with a report) for each run. To look at how metrics were simulated combine this option with `LANTERN_DEBUG=true` that will save a trace for each metric simulation.
+### Debugging metrics simulations (Lantern)
+
+`--saveAssets` will also save traces and devtoolslogs when used with `--local`. To look at how metrics were simulated combine this option with `LANTERN_DEBUG=true` that will save a trace for each metric simulation.
+
+```
+$ LANTERN_DEBUG=true npx pagespeed-score \
+--local --saveAssets --runs 1 https://www.google.com
+```
+
+You can open any of these traces in the Chrome Devtools Performance tab.
