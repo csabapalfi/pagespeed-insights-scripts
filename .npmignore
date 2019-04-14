@@ -3,3 +3,6 @@
 coverage
 jest.config.js
 tests
+*.trace.json
+*.devtoolslog.json
+*.report.json
