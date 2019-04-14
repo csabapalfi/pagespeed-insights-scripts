@@ -1,4 +1,5 @@
-coverage
 .eslintrc.js
+.travis.yml
+coverage
 jest.config.js
 tests
