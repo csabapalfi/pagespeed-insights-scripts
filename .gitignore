@@ -1,2 +1,5 @@
 node_modules
 coverage
+*.trace.json
+*.devtoolslog.json
+*.report.json

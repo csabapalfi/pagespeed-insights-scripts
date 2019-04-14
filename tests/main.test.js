@@ -7,7 +7,7 @@ describe('main', () => {
     getLighthouseResult: jest.fn(),
     url: 'https://www.google.com',
     metrics: {userTimingMarks: {}},
-    jsonl: false
+    output: {jsonl: false, reports: false},
   };
 
   it('returns runner', () => {
@@ -15,13 +15,13 @@ describe('main', () => {
   });
 
   it('runner.getResult calls getLighthouseResult then mapResult', async () => {
-    const lighthouseResult = {
+    const result = {
       categories: {performance: {score: 1}},
       audits: {}
     };
 
     const {getLighthouseResult} = options;
-    getLighthouseResult.mockResolvedValue(lighthouseResult);
+    getLighthouseResult.mockResolvedValue({result});
         
     const runner = main(options);
     const mappedResult = await runner.getResult();

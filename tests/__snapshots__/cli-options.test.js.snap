@@ -2,7 +2,6 @@
 
 exports[`cli-options parseArgs returns defaults based on argv 1`] = `
 Object {
-  "jsonl": false,
   "lighthouse": Object {
     "cpu-slow-down": 4,
     "cpuSlowDown": 4,
@@ -15,6 +14,11 @@ Object {
     "ttfb": false,
     "user-timing-marks": Object {},
     "userTimingMarks": Object {},
+  },
+  "output": Object {
+    "jsonl": false,
+    "save-assets": false,
+    "saveAssets": false,
   },
   "runs": 9,
   "url": "https://www.google.com",
