@@ -7,7 +7,7 @@ describe('main', () => {
     getLighthouseResult: jest.fn(),
     url: 'https://www.google.com',
     metrics: {userTimingMarks: {}},
-    jsonl: false
+    output: {jsonl: false, reports: false},
   };
 
   it('returns runner', () => {
