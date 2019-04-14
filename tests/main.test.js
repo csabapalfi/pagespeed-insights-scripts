@@ -1,25 +1,33 @@
-const {format: tsvFormat} = require('../lib/tsv');
-const {format: jsonlFormat} = require('../lib/jsonl');
 const {main} = require('../lib/main');
 
 describe('main', () => {
-  const mockOptions = (overrides = {}) => ({
+  const options = {
     runs: 1, 
     warmupRuns: 0, 
-    url: 'https://www.google.com',    
-    getLighthouseResult: () => Promise.resolve({}),
-    metrics: {},
-    jsonl: false,
-    ...overrides
+    getLighthouseResult: jest.fn(),
+    url: 'https://www.google.com',
+    metrics: {userTimingMarks: {}},
+    jsonl: false
+  };
+
+  it('returns runner', () => {
+    expect(main(options)).toMatchSnapshot();
   });
 
-  it('uses tsvFormat by default', () => {
-    const runner = main(mockOptions());
-    expect(runner.format).toBe(tsvFormat);
-  });
+  it('runner.getResult calls getLighthouseResult then mapResult', async () => {
+    const lighthouseResult = {
+      categories: {performance: {score: 1}},
+      audits: {}
+    };
 
-  it('uses jsonlFormat if specified', () => {
-    const runner = main(mockOptions({jsonl: true}));
-    expect(runner.format).toBe(jsonlFormat);
+    const {getLighthouseResult} = options;
+    getLighthouseResult.mockResolvedValue(lighthouseResult);
+        
+    const runner = main(options);
+    const mappedResult = await runner.getResult();
+
+    expect(mappedResult.score).toEqual(100);
+    expect(getLighthouseResult).toHaveBeenCalledTimes(1);
+    expect(getLighthouseResult).toHaveBeenCalledWith(options.url);
   });
 });

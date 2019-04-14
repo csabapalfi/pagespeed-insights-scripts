@@ -1,9 +1,8 @@
 const {runPagespeed} = require('../lib/run-pagespeed');
 const wreck = require('wreck');
+jest.mock('wreck');
 
-describe('run-psi', () => {
-
-  jest.mock('wreck');
+describe('run-pagespeed', () => {
   const lighthouseResult = {};
 
   it('runPageSpeed calls API and returns Lighthouse result', async () => {

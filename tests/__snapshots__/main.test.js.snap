@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`main returns runner 1`] = `
+Runner {
+  "counter": Counter {
+    "maxRuns": 1,
+    "run": 0,
+    "warmupRuns": 0,
+  },
+  "format": [Function],
+  "getResult": [Function],
+  "samples": Array [],
+}
+`;

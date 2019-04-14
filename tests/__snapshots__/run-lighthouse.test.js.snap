@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`run-lighthouse runLightHouse launches chrome and runs Lighthouse 1`] = `
+Array [
+  Object {
+    "chromeFlags": Array [
+      "--headless",
+    ],
+  },
+]
+`;
+
+exports[`run-lighthouse runLightHouse launches chrome and runs Lighthouse 2`] = `
+Array [
+  "https://www.google.com",
+  Object {
+    "port": 1234,
+    "throttling": Object {
+      "cpuSlowdownMultiplier": 4,
+    },
+  },
+  Object {
+    "extends": "node_modules/lighthouse/lighthouse-core/config/lr-mobile-config.js",
+    "settings": Object {
+      "onlyAudits": Array [
+        "first-contentful-paint",
+        "first-meaningful-paint",
+        "speed-index",
+        "first-cpu-idle",
+        "interactive",
+        "time-to-first-byte",
+      ],
+    },
+  },
+]
+`;
