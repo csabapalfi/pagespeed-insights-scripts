@@ -29,6 +29,7 @@ Array [
         "first-cpu-idle",
         "interactive",
         "time-to-first-byte",
+        "user-timings",
       ],
     },
   },
