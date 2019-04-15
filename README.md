@@ -7,22 +7,18 @@ Google PageSpeed Insights (PSI) score and metrics CLI
 
 ```
 $ npx pagespeed-score --runs 3 https://www.google.com
-fetchTime	score	FCP	FMP	SI	FCI	TTI
-00:15:25	96	0.9	1.0	1.0	3.1	3.7
-00:15:31	95	0.9	1.0	1.1	3.4	3.9
-00:15:38	96	0.9	1.0	1.0	3.2	3.7
+name  	score	FCP	FMP	SI	FCI	TTI
+run 1 	96	0.9	1.0	1.2	3.1	3.9
+run 2 	96	0.9	1.0	1.0	3.1	3.7
+run 3 	95	0.9	1.0	1.2	3.5	4.0
 
-median  	96	0.9	1.0	1.0	3.2	3.7
-stddev  	0.6	0.0	0.0	0.1	0.2	0.1
-min     	95	0.9	1.0	1.0	3.1	3.7
-max     	96	0.9	1.0	1.1	3.4	3.9
+median	96	0.9	1.0	1.2	3.1	3.9
+stddev	0.6	0.0	0.0	0.1	0.2	0.2
+min   	95	0.9	1.0	1.0	3.1	3.7
+max   	96	0.9	1.0	1.2	3.5	4.0
 ```
 
-Note: most pages have much higher variability in their score.
-
 ## Metrics
-
-* `fetchTime` is simply the time of the day (in UTC) when the run completed.
 
 * `score` is the PageSpeed score based on [LightHouse perfomance scoring](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) calculated using FCP, FMP, SI, FCI and TTI.
 
@@ -55,6 +51,8 @@ Output:
                                                       [boolean] [default: false]
   --saveAssets, --output.saveAssets  Save reports and traces
                                                       [boolean] [default: false]
+  --filePrefix, --output.filePrefix  Saved asset file prefix
+                                                          [string] [default: ""]
 
 Lighthouse:
   --local, --lighthouse.enabled             Switch to local Lighthouse
