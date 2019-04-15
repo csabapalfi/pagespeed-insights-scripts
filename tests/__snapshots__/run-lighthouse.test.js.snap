@@ -20,7 +20,7 @@ Array [
     },
   },
   Object {
-    "extends": "node_modules/lighthouse/lighthouse-core/config/lr-mobile-config.js",
+    "extends": "lighthouse/lighthouse-core/config/lr-mobile-config.js",
     "settings": Object {
       "onlyAudits": Array [
         "first-contentful-paint",
