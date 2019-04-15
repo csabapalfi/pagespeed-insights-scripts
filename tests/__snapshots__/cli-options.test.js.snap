@@ -16,6 +16,8 @@ Object {
     "userTimingMarks": Object {},
   },
   "output": Object {
+    "file-prefix": "",
+    "filePrefix": "",
     "jsonl": false,
     "save-assets": false,
     "saveAssets": false,
