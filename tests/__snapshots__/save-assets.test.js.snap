@@ -2,7 +2,7 @@
 
 exports[`save-assets saves report and artifacts 1`] = `
 Array [
-  "resolvedPath.report.json",
+  "resolvedPath-0.report.json",
   "{
   \\"audits\\": {}
 }",
@@ -12,7 +12,7 @@ Array [
 
 exports[`save-assets saves report only if no artifacts 1`] = `
 Array [
-  "resolvedPath.report.json",
+  "resolvedPath-0.report.json",
   "{
   \\"audits\\": {}
 }",
