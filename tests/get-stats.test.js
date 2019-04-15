@@ -2,7 +2,7 @@ const {getStats} = require('../lib/get-stats');
 
 describe('stats', () => {
   const mockSample = (data) => ({
-    type: 'result', fetchTime: '21:48:05', ...data
+    type: 'result', name: 'run 1', ...data
   });
 
   const samples = [

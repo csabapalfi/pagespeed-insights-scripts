@@ -6,7 +6,7 @@ describe('formatter', () => {
     describe('results', () => {
       const result = {
         type: 'result',
-        fetchTime: '21:48:05',
+        name: 'run 1',
         score: 95,
         FCP: 0.9,
         FMP: 1,
@@ -59,7 +59,7 @@ describe('formatter', () => {
     it('entries are JSON.stringify-ed', () => {
       expect(jsonlFormat([{
         type: 'result',
-        fetchTime: '21:48:05',
+        name: 'run 1',
         score: 95,
         FCP: 0.9,
         FMP: 1,
