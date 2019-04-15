@@ -40,7 +40,7 @@ Note: most pages have much higher variability in their score.
 
 ```
 Runs:
-  --runs        Number of runs                             [number] [default: 9]
+  --runs        Number of runs                             [number] [default: 1]
   --warmupRuns  Number of warmup runs                      [number] [default: 0]
 
 Additional metrics:
@@ -65,7 +65,7 @@ Lighthouse:
                                                            [number] [default: 4]
 ```
 
-* `--runs <N>` overrides the number of runs (default: 9)
+* `--runs <N>` overrides the number of runs (default: 1). For more than 1 runs stats will be calculated.
 
 * `--warmupRuns <N>` add warmup runs that are excluded from stats (e.g. to allow CDN or other caches to warm up)
 
@@ -95,7 +95,7 @@ Local results will still differ from the PSI API because of local hardware and n
 
 ```
 $ LANTERN_DEBUG=true npx pagespeed-score \
---local --saveAssets --runs 1 https://www.google.com
+--local --saveAssets https://www.google.com
 ```
 
 You can open any of these traces in the Chrome Devtools Performance tab. 
