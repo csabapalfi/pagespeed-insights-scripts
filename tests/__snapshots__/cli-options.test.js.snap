@@ -19,6 +19,8 @@ Object {
     "file-prefix": "",
     "filePrefix": "",
     "jsonl": false,
+    "lantern-debug": false,
+    "lanternDebug": false,
     "save-assets": false,
     "saveAssets": false,
   },

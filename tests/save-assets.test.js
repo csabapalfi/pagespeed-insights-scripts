@@ -16,7 +16,10 @@ describe('save-assets', () => {
   const result = {audits};
   const resolvedPath = 'resolvedPath';
 
-  afterEach(() => jest.resetAllMocks());
+  afterEach(() => { 
+    jest.resetAllMocks();
+    delete process.env.LANTERN_DEBUG;
+  });
 
   function expectToSaveReport() {
     expect(resolve).toHaveBeenCalledTimes(1);
@@ -30,7 +33,7 @@ describe('save-assets', () => {
   it('saves report only if no artifacts', async () => {
     resolve.mockReturnValue(resolvedPath);
     
-    await assetSaver(lighthouseModulePath, filePrefix)(index, result);
+    await assetSaver(lighthouseModulePath, {filePrefix})(index, result);
 
     expectToSaveReport();
   });
@@ -39,9 +42,27 @@ describe('save-assets', () => {
     const artifacts = {};
     resolve.mockReturnValue(resolvedPath);
     
-    await assetSaver(lighthouseModulePath, filePrefix)(1, result, artifacts);
+    await assetSaver(lighthouseModulePath, {filePrefix})(1, result, artifacts);
 
     expectToSaveReport();
+
+    expect(process.env.LANTERN_DEBUG).toBeUndefined();
+
+    expect(saveAssets).toHaveBeenCalledTimes(1);
+    expect(saveAssets.mock.calls[0][0]).toBe(artifacts);
+    expect(saveAssets.mock.calls[0][1]).toBe(audits);
+    expect(saveAssets.mock.calls[0][2]).toBe(resolvedPath);
+  });
+
+  it('saves report and artifacts with LANTERN_DEBUG', async () => {
+    const artifacts = {};
+    resolve.mockReturnValue(resolvedPath);
+    const output = {filePrefix, lanternDebug: true};
+    await assetSaver(lighthouseModulePath, output)(1, result, artifacts);
+
+    expectToSaveReport();
+
+    expect(process.env.LANTERN_DEBUG).toBe('true');
 
     expect(saveAssets).toHaveBeenCalledTimes(1);
     expect(saveAssets.mock.calls[0][0]).toBe(artifacts);
