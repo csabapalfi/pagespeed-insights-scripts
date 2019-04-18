@@ -36,38 +36,41 @@ max   	96	0.9	1.0	1.2	3.5	4.0
 
 ```
 Runs:
-  --runs        Number of runs                             [number] [default: 1]
-  --warmupRuns  Number of warmup runs                      [number] [default: 0]
+  --runs         Number of runs                            [number] [default: 1]
+  --warmup-runs  Number of warmup runs                     [number] [default: 0]
 
 Additional metrics:
-  --userTimingMarks,                        User Timing marks
+  --usertiming-marks,                       User Timing marks
   --metrics.userTimingMarks                                        [default: {}]
   --ttfb, --metrics.ttfb                    TTFB      [boolean] [default: false]
   --benchmark, --metrics.benchmark          Benchmark index
                                                       [boolean] [default: false]
 
 Output:
-  --jsonl, --output.jsonl            Output as JSON Lines
+  --jsonl, --output.jsonl                 Output as JSON Lines
                                                       [boolean] [default: false]
-  --saveAssets, --output.saveAssets  Save reports and traces
+  --save-assets, --output.saveAssets      Save reports and traces
                                                       [boolean] [default: false]
-  --filePrefix, --output.filePrefix  Saved asset file prefix
+  --file-prefix, --output.filePrefix      Saved asset file prefix
                                                           [string] [default: ""]
+  --lantern-debug, --output.lanternDebug  Save Lantern traces
+                                                      [boolean] [default: false]
 
 Lighthouse:
   --local, --lighthouse.enabled             Switch to local Lighthouse
                                                       [boolean] [default: false]
-  --lighthousePath,                         Lighthouse module path
+  --lighthouse-path,                        Lighthouse module path
   --lighthouse.modulePath                       [string] [default: "lighthouse"]
-  --cpuSlowDown, --lighthouse.cpuSlowDown   CPU slowdown multiplier
+  --cpu-slowdown, --lighthouse.cpuSlowDown  CPU slowdown multiplier
                                                            [number] [default: 4]
+
 ```
 
 * `--runs <N>` overrides the number of runs (default: 1). For more than 1 runs stats will be calculated.
 
-* `--warmupRuns <N>` add warmup runs that are excluded from stats (e.g. to allow CDN or other caches to warm up)
+* `--warmup-runs <N>` add warmup runs that are excluded from stats (e.g. to allow CDN or other caches to warm up)
 
-* `--userTimingMarks.<alias>=<name>` adds any User Timing mark named to your metrics with the name `alias` (e.g. `--userTimingMarks.DPA=datepicker.active`)
+* `--usertiming-marks.<alias>=<name>` adds any User Timing mark named to your metrics with the name `alias` (e.g. `--usertiming-marks.DPA=datepicker.active`)
 
 * `--ttfb` adds [Time to First Byte](https://developers.google.com/web/tools/lighthouse/audits/ttfb) to your metrics - can help identifying if a run was affected by your server response time variability
 
@@ -75,7 +78,7 @@ Lighthouse:
 
 * `--jsonl` outputs results (and statistics) as [JSON Lines](http://jsonlines.org/) instead of TSV
 
-* `--saveAssets` saves a report for each run
+* `--save-assets` saves a report for each run
 
 ### Local mode
 
@@ -83,17 +86,17 @@ Lighthouse:
 
   * uses the same version of LightHouse as PSI
   * uses the [LightRider mobile config](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/config/lr-mobile-config.js)
-  * allows throttling of CPU with `--lighthouse.cpuSlowDown` (default 4x)
+  * allows throttling of CPU with `--cpu-slowdown` (default 4x)
 
 Local results will still differ from the PSI API because of local hardware and network variability.
 
 ### Debugging metrics simulations (Lantern)
 
-`--saveAssets` will also save traces and devtoolslogs when used with `--local`. To look at how metrics were simulated combine this option with `LANTERN_DEBUG=true` that will save a trace for each metric simulation.
+`--lantern-debug --save-assets --local` will also save traces and devtoolslogs and traces for how metrics were simulated by Lantern
 
 ```
-$ LANTERN_DEBUG=true npx pagespeed-score \
---local --saveAssets https://www.google.com
+$ npx pagespeed-score \
+--local --lantern-debug --save-assets https://www.google.com
 ```
 
 You can open any of these traces in the Chrome Devtools Performance tab. 
