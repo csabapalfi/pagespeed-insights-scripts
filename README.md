@@ -1,4 +1,39 @@
-# pagespeed-score
+# What's in the Google PageSpeed score?
+
+[Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) is based on [Google Lighthouse (LH)](https://developers.google.com/web/tools/lighthouse/). Lighthouse **calculates a speed score based on 5 estimated metrics** and [scores and weights](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) them like the example below. Values are in seconds and a score of 90-100 is fast, 50-89 is average and 0-49 is slow.
+
+| Estimated Metric             | Weight |
+|------------------------------|--------|
+| First Contentful Paint (FCP) |    3   | 
+| First Meaningful Paint (FMP) |    1   | 
+| Speed Index (SI)             |    4   | 
+| First CPU Idle (FCI)         |    2   |
+| Time to Interactive (TTI)    |    5   |
+
+**Other audits have no direct impact on the score** (but give hints to improve the metrics).
+
+**The metrics estimation (code-named [Lantern](https://github.com/GoogleChrome/lighthouse/blob/master/docs/lantern.md)) models and simulates browser execution.** Lantern can emulate mobile network and CPU execution. To achieve this it only relies on a performance trace observed without any throttling (hence the fast execution time).
+
+There’s an [accuracy and variability analysis](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#) available. Lantern trades off accuracy but also mitigates certain sources variability. Metrics can be over/underestimated because of: 
+
+* differences in the unthrottled trace vs real device/throttling
+* details ignored or simplified to make the simulation workable
+
+Recommendations for using the score:
+* Even if not 100% accurate metrics in the red highlight genuine/urgent problems
+* Use the scores to look for longer term trends and bigger changes
+* Reduce variability by forcing AB tests, doing multiple runs, etc
+* but even reduced variability is not removing inherent inaccuracies
+* Use the pagespeed-score cli (this repo/module) to reduce/identify variability and to investigate inaccuracies
+
+
+
+
+
+
+
+
+
 
 [![Build Status](https://travis-ci.org/csabapalfi/pagespeed-score.svg?branch=master)](https://travis-ci.org/csabapalfi/pagespeed-score/)
 [![Coverage Status](https://coveralls.io/repos/github/csabapalfi/pagespeed-score/badge.svg?2)](https://coveralls.io/github/csabapalfi/pagespeed-score)
