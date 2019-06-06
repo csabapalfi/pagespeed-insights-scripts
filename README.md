@@ -1,15 +1,16 @@
 # What's in the Google PageSpeed score?
 
 - [Overview](#overview)
-  * [PageSpeed Insights score = Lighthouse](#pagespeed-insights-score--lighthouse)
+  * [PageSpeed Insights score = Lighthouse score](#pagespeed-insights-score--lighthouse-score)
   * [The 5 metrics that affect the score](#the-5-metrics-that-affect-the-score)
-  * [Metrics estimation: Lantern](#metrics-estimation-lantern)
+  * [Metrics are estimated with Lantern](#metrics-are-estimated-with-lantern)
   * [Recommendations for using the score](#recommendations-for-using-the-score)
-- [How metrics are estimated?](#how-metrics-are-estimated)
 - [`pagespeed-score` cli](#pagespeed-score-cli)
   * [Local mode](#local-mode)
-  * [Debugging metrics simulation locally (Lantern)](#debugging-metrics-simulation-locally-lantern)
+  * [Debugging metrics estimation (Lantern) locally](#debugging-metrics-estimation-lantern-locally)
   * [All options](#all-options)
+- [How does Lantern estimate metrics?](#how-does-lantern-estimate-metrics)
+  * [1. Create a page dependency graph from the observed (unthrottled) trace](#1-create-a-page-dependency-graph-from-the-observed-unthrottled-trace)
 
 ## Overview
 
@@ -56,25 +57,6 @@ Metrics can be over/underestimated because of:
 * Reduce variability by forcing AB test variants, doing multiple runs, etc
 * Keep in mind that even with reduced variability some inherent inaccuracies remain
 * Use the `pagespeed-score` cli to reduce/identify variability and to investigate inaccuracies
-
-## How does Lantern estimate metrics?
-
-Lantern is an ongoing effort to reduce the run time of Lighthouse and improve audit quality by modeling page activity and simulating browser execution. Metrics are estimated based on:
-
-* capturing an unthrottled network and CPU trace (usually referred to as observed trace)
-* simulating browser execution (with emulated mobile conditions) using relevant parts of the trace
-
-See detailed breakdown of steps below.
-
-### 1. Create a page dependency graph from the observed (unthrottled) trace 
-* Lighthouse loads the page without any throttling
-* A dependency graph is built based on the network records and the CPU trace
-* Any CPU tasks and network requests related to each other are linked up
-* See [lighthouse-core/computed/page-dependency-graph.js](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/computed/page-dependency-graph.js)
-
-> ![lantern - step 1 - dependency graph](img/lantern-01-dependency-graph.svg)
-
-(via [Project Lantern Overview - slide 7](https://docs.google.com/presentation/d/1EsuNICCm6uhrR2PLNaI5hNkJ-q-8Mv592kwHmnf4c6U/edit?zx=ksqkx77n311n#slide=id.g2ab7b9a053_0_467) by [@patrickhulce](https://github.com/patrickhulce))
 
 ## `pagespeed-score` cli
 
@@ -169,3 +151,23 @@ Lighthouse:
 * `--jsonl` outputs results (and statistics) as [JSON Lines](http://jsonlines.org/) instead of TSV
 
 * `--save-assets` saves a report for each run
+
+## How does Lantern estimate metrics?
+
+Lantern is an ongoing effort to reduce the run time of Lighthouse and improve audit quality by modeling page activity and simulating browser execution. Metrics are estimated based on:
+
+* capturing an unthrottled network and CPU trace (usually referred to as observed trace)
+* simulating browser execution (with emulated mobile conditions) using relevant parts of the trace
+
+See detailed breakdown of steps below.
+
+### 1. Create a page dependency graph
+
+* Lighthouse loads the page without any throttling
+* A dependency graph is built based on the network records and the CPU trace
+* Any CPU tasks and network requests related to each other are linked up
+* See [lighthouse-core/computed/page-dependency-graph.js](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/computed/page-dependency-graph.js)
+
+> ![lantern - step 1 - dependency graph](img/lantern-01-dependency-graph.svg)
+
+(via [Project Lantern Overview - slide 7](https://docs.google.com/presentation/d/1EsuNICCm6uhrR2PLNaI5hNkJ-q-8Mv592kwHmnf4c6U/edit?zx=ksqkx77n311n#slide=id.g2ab7b9a053_0_467) by [@patrickhulce](https://github.com/patrickhulce))
