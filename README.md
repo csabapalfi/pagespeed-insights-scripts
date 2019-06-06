@@ -19,12 +19,12 @@ This document (and the related node module) tries to answer that.
   * [Benchmark Index](#benchmark-index)
   * [Time to First Byte](#time-to-first-byte)
   * [User Timing marks and measures](#user-timing-marks-and-measures)
-- [Identifying inaccuracies](#identifying-inaccuracies)
-  * [Debug Lantern metrics estimation locally](#debug-lantern-metrics-estimation-locally)
 - [How does Lantern estimate metrics?](#how-does-lantern-estimate-metrics)
   * [1. Create a page dependency graph](#1-create-a-page-dependency-graph)
   * [2. Create subgraph for each metric](#2-create-subgraph-for-each-metric)
   * [3. Simulate subgraph with emulated mobile conditions](#3-simulate-subgraph-with-emulated-mobile-conditions)
+- [Identifying inaccuracies](#identifying-inaccuracies)
+  * [Debug Lantern metrics estimation locally](#debug-lantern-metrics-estimation-locally)
 
 ## Overview
 
@@ -82,7 +82,7 @@ $ npx pagespeed-score --help
 
 ### Local mode
 
-`--local` switches to running Lighthouse locally instead of calling the PSI API. This can be useful for non-public URLs (e.g. staging environment on a private network). To ensure the local results are close to the PSI API results this module:
+`pagespeed-score --local` switches to running Lighthouse locally instead of calling the PSI API. This can be useful for non-public URLs (e.g. staging environment on a private network) or debugging. To ensure the local results are close to the PSI API results this module:
 
   * uses the same version of LightHouse as PSI (5.0.0 as of 9 May 2019) 
   * uses the [LightRider mobile config](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/config/lr-mobile-config.js)
@@ -97,6 +97,8 @@ npx pagespeed-score --local "<url>"
 Local results will still differ from the PSI API because of local hardware and network variability.
 
 ## Reducing variability
+
+The [Lighthouse accuracy and variability analysis](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#) talks about a number of [sources of variability](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.1bbn58r9vku5). Some of them already mitigated by PSI or Lantern but as a user you can also take steps to reduce variability of your scores and metrics even further.
 
 ### Multiple runs
 
@@ -158,25 +160,6 @@ You can use the `pagespeed-score` cli to monitor them:
 
 * `--usertiming-marks.<alias>=<name>` adds any User Timing mark named to your metrics with the name `alias` (e.g. `--usertiming-marks.DPA=datepicker.active`)
 
-## Identifying inaccuracies
-
-### Debug Lantern metrics estimation locally
-
-Read [how does Lantern estimate metrics](#how-does-lantern-estimate-metrics) first to have a better understanding of the high level approach. In case you want to understand why Lantern estimated a metric the way it did you can make Lighthouse save the traces resulting from the simulations:
-
-```sh
-LANTERN_DEBUG=true npx lighthouse --save-assets <url> 
-```
-
-Use the Chrome Devtools Performance tab to open the traces. Subscribe to [lighthouse#5844](https://github.com/GoogleChrome/lighthouse/issues/5844) for future updates on this.
-
-You can also use `pagespeed-score` in [local mode](#local-mode) that has builtin support for this and also ensures that your lighthouse setup is as close to PSI as possible:
-
-```sh
-CHROME_PATH="/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary" \
-npx pagespeed-score --local --save-assets --lantern-debug "<url>"
-```
-
 ## How does Lantern estimate metrics?
 
 Lantern is an ongoing effort to reduce the run time of Lighthouse and improve audit quality by modeling page activity and simulating browser execution. Metrics are estimated based on:
@@ -217,3 +200,23 @@ See detailed breakdown of steps below.
 
 (via [Project Lantern Overview - slide 9](https://docs.google.com/presentation/d/1EsuNICCm6uhrR2PLNaI5hNkJ-q-8Mv592kwHmnf4c6U/edit?zx=ksqkx77n311n#slide=id.g2ab7b9a053_0_845) by [@patrickhulce](https://github.com/patrickhulce))
 
+## Identifying inaccuracies
+
+You can try to understand any inaccuracies affecting your site specifically (e.g. some perfomance related changes not reflected in your score).
+
+### Debug Lantern metrics estimation locally
+
+In case you want to understand how exactly Lantern estimated a metric you can make Lighthouse save the traces resulting from the simulations:
+
+```sh
+LANTERN_DEBUG=true npx lighthouse --save-assets <url> 
+```
+
+Use the Chrome Devtools Performance tab to open the traces. Subscribe to [lighthouse#5844](https://github.com/GoogleChrome/lighthouse/issues/5844) for future updates on this.
+
+You can also use `pagespeed-score` in [local mode](#local-mode) that has builtin support for this and also ensures that your lighthouse setup is as close to PSI as possible:
+
+```sh
+CHROME_PATH="/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary" \
+npx pagespeed-score --local --save-assets --lantern-debug "<url>"
+```
