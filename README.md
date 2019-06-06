@@ -140,9 +140,7 @@ You can use the `pagespeed-score` cli to monitor this:
 
 ### Time to First Byte
 
-Time to First Byte (TTFB) has a very limited impact on the score but can be useful indicator of [Web Server Variability](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.6rnl1clafpqn). 
-
-Please note that TTFB is not estimated by Lantern but based on the observed/fast trace.
+Time to First Byte (TTFB) has a very limited impact on the score but can be useful indicator of [Web Server Variability](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.6rnl1clafpqn). Please note that TTFB is not estimated by Lantern but based on the observed/fast trace.
 
 You can use the `pagespeed-score` cli to monitor this:
 
@@ -150,9 +148,7 @@ You can use the `pagespeed-score` cli to monitor this:
 
 ### User Timing marks and measures
 
-We use a number of User Timing marks and high variability in these can mean you have [Page Nondeterminism](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.js7k0ib0mzzv) or other sources variability.
-
-Please note user timing marks are not estimated by Lantern but based on the observed/fast trace.
+We use a number of User Timing marks and high variability in these can mean you have [Page Nondeterminism](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.js7k0ib0mzzv) or other sources variability. Please note user timing marks are not estimated by Lantern but based on the observed/fast trace.
 
 You can use the `pagespeed-score` cli to monitor them:
 
@@ -162,9 +158,7 @@ You can use the `pagespeed-score` cli to monitor them:
 
 ### Debug Lantern metrics estimation locally
 
-Read [How does Lantern estimate metrics?](#how-does-lantern-estimate-metrics) first to have a better understanding of the details.
-
-In case you want to understand why Lantern estimated a metric the way it did you can make Lighthouse save the traces resulting from the simulations:
+Read [how does Lantern estimate metrics](#how-does-lantern-estimate-metrics) first to have a better understanding of the high level approach. In case you want to understand why Lantern estimated a metric the way it did you can make Lighthouse save the traces resulting from the simulations:
 
 ```sh
 LANTERN_DEBUG=true npx lighthouse --save-assets <url> 
