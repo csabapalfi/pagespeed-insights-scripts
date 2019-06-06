@@ -74,7 +74,7 @@ See detailed breakdown of steps below.
 
 > ![lantern - step 1 - dependency graph](img/lantern-01-dependency-graph.svg)
 
-(via [Project Lantern Overview - slide 7](patrickhulce) by @patrickhulce)
+(via [Project Lantern Overview - slide 7](https://docs.google.com/presentation/d/1EsuNICCm6uhrR2PLNaI5hNkJ-q-8Mv592kwHmnf4c6U/edit?zx=ksqkx77n311n#slide=id.g2ab7b9a053_0_467) by [@patrickhulce](https://github.com/patrickhulce))
 
 ## `pagespeed-score` cli
 
