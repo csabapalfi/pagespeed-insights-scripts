@@ -12,7 +12,7 @@
 | First Meaningful Paint (FMP) |    1   | when the primary content of a page is visible |
 | Speed Index (SI)             |    4   | how quickly the contents of a page are visibly populated |
 | First CPU Idle (FCI)         |    2   | when the main thread is first quiet enough to handle user input |
-| Time to Interactive (TTI)    |    5   | when the main thread and network quiets down for at least 5s |
+| Time to Interactive (TTI)    |    5   | when the main thread and network is quiet for at least 5s |
 
 **Other audits have no direct impact on the score** (but give hints to improve the metrics).
 
