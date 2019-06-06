@@ -35,11 +35,11 @@ This is available in the [Lighthouse scoring documentation](https://github.com/G
 
 | Estimated Metric            | Weight |  90  |  50  | Description |
 |:----------------------------|:------:|:----:|:----:|-------------|
-| First Contentful Paint (FCP)|    3   | 2.4s | 4.0s | when the first text or image content is painted |
-| First Meaningful Paint (FMP)|    1   | 2.4s | 4.0s | when the primary content of a page is visible |
-| Speed Index (SI)            |    4   | 3.4s | 5.8s | how quickly the contents of a page are visibly populated |
-| First CPU Idle (FCI)        |    2   | 3.6s | 6.5s | when the main thread is first quiet enough to handle input |
-| Time to Interactive (TTI)   |    5   | 3.8s | 7.3s | when the main thread and network is quiet for at least 5s |
+| [First Contentful Paint (FCP)](https://github.com/csabapalfi/awesome-web-performance-metrics#first-contentful-paint-fcp) |    3   | 2.4s | 4.0s | when the first text or image content is painted |
+| [First Meaningful Paint (FMP)](https://github.com/csabapalfi/awesome-web-performance-metrics#first-meaningful-paint-fmp) |    1   | 2.4s | 4.0s | when the primary content of a page is visible |
+| [Speed Index (SI)](https://github.com/csabapalfi/awesome-web-performance-metrics#speed-index) |    4   | 3.4s | 5.8s | how quickly the contents of a page are visibly populated |
+| [First CPU Idle (FCI)](https://github.com/csabapalfi/awesome-web-performance-metrics#first-cpu-idle) |    2   | 3.6s | 6.5s | when the main thread is first quiet enough to handle input |
+| [Time to Interactive (TTI)](https://github.com/csabapalfi/awesome-web-performance-metrics#time-to-interactive-tti) |    5   | 3.8s | 7.3s | when the main thread and network is quiet for at least 5s |
 
 **Other audits have no direct impact on the score** (but give hints to improve the metrics).
 
