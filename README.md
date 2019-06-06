@@ -1,18 +1,27 @@
 # What's in the Google PageSpeed score?
 
+- [Summary](#summary)
+- [Google PageSpeed Insights (PSI) score and metrics CLI](#google-pagespeed-insights-psi-score-and-metrics-cli)
+  * [Metrics](#metrics)
+  * [Command Line Options](#command-line-options)
+  * [Local mode](#local-mode)
+  * [Debugging metrics simulations (Lantern)](#debugging-metrics-simulations-lantern)
 
 
-## tl;dr
 
-[Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) is based on [Google Lighthouse (LH)](https://developers.google.com/web/tools/lighthouse/). Lighthouse **calculates a speed score based on 5 estimated metrics** and [scores and weights](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) them like the example below. Values are in seconds and a score of 90-100 is fast, 50-89 is average and 0-49 is slow.
+## Summary
 
-| Estimated Metric             | Weight | Description |
-|:-----------------------------|:------:|:------------|
-| First Contentful Paint (FCP) |    3   | when the first text or image content is painted |
-| First Meaningful Paint (FMP) |    1   | when the primary content of a page is visible |
-| Speed Index (SI)             |    4   | how quickly the contents of a page are visibly populated |
-| First CPU Idle (FCI)         |    2   | when the main thread is first quiet enough to handle user input |
-| Time to Interactive (TTI)    |    5   | when the main thread and network is quiet for at least 5s |
+The [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) speed score is based on [Google Lighthouse (LH)](https://developers.google.com/web/tools/lighthouse/).
+
+Lighthouse **calculates a speed score based on 5 estimated metrics**. It [scores and weights](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) them like the table below. Values are in seconds and a score of 90-100 is fast, 50-89 is average and 0-49 is slow.
+
+| Estimated Metric            | Weight |  90  |  50  | Description |
+|:----------------------------|:------:|:----:|:----:|-------------|
+| First Contentful Paint (FCP)|    3   | 2.4s | 4.0s | when the first text or image content is painted |
+| First Meaningful Paint (FMP)|    1   | 2.4s | 4.0s | when the primary content of a page is visible |
+| Speed Index (SI)            |    4   | 3.4s | 5.8s | how quickly the contents of a page are visibly populated |
+| First CPU Idle (FCI)        |    2   | 3.6s | 6.5s | when the main thread is first quiet enough to handle input |
+| Time to Interactive (TTI)   |    5   | 3.8s | 7.3s | when the main thread and network is quiet for at least 5s |
 
 **Other audits have no direct impact on the score** (but give hints to improve the metrics).
 
