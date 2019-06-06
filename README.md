@@ -164,11 +164,9 @@ Read [how does Lantern estimate metrics](#how-does-lantern-estimate-metrics) fir
 LANTERN_DEBUG=true npx lighthouse --save-assets <url> 
 ```
 
-Use the Chrome Devtools Performance tab to open the traces.
+Use the Chrome Devtools Performance tab to open the traces. Subscribe to [lighthouse#5844](https://github.com/GoogleChrome/lighthouse/issues/5844) for future updates on this.
 
-Subscribe to [lighthouse#5844](https://github.com/GoogleChrome/lighthouse/issues/5844) for future updates on this.
-
-You can also use the `pagespeed-score` cli in [local mode](#local-mode) that has builtin support for this and also ensures that your lighthouse setup is as close to PSI as possible:
+You can also use `pagespeed-score` in [local mode](#local-mode) that has builtin support for this and also ensures that your lighthouse setup is as close to PSI as possible:
 
 ```sh
 CHROME_PATH="/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary" \
