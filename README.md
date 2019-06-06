@@ -47,9 +47,7 @@ This is available in the [Lighthouse scoring documentation](https://github.com/G
 
 **[Lantern](https://github.com/GoogleChrome/lighthouse/blob/master/docs/lantern.md) is the part of Lighthouse that estimates metrics. Lantern models page activity and simulates browser execution.** It can also emulate mobile network and CPU execution based on only a performance trace captured without any throttling (hence the fast execution time).
 
-There’s an [accuracy and variability analysis](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#) available. Lantern trades off accuracy but also mitigates certain sources variability.
-
-Metrics can be over/underestimated because of:
+There’s an [accuracy and variability analysis](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#) available. Lantern trades off accuracy but also mitigates certain sources variability. Metrics can be over/underestimated because of:
 * differences in the unthrottled trace vs real device/throttling
 * details ignored or simplified to make the simulation workable
 
