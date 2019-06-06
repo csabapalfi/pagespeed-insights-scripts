@@ -72,7 +72,9 @@ See detailed breakdown of steps below.
 * Any CPU tasks and network requests related to each other are linked up
 * See [lighthouse-core/computed/page-dependency-graph.js](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/computed/page-dependency-graph.js)
 
-![lantern - step 1 - dependency graph](img/lantern-01-dependency-graph.svg)
+> ![lantern - step 1 - dependency graph](img/lantern-01-dependency-graph.svg)
+
+(via [Project Lantern Overview - slide 7](patrickhulce) by @patrickhulce)
 
 ## `pagespeed-score` cli
 
