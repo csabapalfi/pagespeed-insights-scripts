@@ -21,7 +21,7 @@
 - [How does Lantern estimate metrics?](#how-does-lantern-estimate-metrics)
   * [1. Create a page dependency graph](#1-create-a-page-dependency-graph)
   * [2. Create subgraph for each metric](#2-create-subgraph-for-each-metric)
-  * [3. Simulate subgraph with emulated mobile conditions](#3-simulate-subgraph-with-emulated-mobile-conditions)
+  * [3. Simulate subgraphs with emulated mobile conditions](#3-simulate-subgraph-with-emulated-mobile-conditions)
 
 ## Overview
 
@@ -183,10 +183,27 @@ See detailed breakdown of steps below.
 * Any CPU tasks and network requests related to each other are linked up
 * See [lighthouse-core/computed/page-dependency-graph.js](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/computed/page-dependency-graph.js)
 
-> ![lantern - step 1 - dependency graph](img/lantern-01-dependency-graph.svg)
+> ![lantern - step 1 - dependency graph](img/lantern-1-dependency-graph.svg)
 
 (via [Project Lantern Overview - slide 7](https://docs.google.com/presentation/d/1EsuNICCm6uhrR2PLNaI5hNkJ-q-8Mv592kwHmnf4c6U/edit?zx=ksqkx77n311n#slide=id.g2ab7b9a053_0_467) by [@patrickhulce](https://github.com/patrickhulce))
 
 ### 2. Create subgraph for each metric
 
+* CPU and network nodes are filtered to create a subgraph with only the nodes contributing to the delay of a specific metric
+* e.g. based on the comparing node end timestamps with observed (unthrottled) metric timestamps
+* See [lighthouse-core/computed/metrics/lantern-*](https://github.com/GoogleChrome/lighthouse/tree/master/lighthouse-core/computed/metrics)
+
+> ![lantern - step 2 - create subgraphs](img/lantern-2-create-subgraphs.svg)
+
+(via [Project Lantern Overview - slide 8](https://docs.google.com/presentation/d/1EsuNICCm6uhrR2PLNaI5hNkJ-q-8Mv592kwHmnf4c6U/edit?zx=ksqkx77n311n#slide=id.g2ab7b9a053_0_503) by [@patrickhulce](https://github.com/patrickhulce))
+
 ### 3. Simulate subgraph with emulated mobile conditions
+
+* Simulate browser execution for each metric subgraph
+* DNS caching, TCP slow start, Connection pooling, and lots more implemented...
+* See [lighthouse-core/lib/dependency-graph/simulator/simulator.js](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/dependency-graph/simulator/simulator.js)
+
+> ![lantern - step 3 - simulate subgraphs](img/lantern-3-simulate-subgraphs.svg)
+
+(via [Project Lantern Overview - slide 9](https://docs.google.com/presentation/d/1EsuNICCm6uhrR2PLNaI5hNkJ-q-8Mv592kwHmnf4c6U/edit?zx=ksqkx77n311n#slide=id.g2ab7b9a053_0_845) by [@patrickhulce](https://github.com/patrickhulce))
+
