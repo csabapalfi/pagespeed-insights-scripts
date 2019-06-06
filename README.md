@@ -1,6 +1,8 @@
 # What's in the Google PageSpeed score?
 
-Ever wondered how your Google PageSpeed score is calculated and how to use it? This document (and node module) tries to answer that.
+Ever wondered how your Google PageSpeed score is calculated and how to use it? 
+
+This document (and node module) tries to answer that.
 
 - [Overview](#overview)
   * [PageSpeed Insights score = Lighthouse score](#pagespeed-insights-score--lighthouse-score)
@@ -61,9 +63,9 @@ There’s an [accuracy and variability analysis](https://docs.google.com/documen
 * Keep in mind that even with reduced variability some inherent inaccuracies remain
 * Use the `pagespeed-score` cli to reduce/identify variability and to investigate inaccuracies
 
-## `pagespeed-score` cli
+## The `pagespeed-score` module
 
-`pagespeed-score` is a module contained in this repe. It's a command line toolkit to get a speed score and metrics via the Google PageSpeed Insights API or a local Lighthouse run. 
+`pagespeed-score` is a node module published from this repo. It's a command line toolkit to get a speed score and metrics via the Google PageSpeed Insights API or a local Lighthouse run. 
 
 ```
 $ npx pagespeed-score https://www.google.com
