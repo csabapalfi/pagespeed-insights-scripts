@@ -2,7 +2,7 @@
 
 Ever wondered how your Google PageSpeed score is calculated and how to use it? 
 
-This document (and node module) tries to answer that.
+This document (and the related node module) tries to answer that.
 
 - [Overview](#overview)
   * [PageSpeed Insights score = Lighthouse score](#pagespeed-insights-score--lighthouse-score)
