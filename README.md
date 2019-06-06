@@ -9,7 +9,7 @@ This document (and node module) tries to answer that.
   * [The 5 metrics that affect the score](#the-5-metrics-that-affect-the-score)
   * [Metrics are estimated with Lantern](#metrics-are-estimated-with-lantern)
   * [Recommendations for using the score](#recommendations-for-using-the-score)
-- [`pagespeed-score` cli](#pagespeed-score-cli)
+- [The `pagespeed-score` module](#the-pagespeed-score-module)
   * [Local mode](#local-mode)
 - [Reducing variability](#reducing-variability)
   * [Multiple runs](#multiple-runs)
