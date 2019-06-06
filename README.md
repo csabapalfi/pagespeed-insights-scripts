@@ -13,7 +13,7 @@
 
 ## Overview
 
-### PageSpeed Insights score = Lighthouse
+### PageSpeed Insights score = Lighthouse score
 
 The [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) score is based on [Google Lighthouse (LH)](https://developers.google.com/web/tools/lighthouse/).
 
@@ -35,9 +35,13 @@ This is available in the [Lighthouse scoring documentation](https://github.com/G
 
 **Other audits have no direct impact on the score** (but give hints to improve the metrics).
 
-### Metrics estimation (project Lantern)
+### Metrics are estimated with Lantern
 
-**The metrics estimation (code-named [Lantern](https://github.com/GoogleChrome/lighthouse/blob/master/docs/lantern.md)) models and simulates browser execution.** Lantern can emulate mobile network and CPU execution. To achieve this it only relies on a performance trace observed without any throttling (hence the fast execution time).
+**[Lantern](https://github.com/GoogleChrome/lighthouse/blob/master/docs/lantern.md) is the part of Lighthouse that estimates metrics.**
+
+* **Lantern models page activity and simulates browser execution.** 
+* It can also emulate mobile network and CPU execution based on only a performance trace captured without any throttling.
+* (hence the fast execution time).
 
 There’s an [accuracy and variability analysis](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#) available. Lantern trades off accuracy but also mitigates certain sources variability.
 
@@ -48,14 +52,27 @@ Metrics can be over/underestimated because of:
 ### Recommendations for using the score
 
 * Even if not 100% accurate **metrics in the red highlight genuine/urgent problems**
-* Use the scores to **look for longer term trends and bigger changes**
-* Reduce variability by forcing AB tests, doing multiple runs, etc
-* Even reduced variability is not removing inherent inaccuracies
+* Use the scores to **look for longer term trends and identify big changes**
+* Reduce variability by forcing AB test variants, doing multiple runs, etc
+* Keep in mind that even with reduced variability some inherent inaccuracies remain
 * Use the `pagespeed-score` cli to reduce/identify variability and to investigate inaccuracies
 
 ## How does Lantern estimate metrics?
 
-TODO
+Lantern is an ongoing effort to reduce the run time of Lighthouse and improve audit quality by modeling page activity and simulating browser execution. Metrics are estimated based on:
+
+* capturing an unthrottled network and CPU trace (usually referred to as observed trace)
+* simulating browser execution (with emulated mobile conditions) using relevant parts of the trace
+
+See detailed breakdown of steps below.
+
+### 1. Create a page dependency graph from the observed (unthrottled) trace 
+* Lighthouse loads the page without any throttling
+* A dependency graph is built based on the network records and the CPU trace
+* Any CPU tasks and network requests related to each other are linked up
+* See [lighthouse-core/computed/page-dependency-graph.js](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/computed/page-dependency-graph.js)
+
+![lantern - step 1 - dependency graph](img/lantern-01-dependency-graph.svg)
 
 ## `pagespeed-score` cli
 
