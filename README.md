@@ -7,7 +7,7 @@
 [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) is based on [Google Lighthouse (LH)](https://developers.google.com/web/tools/lighthouse/). Lighthouse **calculates a speed score based on 5 estimated metrics** and [scores and weights](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) them like the example below. Values are in seconds and a score of 90-100 is fast, 50-89 is average and 0-49 is slow.
 
 | Estimated Metric             | Weight | Description |
-|------------------------------|--------|-------------|
+|:-----------------------------|:------:|:------------|
 | First Contentful Paint (FCP) |    3   | when the first text or image content is painted |
 | First Meaningful Paint (FMP) |    1   | when the primary content of a page is visible |
 | Speed Index (SI)             |    4   | how quickly the contents of a page are visibly populated |
