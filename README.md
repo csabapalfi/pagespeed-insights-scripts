@@ -1,21 +1,23 @@
 # What's in the Google PageSpeed score?
 
-- [Summary](#summary)
+- [Overview](#overview)
+  * [What is the pagespeed score?](#what-is-the-pagespeed-score)
+  * [What metrics affect the score and how?](#what-metrics-affect-the-score-and-how)
+  * [How metrics are estimated? Is that accurate?](#how-metrics-are-estimated-is-that-accurate)
+  * [Recommendations for using the score](#recommendations-for-using-the-score)
 - [Google PageSpeed Insights (PSI) score and metrics CLI](#google-pagespeed-insights-psi-score-and-metrics-cli)
   * [Metrics](#metrics)
   * [Command Line Options](#command-line-options)
   * [Local mode](#local-mode)
   * [Debugging metrics simulations (Lantern)](#debugging-metrics-simulations-lantern)
 
+## Overview
 
+### What is the pagespeed score?
 
-## Summary
+The [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) score is based on [Google Lighthouse (LH)](https://developers.google.com/web/tools/lighthouse/).
 
-### What is it?
-
-The [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) is based on [Google Lighthouse (LH)](https://developers.google.com/web/tools/lighthouse/). 
-
-**Lighthouse calculates a speed score on the scale of 0-100 based on 5 estimated metrics.**
+**Lighthouse calculates the performance score on the scale of 0-100 based on 5 estimated metrics.**
 
 The score of 90-100 is fast, 50-89 is average and 0-49 is slow.
 
@@ -33,25 +35,28 @@ This is available in the [Lighthouse scoring documentation](https://github.com/G
 
 **Other audits have no direct impact on the score** (but give hints to improve the metrics).
 
+### How metrics are estimated? Is that accurate?
+
 **The metrics estimation (code-named [Lantern](https://github.com/GoogleChrome/lighthouse/blob/master/docs/lantern.md)) models and simulates browser execution.** Lantern can emulate mobile network and CPU execution. To achieve this it only relies on a performance trace observed without any throttling (hence the fast execution time).
 
-There’s an [accuracy and variability analysis](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#) available. Lantern trades off accuracy but also mitigates certain sources variability. Metrics can be over/underestimated because of: 
+There’s an [accuracy and variability analysis](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#) available. Lantern trades off accuracy but also mitigates certain sources variability. 
 
+Metrics can be over/underestimated because of:
 * differences in the unthrottled trace vs real device/throttling
 * details ignored or simplified to make the simulation workable
 
-Recommendations for using the score:
+### Recommendations for using the score
+
 * Even if not 100% accurate **metrics in the red highlight genuine/urgent problems**
 * Use the scores to **look for longer term trends and bigger changes**
 * Reduce variability by forcing AB tests, doing multiple runs, etc
 * but even reduced variability is not removing inherent inaccuracies
 * Use the pagespeed-score cli (this repo/module) to reduce/identify variability and to investigate inaccuracies
 
+## Google PageSpeed Insights (PSI) score and metrics CLI
 
 [![Build Status](https://travis-ci.org/csabapalfi/pagespeed-score.svg?branch=master)](https://travis-ci.org/csabapalfi/pagespeed-score/)
 [![Coverage Status](https://coveralls.io/repos/github/csabapalfi/pagespeed-score/badge.svg?2)](https://coveralls.io/github/csabapalfi/pagespeed-score)
-
-## Google PageSpeed Insights (PSI) score and metrics CLI
 
 ```
 $ npx pagespeed-score --runs 3 https://www.google.com
