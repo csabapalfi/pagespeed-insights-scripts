@@ -11,9 +11,17 @@
 
 ## Summary
 
-The [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) speed score is based on [Google Lighthouse (LH)](https://developers.google.com/web/tools/lighthouse/).
+### What is it?
 
-Lighthouse **calculates a speed score based on 5 estimated metrics**. It [scores and weights](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) them like the table below. Values are in seconds and a score of 90-100 is fast, 50-89 is average and 0-49 is slow.
+The [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) is based on [Google Lighthouse (LH)](https://developers.google.com/web/tools/lighthouse/). 
+
+**Lighthouse calculates a speed score on the scale of 0-100 based on 5 estimated metrics.**
+
+The score of 90-100 is fast, 50-89 is average and 0-49 is slow.
+
+### What metrics affect the score and how?
+
+This is available in the [Lighthouse scoring documentation](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md). See a summary of metrics, their weights in the score and their maximum values to achieve the score of 90 and 50 in the table below:
 
 | Estimated Metric            | Weight |  90  |  50  | Description |
 |:----------------------------|:------:|:----:|:----:|-------------|
