@@ -16,11 +16,7 @@
 
 ### PageSpeed Insights score = Lighthouse score
 
-The [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) score is based on [Google Lighthouse (LH)](https://developers.google.com/web/tools/lighthouse/).
-
-**Lighthouse calculates the performance score on the scale of 0-100 based on 5 estimated metrics.**
-
-The score of 90-100 is fast, 50-89 is average and 0-49 is slow.
+The [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) score is based on [Google Lighthouse (LH)](https://developers.google.com/web/tools/lighthouse/). **Lighthouse calculates the performance score on the scale of 0-100 based on 5 estimated metrics.** The score of 90-100 is fast, 50-89 is average and 0-49 is slow.
 
 ### The 5 metrics that affect the score
 
@@ -38,11 +34,7 @@ This is available in the [Lighthouse scoring documentation](https://github.com/G
 
 ### Metrics are estimated with Lantern
 
-**[Lantern](https://github.com/GoogleChrome/lighthouse/blob/master/docs/lantern.md) is the part of Lighthouse that estimates metrics.**
-
-* **Lantern models page activity and simulates browser execution.** 
-* It can also emulate mobile network and CPU execution based on only a performance trace captured without any throttling.
-* (hence the fast execution time).
+**[Lantern](https://github.com/GoogleChrome/lighthouse/blob/master/docs/lantern.md) is the part of Lighthouse that estimates metrics. Lantern models page activity and simulates browser execution.** It can also emulate mobile network and CPU execution based on only a performance trace captured without any throttling (hence the fast execution time).
 
 There’s an [accuracy and variability analysis](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#) available. Lantern trades off accuracy but also mitigates certain sources variability.
 
