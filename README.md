@@ -1,14 +1,18 @@
 # What's in the Google PageSpeed score?
 
+
+
+## tl;dr
+
 [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) is based on [Google Lighthouse (LH)](https://developers.google.com/web/tools/lighthouse/). Lighthouse **calculates a speed score based on 5 estimated metrics** and [scores and weights](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) them like the example below. Values are in seconds and a score of 90-100 is fast, 50-89 is average and 0-49 is slow.
 
-| Estimated Metric             | Weight |
-|------------------------------|--------|
-| First Contentful Paint (FCP) |    3   | 
-| First Meaningful Paint (FMP) |    1   | 
-| Speed Index (SI)             |    4   | 
-| First CPU Idle (FCI)         |    2   |
-| Time to Interactive (TTI)    |    5   |
+| Estimated Metric             | Weight | Description |
+|------------------------------|--------|-------------|
+| First Contentful Paint (FCP) |    3   | when the first text or image content is painted |
+| First Meaningful Paint (FMP) |    1   | when the primary content of a page is visible |
+| Speed Index (SI)             |    4   | how quickly the contents of a page are visibly populated |
+| First CPU Idle (FCI)         |    2   | when the main thread is quiet enough to handle user input |
+| Time to Interactive (TTI)    |    5   | how quickly the main thread and network quiets down for at least 5 seconds |
 
 **Other audits have no direct impact on the score** (but give hints to improve the metrics).
 
@@ -20,25 +24,17 @@ There’s an [accuracy and variability analysis](https://docs.google.com/documen
 * details ignored or simplified to make the simulation workable
 
 Recommendations for using the score:
-* Even if not 100% accurate metrics in the red highlight genuine/urgent problems
-* Use the scores to look for longer term trends and bigger changes
+* Even if not 100% accurate **metrics in the red highlight genuine/urgent problems**
+* Use the scores to **look for longer term trends and bigger changes**
 * Reduce variability by forcing AB tests, doing multiple runs, etc
 * but even reduced variability is not removing inherent inaccuracies
 * Use the pagespeed-score cli (this repo/module) to reduce/identify variability and to investigate inaccuracies
 
 
-
-
-
-
-
-
-
-
 [![Build Status](https://travis-ci.org/csabapalfi/pagespeed-score.svg?branch=master)](https://travis-ci.org/csabapalfi/pagespeed-score/)
 [![Coverage Status](https://coveralls.io/repos/github/csabapalfi/pagespeed-score/badge.svg?2)](https://coveralls.io/github/csabapalfi/pagespeed-score)
 
-Google PageSpeed Insights (PSI) score and metrics CLI
+## Google PageSpeed Insights (PSI) score and metrics CLI
 
 ```
 $ npx pagespeed-score --runs 3 https://www.google.com
@@ -53,7 +49,7 @@ min   	95	0.9	1.0	1.0	3.1	3.7
 max   	96	0.9	1.0	1.2	3.5	4.0
 ```
 
-## Metrics
+### Metrics
 
 * `score` is the PageSpeed score based on [LightHouse perfomance scoring](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) calculated using FCP, FMP, SI, FCI and TTI.
 
@@ -67,7 +63,7 @@ max   	96	0.9	1.0	1.2	3.5	4.0
 
 * `TTI` is [Time to Interactive](https://github.com/csabapalfi/awesome-web-performance-metrics#time-to-interactive-tti)
 
-## Command Line Options
+### Command Line Options
 
 ```
 Runs:
