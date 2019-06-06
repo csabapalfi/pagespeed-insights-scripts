@@ -35,7 +35,7 @@ This is available in the [Lighthouse scoring documentation](https://github.com/G
 
 **Other audits have no direct impact on the score** (but give hints to improve the metrics).
 
-### Metrics estimation: Project Lantern
+### Metrics estimation (project Lantern)
 
 **The metrics estimation (code-named [Lantern](https://github.com/GoogleChrome/lighthouse/blob/master/docs/lantern.md)) models and simulates browser execution.** Lantern can emulate mobile network and CPU execution. To achieve this it only relies on a performance trace observed without any throttling (hence the fast execution time).
 
@@ -53,7 +53,9 @@ Metrics can be over/underestimated because of:
 * Even reduced variability is not removing inherent inaccuracies
 * Use the `pagespeed-score` cli to reduce/identify variability and to investigate inaccuracies
 
-## How metrics are estimated?
+## How does Lantern estimate metrics?
+
+TODO
 
 ## `pagespeed-score` cli
 
@@ -85,7 +87,7 @@ max   	96	0.9	1.0	1.2	3.5	4.0
 
 Local results will still differ from the PSI API because of local hardware and network variability.
 
-### Debugging metrics simulation locally (Lantern)
+### Debugging metrics estimation (Lantern) locally 
 
 `--lantern-debug --save-assets --local` will also save traces for metrics simulations run by Lantern
 
