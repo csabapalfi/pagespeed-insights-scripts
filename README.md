@@ -61,7 +61,7 @@ There’s an [accuracy and variability analysis](https://docs.google.com/documen
 
 ## `pagespeed-score` cli
 
-Command line toolkit to get a speed score and metrics via the Google PageSpeed Insights API or a local Lighthouse run. 
+`pagespeed-score` is a module contained in this repe. It's a command line toolkit to get a speed score and metrics via the Google PageSpeed Insights API or a local Lighthouse run. 
 
 ```
 $ npx pagespeed-score https://www.google.com
@@ -132,11 +132,7 @@ You can look at additional datapoints not directly taken into account for score 
 
 ### Benchmark Index
 
-Lighthouse computes a memory/CPU performance [benchmark index]((https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154)) to determine rough device class. 
-
-Variability in this can help identifying [Client Hardware Variability](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.km3f9ebrlnmi) or [Client Resource Contention](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.9gqujdsfrbou).
-
-These are less likely to occur with PSI that uses a highly controlled lab environment and can affect local Lighthouse runs more.
+Lighthouse computes a memory/CPU performance [benchmark index]((https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154)) to determine rough device class. Variability in this can help identifying [Client Hardware Variability](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.km3f9ebrlnmi) or [Client Resource Contention](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.9gqujdsfrbou). These are less likely to occur with PSI that uses a highly controlled lab environment and can affect local Lighthouse runs more.
 
 You can use the `pagespeed-score` cli to monitor this:
 
