@@ -7,12 +7,9 @@ Google PageSpeed score command line toolkit
 
 Get a score and metrics via the Google PageSpeed Insights API or a local Lighthouse run.
 
-## Recommendations for using the PageSpeed score
-
 * **Use the score to look for longer-term trends and identify big changes**; but prefer your own analytics/field data for finer details
-* **Metrics marked slow (red) usually highlight genuine problems**, even though actual values are not 100% accurate
+* **Individual metrics marked slow (red) usually highlight genuine problems**, even though actual values are not 100% accurate
 * **Reduce variability by doing multiple runs, forcing A/B test variants, and other means** — but even with reduced variability, some inherent inaccuracies remain
-* **Try the `pagespeed-score` cli (this module!)** to reduce/identify variability and to investigate inaccuracies
 
 Check out my blog post for more details: [What's in the Google PageSpeed score?](https://medium.com/expedia-group-tech/whats-in-the-google-pagespeed-score-a5fc93f91e91)
 
