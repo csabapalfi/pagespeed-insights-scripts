@@ -7,9 +7,18 @@ Google PageSpeed score command line toolkit
 
 You can use `pagespeed-score` to get a speed score and metrics via the Google PageSpeed Insights API or a local Lighthouse run.
 
-Ever wondered how Lighthouse (and PageSpeed Insights) calculates your performance score? Check out my blog post with a deep dive and recommendations. https://medium.com/expedia-group-tech/whats-in-the-google-pagespeed-score-a5fc93f91e91
+Ever wondered how Lighthouse (and PageSpeed Insights) calculates your performance score? Check out my blog post with a deep dive and recommendations: [What's in the Google PageSpeed score?](https://medium.com/expedia-group-tech/whats-in-the-google-pagespeed-score-a5fc93f91e91)
+
+## Recommendations for using the score
+
+* **Use the score to look for longer-term trends and identify big changes**; but prefer your own analytics/field data for finer details
+* **Metrics marked slow (red) usually highlight genuine problems**, even though actual values are not 100% accurate
+* **Reduce variability by doing multiple runs, forcing A/B test variants, and other means** — but even with reduced variability, some inherent inaccuracies remain
+* **Try the `pagespeed-score` cli (this module!)** to reduce/identify variability and to investigate inaccuracies
 
 ## About the score
+
+Learn more by reading my blog post: [What's in the Google PageSpeed score?](https://medium.com/expedia-group-tech/whats-in-the-google-pagespeed-score-a5fc93f91e91)
 
 ### PageSpeed Insights score = Lighthouse score
 
@@ -29,7 +38,7 @@ The [Lighthouse scoring documentation](https://github.com/GoogleChrome/lighthous
 
 **None of the other Lighthouse audits have a direct impact on the score**, but they do give hints on improving the metrics. To learn more about the metrics, check out my [awesome-web-performance-metrics](https://github.com/csabapalfi/awesome-web-performance-metrics) repo.
 
-### Not all metrics created equal
+### Not all metrics are weighted equally
 
 Lighthouse calculates a speed score for all 5 metrics based on their estimated values, then calculates a weighted average to get an aggregate speed score. The metric weights and fast/slow thresholds are available in the table below:
 
@@ -41,24 +50,10 @@ Lighthouse calculates a speed score for all 5 metrics based on their estimated v
 | First CPU Idle (FCI)        |    2   | <3.6s | >6.5s | 
 | Time to Interactive (TTI)   |    5   | <3.8s | >7.3s |
 
+### Metrics are estimated with a simulation (Lantern) 
 
+[Lantern](https://github.com/GoogleChrome/lighthouse/blob/master/docs/lantern.md) is the part of Lighthouse that models page activity and simulates browser execution to estimate metrics.
 
-### Metrics are estimated with Lantern
-
-**[Lantern](https://github.com/GoogleChrome/lighthouse/blob/master/docs/lantern.md) is the part of Lighthouse that estimates metrics. Lantern models page activity and simulates browser execution.** It can also emulate mobile network and CPU execution. The input data for the simulation is a performance trace captured without any throttling (hence the fast execution time).
-
-There’s an [accuracy and variability analysis](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#) available. Lantern trades off accuracy but also mitigates certain sources variability. Metrics can be over/underestimated because of:
-
-* differences in the unthrottled trace vs real device/throttling
-* details ignored or simplified to make the simulation workable
-
-### Recommendations for using the score
-
-* Even if not 100% accurate **metrics in the red highlight genuine/urgent problems**
-* Use the scores to **look for longer term trends and identify big changes**
-* Reduce variability by forcing AB test variants, doing multiple runs, etc
-* Keep in mind that even with reduced variability some inherent inaccuracies remain
-* Use the `pagespeed-score` cli to reduce/identify variability and to investigate inaccuracies
 
 ## The `pagespeed-score` module
 
