@@ -7,12 +7,6 @@ Google PageSpeed score command line toolkit
 
 Get a score and metrics via the Google PageSpeed Insights API or a local Lighthouse run.
 
-* **Use the score to look for longer-term trends and identify big changes**; but prefer your own analytics/field data for finer details
-* **Individual metrics marked slow (red) usually highlight genuine problems**, even though actual values are not 100% accurate
-* **Reduce variability by doing multiple runs, forcing A/B test variants, and other means** — but even with reduced variability, some inherent inaccuracies remain
-
-Check out my blog post for more details: [What's in the Google PageSpeed score?](https://medium.com/expedia-group-tech/whats-in-the-google-pagespeed-score-a5fc93f91e91)
-
 - [Requirements](#requirements)
 - [Usage](#usage)
   * [`--runs`,`--warmup-runs` - multiple runs](#--runs--warmup-runs---multiple-runs)
@@ -26,6 +20,15 @@ Check out my blog post for more details: [What's in the Google PageSpeed score?]
   * [The 5 metrics that affect the score](#the-5-metrics-that-affect-the-score)
   * [Not all metrics are weighted equally](#not-all-metrics-are-weighted-equally)
   * [Metrics are estimated with a simulation (Lantern)](#metrics-are-estimated-with-a-simulation-lantern)
+
+
+## Recommendations for using the score and metrics values
+
+* **Use the score to look for longer-term trends and identify big changes**; but prefer your own analytics/field data for finer details
+* **Individual metrics marked slow (red) usually highlight genuine problems**, even though actual values are not 100% accurate
+* **Reduce variability by doing multiple runs, forcing A/B test variants, and other means** — but even with reduced variability, some inherent inaccuracies remain
+
+Check out my blog post for more details: [What's in the Google PageSpeed score?](https://medium.com/expedia-group-tech/whats-in-the-google-pagespeed-score-a5fc93f91e91)
 
 ## Requirements
 
