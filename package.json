@@ -1,7 +1,7 @@
 {
   "name": "pagespeed-score",
   "version": "0.15.0",
-  "description": "Google PageSpeed Insights (PSI) score and metrics CLI",
+  "description": "Google PageSpeed score command line toolkit",
   "bin": {
     "pagespeed-score": "index.js"
   },
@@ -34,6 +34,7 @@
     "cli",
     "score",
     "google",
-    "lighthouse"
+    "lighthouse",
+    "metrics"
   ]
 }

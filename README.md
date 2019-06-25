@@ -1,50 +1,47 @@
-# What's in the Google PageSpeed score?
+# pagespeed-score
 
-Ever wondered how your Google PageSpeed score is calculated and how to use it? 
+[![Build Status](https://travis-ci.org/csabapalfi/pagespeed-score.svg?branch=master)](https://travis-ci.org/csabapalfi/pagespeed-score/)
+[![Coverage Status](https://coveralls.io/repos/github/csabapalfi/pagespeed-score/badge.svg?2)](https://coveralls.io/github/csabapalfi/pagespeed-score)
 
-This document (and the related node module) tries to answer that.
+Google PageSpeed score command line toolkit
 
-- [Overview](#overview)
-  * [PageSpeed Insights score = Lighthouse score](#pagespeed-insights-score--lighthouse-score)
-  * [The 5 metrics that affect the score](#the-5-metrics-that-affect-the-score)
-  * [Metrics are estimated with Lantern](#metrics-are-estimated-with-lantern)
-  * [Recommendations for using the score](#recommendations-for-using-the-score)
-- [The `pagespeed-score` module](#the-pagespeed-score-module)
-  * [Local mode](#local-mode)
-- [Reducing variability](#reducing-variability)
-  * [Multiple runs](#multiple-runs)
-  * [Force AB tests variants](#force-ab-tests-variants)
-  * [Feature flags to turn off e.g. third party scripts](#feature-flags-to-turn-off-eg-third-party-scripts)
-- [Identifying sources of variability](#identifying-sources-of-variability)
-  * [Benchmark Index](#benchmark-index)
-  * [Time to First Byte](#time-to-first-byte)
-  * [User Timing marks and measures](#user-timing-marks-and-measures)
-- [How does Lantern estimate metrics?](#how-does-lantern-estimate-metrics)
-  * [1. Create a page dependency graph](#1-create-a-page-dependency-graph)
-  * [2. Create subgraph for each metric](#2-create-subgraph-for-each-metric)
-  * [3. Simulate subgraph with emulated mobile conditions](#3-simulate-subgraph-with-emulated-mobile-conditions)
-- [Identifying inaccuracies](#identifying-inaccuracies)
-  * [Debug Lantern metrics estimation locally](#debug-lantern-metrics-estimation-locally)
+Ever wondered how Lighthouse (and PageSpeed Insights) calculates your performance score? Check out my blog post with a deep dive and recommendations. https://medium.com/expedia-group-tech/whats-in-the-google-pagespeed-score-a5fc93f91e91
 
-## Overview
+`pagespeed-score` is a command line toolkit to get a speed score and metrics via the Google PageSpeed Insights API or a local Lighthouse run.
+
+## About the score
 
 ### PageSpeed Insights score = Lighthouse score
 
-The [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) score is based on [Google Lighthouse (LH)](https://developers.google.com/web/tools/lighthouse/). **Lighthouse calculates the performance score on the scale of 0-100 based on 5 estimated metrics.** The score of 90-100 is fast, 50-89 is average and 0-49 is slow.
+The [Google PageSpeed Insights (PSI)](https://developers.google.com/speed/pagespeed/insights/) score is based on [Google Lighthouse](https://developers.google.com/web/tools/lighthouse/) run.
 
 ### The 5 metrics that affect the score
 
-This is available in the [Lighthouse scoring documentation](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md). See a summary of metrics, their weights in the score and their maximum values to achieve the score of 90 and 50 in the table below:
+The [Lighthouse scoring documentation](https://github.com/GoogleChrome/lighthouse/blob/master/docs/scoring.md) explains that the performance score is determined using the following estimated metrics:
 
-| Estimated Metric            | Weight |  90  |  50  | Description |
-|:----------------------------|:------:|:----:|:----:|-------------|
-| [First Contentful Paint (FCP)](https://github.com/csabapalfi/awesome-web-performance-metrics#first-contentful-paint-fcp) |    3   | 2.4s | 4.0s | when the first text or image content is painted |
-| [First Meaningful Paint (FMP)](https://github.com/csabapalfi/awesome-web-performance-metrics#first-meaningful-paint-fmp) |    1   | 2.4s | 4.0s | when the primary content of a page is visible |
-| [Speed Index (SI)](https://github.com/csabapalfi/awesome-web-performance-metrics#speed-index) |    4   | 3.4s | 5.8s | how quickly the contents of a page are visibly populated |
-| [First CPU Idle (FCI)](https://github.com/csabapalfi/awesome-web-performance-metrics#first-cpu-idle) |    2   | 3.6s | 6.5s | when the main thread is first quiet enough to handle input |
-| [Time to Interactive (TTI)](https://github.com/csabapalfi/awesome-web-performance-metrics#time-to-interactive-tti) |    5   | 3.8s | 7.3s | when the main thread and network is quiet for at least 5s |
+| Estimated Metric            | Short Description |
+|:----------------------------|-------------|
+| First Contentful Paint (FCP)| when the first text or image content is painted |
+| First Meaningful Paint (FMP)| when the primary content of a page is visible |
+| Speed Index (SI)            | how quickly the contents of a page are visibly populated |
+| First CPU Idle (FCI)        | when the main thread first becomes quiet enough to handle input |
+| Time to Interactive (TTI)   | when the main thread and network is quiet for at least 5s |
 
-**Other audits have no direct impact on the score** (but give hints to improve the metrics).
+**None of the other Lighthouse audits have a direct impact on the score**, but they do give hints on improving the metrics. To learn more about the metrics, check out my awesome-web-performance-metrics repo.
+
+### Not all metrics created equal
+
+Lighthouse calculates a speed score for all 5 metrics based on their estimated values, then calculates a weighted average to get an aggregate speed score. The metric weights and fast/slow thresholds are available in the table below:
+
+| Estimated Metric            | Weight | Fast  | Slow  |
+|:----------------------------|:------:|:-----:|:-----:|
+| First Contentful Paint (FCP)|    3   | <2.4s | >4.0s |
+| First Meaningful Paint (FMP)|    1   | <2.4s | >4.0s |
+| Speed Index (SI)            |    4   | <3.4s | >5.8s | 
+| First CPU Idle (FCI)        |    2   | <3.6s | >6.5s | 
+| Time to Interactive (TTI)   |    5   | <3.8s | >7.3s |
+
+
 
 ### Metrics are estimated with Lantern
 
