@@ -51,9 +51,7 @@ Use `--help` see the list of all options.
 
 ### `--runs`,`--warmup-runs` - multiple runs
 
-Test multiple times and take the median (or more/better statistics) of the score to reduce the impact of outliers (independent of what’s causing this variability). 
-
-* `--runs <N>` overrides the number of runs (default: 1). For more than 1 runs stats will be calculated.
+`--runs <N>` overrides the number of runs (default: 1). For more than 1 runs stats will be calculated.
 
 ```
 $ npx pagespeed-score --runs 3 https://www.google.com
@@ -68,7 +66,7 @@ min   	95	0.9	1.0	1.0	3.1	3.7
 max   	96	0.9	1.0	1.2	3.5	4.0
 ```
 
-* `--warmup-runs <N>` add warmup runs that are excluded from stats (e.g. to allow CDN or other caches to warm up)
+`--warmup-runs <N>` add warmup runs that are excluded from stats (e.g. to allow CDN or other caches to warm up)
 
 ### `--local` - local mode
 
@@ -88,40 +86,51 @@ Local results will still differ from the PSI API because of local hardware and n
 
 ### `--benchmark` - output CPU/memory benchmark
 
-Lighthouse computes a memory/CPU performance [benchmark index]((https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154)) to determine rough device class. Variability in this can help identifying [Client Hardware Variability](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.km3f9ebrlnmi) or [Client Resource Contention](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.9gqujdsfrbou). These are less likely to occur with PSI that uses a highly controlled lab environment and can affect local Lighthouse runs more.
-
-* `--benchmark` adds the benchmark index as a metric for each test run
+`--benchmark` adds the benchmark index as a metric for each test run. Lighthouse computes a memory/CPU performance [benchmark index]((https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154)) to determine rough device class. Variability in this can help identifying [Client Hardware Variability](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.km3f9ebrlnmi) or [Client Resource Contention](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.9gqujdsfrbou). These are less likely to occur with PSI that uses a highly controlled lab environment and can affect local Lighthouse runs more.
 
 ### ` --ttfb` - output Time to First Byte
 
-Time to First Byte (TTFB) has a very limited impact on the score but can be useful indicator of [Web Server Variability](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.6rnl1clafpqn). Please note that TTFB is not estimated by Lantern but based on the observed/fast trace.
-
-* ` --ttfb` adds TTFB as a metric for each test run
+`--ttfb` adds TTFB as a metric for each test run. Please note that TTFB is not simulated.
 
 ### `--usertiming-marks` - output user timing marks
 
-We use a number of User Timing marks and high variability in these can mean you have [Page Nondeterminism](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.js7k0ib0mzzv) or other sources variability. Please note user timing marks are not estimated by Lantern but based on the observed/fast trace.
+`--usertiming-marks.<alias>=<name>` adds any user timing mark named to your metrics with the name `alias` (e.g. `--usertiming-marks.DPA=datepicker.active`). Please note that user timing marks are not simulated.
 
-You can use the `pagespeed-score` cli to monitor them:
-
-* `--usertiming-marks.<alias>=<name>` adds any User Timing mark named to your metrics with the name `alias` (e.g. `--usertiming-marks.DPA=datepicker.active`)
+```
+$ npx pagespeed-score --usertiming-marks.DPA=datepicker.active https://www.vrbo.com/vacation-rentals/usa
+name  	score	FCP	FMP	SI	FCI	TTI	DPA
+run 1 	52	2.2	3.1	4.4	10.2	11.3	0.67
+```
 
 ### `--lantern-debug` - save metrics estimation traces
 
-In case you want to understand how exactly Lantern estimated a metric you can make Lighthouse save the traces resulting from the simulations:
+`--lantern-debug --save-assets --local` will save traces for how metrics were simulated by Lantern
 
-```sh
-LANTERN_DEBUG=true npx lighthouse --save-assets <url> 
+```
+$ npx pagespeed-score \
+> --local --lantern-debug --save-assets https://www.google.com
+name  	score	FCP	FMP	SI	FCI	TTI
+run 1 	95	1.4	1.4	1.7	3.6	3.8
+
+$ ls
+1-0.devtoolslog.json
+1-0.report.json
+1-0.trace.json
+1-optimisticFirstContentfulPaint.trace.json
+1-optimisticFirstMeaningfulPaint.trace.json
+1-optimisticFlexFirstContentfulPaint.trace.json
+1-optimisticFlexFirstMeaningfulPaint.trace.json
+1-optimisticFlexInteractive.trace.json
+1-optimisticInteractive.trace.json
+1-pessimisticFirstContentfulPaint.trace.json
+1-pessimisticFirstMeaningfulPaint.trace.json
+1-pessimisticInteractive.trace.json
+
 ```
 
-Use the Chrome Devtools Performance tab to open the traces. Subscribe to [lighthouse#5844](https://github.com/GoogleChrome/lighthouse/issues/5844) for future updates on this.
+You can drag and drop these traces on the Chrome Devtools Performance tab.
 
-You can also use `pagespeed-score` in [local mode](#local-mode) that has builtin support for this and also ensures that your lighthouse setup is as close to PSI as possible:
-
-```sh
-CHROME_PATH="/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary" \
-npx pagespeed-score --local --save-assets --lantern-debug "<url>"
-```
+See also [lighthouse#5844 Better visualization of Lantern simulation](https://github.com/GoogleChrome/lighthouse/issues/5844).
 
 ## Learn more about the score
 
