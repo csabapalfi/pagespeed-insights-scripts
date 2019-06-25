@@ -70,7 +70,7 @@ max   	96	0.9	1.0	1.2	3.5	4.0
 
 ### `--local` - local mode
 
-`pagespeed-score --local` switches to running Lighthouse locally instead of calling the PSI API. This can be useful for non-public URLs (e.g. staging environment on a private network) or debugging. To ensure the local results are close to the PSI API results this module:
+Switches to running Lighthouse locally instead of calling the PSI API. This can be useful for non-public URLs (e.g. staging environment on a private network) or debugging. To ensure the local results are close to the PSI API results this module:
 
   * uses the same version of LightHouse as PSI (5.0.0 as of 26 June 2019) 
   * uses the [LightRider mobile config](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/config/lr-mobile-config.js)
@@ -86,11 +86,11 @@ Local results will still differ from the PSI API because of local hardware and n
 
 ### `--benchmark` - output CPU/memory benchmark
 
-`--benchmark` adds the benchmark index as a metric for each test run. Lighthouse computes a memory/CPU performance [benchmark index]((https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154)) to determine rough device class. Variability in this can help identifying [Client Hardware Variability](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.km3f9ebrlnmi) or [Client Resource Contention](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.9gqujdsfrbou). These are less likely to occur with PSI that uses a highly controlled lab environment and can affect local Lighthouse runs more.
+Adds the benchmark index as a metric for each test run. Lighthouse computes a memory/CPU performance [benchmark index]((https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154)) to determine rough device class. Variability in this can help identifying [Client Hardware Variability](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.km3f9ebrlnmi) or [Client Resource Contention](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.9gqujdsfrbou). These are less likely to occur with PSI that uses a highly controlled lab environment and can affect local Lighthouse runs more.
 
 ### ` --ttfb` - output Time to First Byte
 
-`--ttfb` adds TTFB as a metric for each test run. Please note that TTFB is not simulated.
+Adds TTFB as a metric for each test run. Please note that TTFB is not simulated.
 
 ### `--usertiming-marks` - output user timing marks
 
@@ -104,7 +104,7 @@ run 1 	52	2.2	3.1	4.4	10.2	11.3	0.67
 
 ### `--lantern-debug` - save metrics estimation traces
 
-`--lantern-debug --save-assets --local` will save traces for how metrics were simulated by Lantern
+`--lantern-debug --save-assets --local` will save traces for how metrics were simulated by Lantern.
 
 ```
 $ npx pagespeed-score \
