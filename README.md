@@ -5,9 +5,9 @@
 
 Google PageSpeed score command line toolkit
 
-Ever wondered how Lighthouse (and PageSpeed Insights) calculates your performance score? Check out my blog post with a deep dive and recommendations. https://medium.com/expedia-group-tech/whats-in-the-google-pagespeed-score-a5fc93f91e91
+You can use `pagespeed-score` to get a speed score and metrics via the Google PageSpeed Insights API or a local Lighthouse run.
 
-`pagespeed-score` is a command line toolkit to get a speed score and metrics via the Google PageSpeed Insights API or a local Lighthouse run.
+Ever wondered how Lighthouse (and PageSpeed Insights) calculates your performance score? Check out my blog post with a deep dive and recommendations. https://medium.com/expedia-group-tech/whats-in-the-google-pagespeed-score-a5fc93f91e91
 
 ## About the score
 
@@ -27,7 +27,7 @@ The [Lighthouse scoring documentation](https://github.com/GoogleChrome/lighthous
 | First CPU Idle (FCI)        | when the main thread first becomes quiet enough to handle input |
 | Time to Interactive (TTI)   | when the main thread and network is quiet for at least 5s |
 
-**None of the other Lighthouse audits have a direct impact on the score**, but they do give hints on improving the metrics. To learn more about the metrics, check out my awesome-web-performance-metrics repo.
+**None of the other Lighthouse audits have a direct impact on the score**, but they do give hints on improving the metrics. To learn more about the metrics, check out my [awesome-web-performance-metrics](https://github.com/csabapalfi/awesome-web-performance-metrics) repo.
 
 ### Not all metrics created equal
 
