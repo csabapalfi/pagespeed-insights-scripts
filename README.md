@@ -5,7 +5,7 @@
 
 Google PageSpeed score command line toolkit
 
-Get a speed score and metrics via the Google PageSpeed Insights API or a local Lighthouse run.
+Get a score and metrics via the Google PageSpeed Insights API or a local Lighthouse run.
 
 ## Recommendations for using the PageSpeed score
 
