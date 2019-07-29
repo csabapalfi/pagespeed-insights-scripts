@@ -25,6 +25,7 @@ Object {
     "saveAssets": false,
   },
   "runs": 1,
+  "strategy": "mobile",
   "url": "https://www.google.com",
   "warmupRuns": 0,
 }
