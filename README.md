@@ -10,6 +10,7 @@ Get a score and metrics via the Google PageSpeed Insights API or a local Lightho
 - [Recommendations for using the score and metrics values](#recommendations-for-using-the-score-and-metrics-values)
 - [Requirements](#requirements)
 - [Usage](#usage)
+  * [`--strategy`- mobile or desktop](#--strategy)
   * [`--runs`,`--warmup-runs` - multiple runs](#--runs--warmup-runs---multiple-runs)
   * [`--local` - local mode](#--local---local-mode)
   * [`--benchmark` - output CPU/memory benchmark](#--benchmark---output-cpumemory-benchmark)
@@ -48,6 +49,23 @@ run 1 	96	1.2	1.2	1.2	3.3	3.7
 FCP, FMP, SI, FCI, TTI are the values (in seconds) for the 5 metrics that affect the score.
 
 Use `--help` see the list of all options.
+
+### `--strategy` - mobile or desktop
+
+`--strategy <mobile|desktop>` sets the lighthouse strategy (default: mobile)
+
+```
+$ npx pagespeed-score --strategy desktop --runs 3 https://www.google.com
+name  	score	FCP	FMP	SI	FCI	TTI
+run 1 	100	0.5	0.5	0.5	0.9	0.9
+run 2 	100	0.5	0.5	0.5	0.8	0.9
+run 3 	100	0.5	0.5	0.5	0.8	0.9
+
+median	100	0.5	0.5	0.5	0.8	0.9
+stddev	0.0	0.0	0.0	0.0	0.1	0.0
+min   	100	0.5	0.5	0.5	0.8	0.9
+max   	100	0.5	0.5	0.5	0.9	0.9
+```
 
 ### `--runs`,`--warmup-runs` - multiple runs
 

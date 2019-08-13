@@ -1,6 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`run-pagespeed runPageSpeed calls API and returns Lighthouse result 1`] = `
+exports[`run-pagespeed runPageSpeed calls Desktop API and returns Lighthouse result 1`] = `
+Array [
+  "https://www.googleapis.com/pagespeedonline/v5/runPagespeed/?url=https%3A%2F%2Fwww.google.com%2F%3Fpagespeed-nocache%3D1479427200000&strategy=desktop",
+  Object {
+    "json": true,
+  },
+]
+`;
+
+exports[`run-pagespeed runPageSpeed calls Mobile API and returns Lighthouse result 1`] = `
 Array [
   "https://www.googleapis.com/pagespeedonline/v5/runPagespeed/?url=https%3A%2F%2Fwww.google.com%2F%3Fpagespeed-nocache%3D1479427200000&strategy=mobile",
   Object {
