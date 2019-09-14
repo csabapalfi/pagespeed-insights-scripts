@@ -3,7 +3,7 @@
   "version": "0.17.0",
   "description": "Google PageSpeed score command line toolkit",
   "bin": {
-    "pagespeed-score": "index.js"
+    "pagespeed-score": "lib/cli.js"
   },
   "scripts": {
     "pretest": "eslint .",
@@ -11,7 +11,7 @@
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "clean": "rm -f *.trace.json *.devtoolslog.json *.report.json"
   },
-  "main": "index.js",
+  "main": "lib/main.js",
   "author": "Csaba Palfi",
   "license": "MIT",
   "dependencies": {
