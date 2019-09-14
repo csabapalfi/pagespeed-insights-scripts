@@ -15,18 +15,18 @@
   "author": "Csaba Palfi",
   "license": "MIT",
   "dependencies": {
-    "chrome-launcher": "^0.10.5",
-    "lighthouse": "5.0.0",
+    "chrome-launcher": "^0.11.2",
+    "lighthouse": "5.2.0",
     "simple-statistics": "^7.0.2",
     "wreck": "^14.2.0",
-    "yargs": "^13.2.2"
+    "yargs": "^14.0.0"
   },
   "devDependencies": {
-    "coveralls": "^3.0.3",
-    "eslint": "^5.16.0",
-    "eslint-plugin-jest": "^22.4.1",
-    "fast-check": "^1.13.0",
-    "jest": "^24.7.1"
+    "coveralls": "^3.0.6",
+    "eslint": "^6.4.0",
+    "eslint-plugin-jest": "^22.17.0",
+    "fast-check": "^1.16.3",
+    "jest": "^24.9.0"
   },
   "keywords": [
     "perfmatters",
