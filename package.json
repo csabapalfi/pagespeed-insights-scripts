@@ -1,6 +1,6 @@
 {
   "name": "pagespeed-score",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "description": "Google PageSpeed score command line toolkit",
   "bin": {
     "pagespeed-score": "lib/cli.js"
