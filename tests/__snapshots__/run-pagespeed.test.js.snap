@@ -2,7 +2,7 @@
 
 exports[`run-pagespeed runPageSpeed calls Desktop API and returns Lighthouse result 1`] = `
 Array [
-  "https://www.googleapis.com/pagespeedonline/v5/runPagespeed/?url=https%3A%2F%2Fwww.google.com%2F%3Fpagespeed-nocache%3D1479427200000&strategy=desktop",
+  "https://www.googleapis.com/pagespeedonline/v5/runPagespeed/?url=https%3A%2F%2Fwww.google.com%2F%237200000&strategy=desktop",
   Object {
     "json": true,
   },
@@ -11,7 +11,7 @@ Array [
 
 exports[`run-pagespeed runPageSpeed calls Mobile API and returns Lighthouse result 1`] = `
 Array [
-  "https://www.googleapis.com/pagespeedonline/v5/runPagespeed/?url=https%3A%2F%2Fwww.google.com%2F%3Fpagespeed-nocache%3D1479427200000&strategy=mobile",
+  "https://www.googleapis.com/pagespeedonline/v5/runPagespeed/?url=https%3A%2F%2Fwww.google.com%2F%237200000&strategy=mobile",
   Object {
     "json": true,
   },
