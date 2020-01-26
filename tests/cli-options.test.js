@@ -19,26 +19,6 @@ describe('cli-options', () => {
       expect(check({_:mockArgv([url])}))
         .toBeTruthy()
     });
-
-    it('allows if local + lantern-debug', () => {
-      expect(check({_:mockArgv([url]), lanternDebug: true, local: true}))
-        .toBeTruthy()
-    });
-
-    it('allows if local + !lantern-debug', () => {
-      expect(check({_:mockArgv([url]), lanternDebug: false, local: true}))
-        .toBeTruthy()
-    });
-
-    it('allows if !local + !lantern-debug', () => {
-      expect(check({_:mockArgv([url]), lanternDebug: false, local: false}))
-        .toBeTruthy()
-    });
-
-    it('throws if !local + lantern-debug', () => {
-      expect(() => check({_:mockArgv([url]), lanternDebug: true, local: false}))
-        .toThrow('--lantern-debug only works with --local')
-    });
   });
 
   describe('parseArgs', () => {

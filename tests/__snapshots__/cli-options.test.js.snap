@@ -7,19 +7,13 @@ Object {
     "cpuSlowDown": 4,
     "enabled": false,
   },
-  "metrics": undefined,
   "output": Object {
-    "file-prefix": "",
-    "filePrefix": "",
     "jsonl": false,
-    "lantern-debug": false,
-    "lanternDebug": false,
     "save-assets": false,
     "saveAssets": false,
   },
   "runs": 1,
   "strategy": "mobile",
   "url": "https://www.google.com",
-  "warmupRuns": undefined,
 }
 `;
