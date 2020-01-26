@@ -8,7 +8,6 @@ Object {
     "enabled": false,
   },
   "output": Object {
-    "jsonl": false,
     "save-assets": false,
     "saveAssets": false,
   },

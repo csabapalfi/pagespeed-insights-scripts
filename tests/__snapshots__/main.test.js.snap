@@ -10,9 +10,6 @@ Runner {
     "getLighthouseResult": [Function],
     "mapResult": [Function],
   },
-  "formatter": Formatter {
-    "format": [Function],
-  },
   "samples": Array [],
 }
 `;
