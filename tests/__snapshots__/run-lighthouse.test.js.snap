@@ -28,8 +28,6 @@ Array [
         "speed-index",
         "first-cpu-idle",
         "interactive",
-        "time-to-first-byte",
-        "user-timings",
       ],
     },
   },

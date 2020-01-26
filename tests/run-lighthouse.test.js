@@ -10,7 +10,7 @@ describe('run-lighthouse', () => {
     const url = 'https://www.google.com';
     const lighthouseResult = {};
     const lighthouseArtifacts = {};
-    const options = {modulePath: 'lighthouse', cpuSlowDown: 4};
+    const options = {cpuSlowDown: 4};
     const chrome = {port: 1234, kill: jest.fn()};
     launch.mockResolvedValue(chrome);
     lighthouse.mockResolvedValue({

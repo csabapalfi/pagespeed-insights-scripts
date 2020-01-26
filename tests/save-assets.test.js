@@ -9,7 +9,6 @@ jest.mock('lighthouse/lighthouse-core/lib/asset-saver');
 
 
 describe('save-assets', () => {
-  const lighthouseModulePath = 'lighthouse';
   const filePrefix = 'prefix-';
   const index = 1;
   const audits = {};
@@ -33,7 +32,7 @@ describe('save-assets', () => {
   it('saves report only if no artifacts', async () => {
     resolve.mockReturnValue(resolvedPath);
     
-    await assetSaver(lighthouseModulePath, {filePrefix})(index, result);
+    await assetSaver({filePrefix})(index, result);
 
     expectToSaveReport();
   });
@@ -42,7 +41,7 @@ describe('save-assets', () => {
     const artifacts = {};
     resolve.mockReturnValue(resolvedPath);
     
-    await assetSaver(lighthouseModulePath, {filePrefix})(1, result, artifacts);
+    await assetSaver({filePrefix})(1, result, artifacts);
 
     expectToSaveReport();
 
@@ -58,7 +57,7 @@ describe('save-assets', () => {
     const artifacts = {};
     resolve.mockReturnValue(resolvedPath);
     const output = {filePrefix, lanternDebug: true};
-    await assetSaver(lighthouseModulePath, output)(1, result, artifacts);
+    await assetSaver(output)(1, result, artifacts);
 
     expectToSaveReport();
 

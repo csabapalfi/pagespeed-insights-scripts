@@ -6,8 +6,6 @@ Object {
     "cpu-slow-down": 4,
     "cpuSlowDown": 4,
     "enabled": false,
-    "module-path": "lighthouse",
-    "modulePath": "lighthouse",
   },
   "metrics": undefined,
   "output": Object {
