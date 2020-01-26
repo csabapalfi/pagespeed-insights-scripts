@@ -9,12 +9,7 @@ Object {
     "module-path": "lighthouse",
     "modulePath": "lighthouse",
   },
-  "metrics": Object {
-    "benchmark": false,
-    "ttfb": false,
-    "user-timing-marks": Object {},
-    "userTimingMarks": Object {},
-  },
+  "metrics": undefined,
   "output": Object {
     "file-prefix": "",
     "filePrefix": "",
