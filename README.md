@@ -7,21 +7,18 @@ Google PageSpeed score command line toolkit
 
 Get a score and metrics via the Google PageSpeed Insights API or a local Lighthouse run.
 
-- [Recommendations for using the score and metrics values](#recommendations-for-using-the-score-and-metrics-values)
-- [Requirements](#requirements)
-- [Usage](#usage)
-  * [`--strategy`- mobile or desktop](#--strategy)
-  * [`--runs`,`--warmup-runs` - multiple runs](#--runs--warmup-runs---multiple-runs)
-  * [`--local` - local mode](#--local---local-mode)
-  * [`--benchmark` - output CPU/memory benchmark](#--benchmark---output-cpumemory-benchmark)
-  * [` --ttfb` - output Time to First Byte](#---ttfb---output-time-to-first-byte)
-  * [`--usertiming-marks` - output user timing marks](#--usertiming-marks---output-user-timing-marks)
-  * [`--lantern-debug` - save metrics estimation traces](#--lantern-debug---save-metrics-estimation-traces)
-- [Learn more about the score](#learn-more-about-the-score)
-  * [PageSpeed Insights score = Lighthouse score](#pagespeed-insights-score--lighthouse-score)
-  * [The 5 metrics that affect the score](#the-5-metrics-that-affect-the-score)
-  * [Not all metrics are weighted equally](#not-all-metrics-are-weighted-equally)
-  * [Metrics are estimated with a simulation (Lantern)](#metrics-are-estimated-with-a-simulation-lantern)
+  - [Recommendations for using the score and metrics values](#recommendations-for-using-the-score-and-metrics-values)
+  - [Requirements](#requirements)
+  - [Usage](#usage)
+    - [`--strategy` - mobile or desktop](#--strategy---mobile-or-desktop)
+    - [`--runs` - multiple runs](#--runs---multiple-runs)
+    - [`--local` - local mode](#--local---local-mode)
+    - [`LANTERN_DEBUG=true` - save metrics estimation traces](#lantern_debugtrue---save-metrics-estimation-traces)
+  - [Learn more about the score](#learn-more-about-the-score)
+    - [PageSpeed Insights score = Lighthouse score](#pagespeed-insights-score--lighthouse-score)
+    - [The 5 metrics that affect the score](#the-5-metrics-that-affect-the-score)
+    - [Not all metrics are weighted equally](#not-all-metrics-are-weighted-equally)
+    - [Metrics are estimated with a simulation (Lantern)](#metrics-are-estimated-with-a-simulation-lantern)
 
 
 ## Recommendations for using the score and metrics values
@@ -67,7 +64,7 @@ min   	100	0.5	0.5	0.5	0.8	0.9
 max   	100	0.5	0.5	0.5	0.9	0.9
 ```
 
-### `--runs`,`--warmup-runs` - multiple runs
+### `--runs` - multiple runs
 
 `--runs <N>` overrides the number of runs (default: 1). For more than 1 runs stats will be calculated.
 
@@ -83,8 +80,6 @@ stddev	0.6	0.0	0.0	0.1	0.2	0.2
 min   	95	0.9	1.0	1.0	3.1	3.7
 max   	96	0.9	1.0	1.2	3.5	4.0
 ```
-
-`--warmup-runs <N>` add warmup runs that are excluded from stats (e.g. to allow CDN or other caches to warm up)
 
 ### `--local` - local mode
 
@@ -102,31 +97,14 @@ npx pagespeed-score --local "<url>"
 
 Local results will still differ from the PSI API because of local hardware and network variability.
 
-### `--benchmark` - output CPU/memory benchmark
 
-Adds the benchmark index as a metric for each test run. Lighthouse computes a memory/CPU performance [benchmark index]((https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/lib/page-functions.js#L128-L154)) to determine rough device class. Variability in this can help identifying [Client Hardware Variability](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.km3f9ebrlnmi) or [Client Resource Contention](https://docs.google.com/document/d/1BqtL-nG53rxWOI5RO0pItSRPowZVnYJ_gBEQCJ5EeUE/edit#heading=h.9gqujdsfrbou). These are less likely to occur with PSI that uses a highly controlled lab environment and can affect local Lighthouse runs more.
+### `LANTERN_DEBUG=true` - save metrics estimation traces
 
-### ` --ttfb` - output Time to First Byte
-
-Adds TTFB as a metric for each test run. Please note that TTFB is not simulated.
-
-### `--usertiming-marks` - output user timing marks
-
-`--usertiming-marks.<alias>=<name>` adds any user timing mark named to your metrics with the name `alias` (e.g. `--usertiming-marks.DPA=datepicker.active`). Please note that user timing marks are not simulated.
+Setting `LANTERN_DEBUG=true` along with `--save-assets --local` will save traces for how metrics were simulated by Lantern.
 
 ```
-$ npx pagespeed-score --usertiming-marks.DPA=datepicker.active https://www.vrbo.com/vacation-rentals/usa
-name  	score	FCP	FMP	SI	FCI	TTI	DPA
-run 1 	52	2.2	3.1	4.4	10.2	11.3	0.67
-```
-
-### `--lantern-debug` - save metrics estimation traces
-
-`--lantern-debug --save-assets --local` will save traces for how metrics were simulated by Lantern.
-
-```
-$ npx pagespeed-score \
-> --local --lantern-debug --save-assets https://www.google.com
+$ LANTERN_DEBUG=true npx pagespeed-score \
+> --local --save-assets https://www.google.com
 name  	score	FCP	FMP	SI	FCI	TTI
 run 1 	95	1.4	1.4	1.7	3.6	3.8
 
