@@ -9,7 +9,7 @@
     "pretest": "eslint .",
     "test": "jest",
     "coverage": "cat ./coverage/lcov.info | coveralls",
-    "clean": "rm -f *.trace.json *.devtoolslog.json *.report.json"
+    "clean": "rm -f *.trace.json *.devtoolslog.json *.result.json"
   },
   "main": "index.js",
   "author": "Csaba Palfi",
