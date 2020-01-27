@@ -1,8 +1,8 @@
-const {getStats} = require('../lib/get-stats');
+const stats = require('../lib/stats');
 
 describe('stats', () => {
   const mockSample = (data) => ({
-    type: 'result', name: 'run 1', ...data
+    name: 'run 1', ...data
   });
 
   const samples = [
@@ -11,7 +11,7 @@ describe('stats', () => {
   ]
 
   it('returns expected stats', () => {
-    expect(getStats(samples))
+    expect(stats(samples))
       .toMatchSnapshot();
   });
 });

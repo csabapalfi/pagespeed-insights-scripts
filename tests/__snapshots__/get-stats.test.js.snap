@@ -10,7 +10,6 @@ Array [
     "TTI": 6.5,
     "name": "median",
     "score": 85,
-    "type": "statistic",
   },
   Object {
     "FCI": 0.7071067811865476,
@@ -20,7 +19,6 @@ Array [
     "TTI": 0.7071067811865476,
     "name": "stddev",
     "score": 7.0710678118654755,
-    "type": "statistic",
   },
   Object {
     "FCI": 5,
@@ -30,7 +28,6 @@ Array [
     "TTI": 6,
     "name": "min",
     "score": 80,
-    "type": "statistic",
   },
   Object {
     "FCI": 6,
@@ -40,7 +37,6 @@ Array [
     "TTI": 7,
     "name": "max",
     "score": 90,
-    "type": "statistic",
   },
 ]
 `;

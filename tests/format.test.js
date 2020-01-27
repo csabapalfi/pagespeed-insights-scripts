@@ -1,9 +1,8 @@
-const format = require('../lib/formatter');
+const {formatRow, formatHeading} = require('../lib/format');
 
 describe('format', () => {
   describe('results', () => {
     const result = {
-      type: 'result',
       name: 'run 1',
       score: 95,
       FCP: 0.9,
@@ -13,25 +12,17 @@ describe('format', () => {
       TTI: 4
     };
 
-    it('are formatted as expected', () => {
-      expect(format([result], {}))
-        .toMatchSnapshot();
+    it('results are formatted as expected', () => {
+      expect(formatRow(result)).toMatchSnapshot();
     });
   
-    it('heading row added before first result', () => {
-      expect(format([result], {first: true}))
-        .toMatchSnapshot();
-    });
-
-    it('userTimingMark uses default number format precision (2 digits)', () => {
-      expect(format([{...result, DPA: 1.25}], {}))
-        .toMatchSnapshot();
+    it('heading row is formatted as expected', () => {
+      expect(formatHeading(result)).toMatchSnapshot();
     });
   });
 
   describe('stats', () => {
     const statistic = {
-      type: 'statistic',
       name: 'median',
       score: 95,
       FCP: 0.9,
@@ -42,12 +33,12 @@ describe('format', () => {
     };
   
     it('stats are formatted as expected', () => {
-      expect(format([statistic]))
+      expect(formatRow(statistic))
         .toMatchSnapshot();
     });
 
     it('stddev uses custom precision for score (1 digit)', () => {
-      expect(format([{...statistic, name: 'stddev'}]))
+      expect(formatRow({...statistic, name: 'stddev'}))
         .toMatchSnapshot();
     });
   });

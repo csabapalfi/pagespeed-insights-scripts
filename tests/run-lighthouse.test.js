@@ -1,6 +1,6 @@
 const {launch} = require('chrome-launcher');
 const lighthouse = require('lighthouse');
-const {runLighthouse} = require('../lib/run-lighthouse');
+const runLighthouse = require('../lib/run-lighthouse');
 
 jest.mock('chrome-launcher');
 jest.mock('lighthouse');

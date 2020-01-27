@@ -1,6 +1,6 @@
-const {check, parseArgs} = require('../lib/cli-options');
+const {check, parseArgs} = require('../lib/parse-args');
 
-describe('cli-options', () => {
+describe('parse-args', () => {
   const url = 'https://www.google.com';
   const mockArgv = (args = []) => ['node', 'pagespeed-score', ...args];
 
