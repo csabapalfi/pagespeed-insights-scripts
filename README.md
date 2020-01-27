@@ -7,21 +7,22 @@ Google PageSpeed score command line toolkit
 
 Get a score and metrics via the Google PageSpeed Insights API or a local Lighthouse run.
 
-  - [Recommendations for using the score and metrics values](#recommendations-for-using-the-score-and-metrics-values)
+> For recommendations about using the score check out my blog post: [What's in the Google PageSpeed score?](https://medium.com/expedia-group-tech/whats-in-the-google-pagespeed-score-a5fc93f91e91)
+
   - [Requirements](#requirements)
   - [Usage](#usage)
-    - [`--strategy` - mobile or desktop](#--strategy---mobile-or-desktop)
-    - [`--runs` - multiple runs](#--runs---multiple-runs)
-    - [`--local` - local mode](#--local---local-mode)
-    - [`LANTERN_DEBUG=true` - save metrics estimation traces](#lantern_debugtrue---save-metrics-estimation-traces)
-
-## Recommendations for using the score and metrics values
-
-Check out my blog post for more details: [What's in the Google PageSpeed score?](https://medium.com/expedia-group-tech/whats-in-the-google-pagespeed-score-a5fc93f91e91)
+    - [multiple runs](#multiple-runs)
+    - [mobile or desktop strategy](#mobile-or-desktop-strategy)
+    - [save result JSON to disk](#save-result-json-to-disk)
+  - [Local mode](#local-mode)
+    - [set CPU slowdown multiplier](#set-cpu-slowdown-multiplier)
+    - [save trace & devtools log to disk](#save-trace--devtools-log-to-disk)
+    - [save Lantern metrics estimation traces](#save-lantern-metrics-estimation-traces)
 
 ## Requirements
 
-The pagespeed score CLI requires **node.js 10+** (because it relies on async iterators).
+* **node.js 10+** - because of [`for-await...of`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of)
+* (**Google Chrome**) - in case you want to run [local mode](#local-mode)
 
 ## Usage
 
@@ -37,17 +38,7 @@ FCP, FMP, SI, FCI, TTI are the values (in seconds) for the 5 metrics that affect
 
 Use `--help` see the list of all options.
 
-### `--strategy` - mobile or desktop
-
-`--strategy <mobile|desktop>` sets the lighthouse strategy (default: mobile)
-
-```
-$ npx pagespeed-score --strategy desktop https://www.google.com
-name  	score	FCP	FMP	SI	FCI	TTI
-run 1 	100	0.5	0.5	0.5	0.9	0.9
-```
-
-### `--runs` - multiple runs
+### multiple runs
 
 `--runs <N>` overrides the number of runs (default: 1). For more than 1 runs stats will be calculated.
 
@@ -64,26 +55,70 @@ min   	95	0.9	1.0	1.0	3.1	3.7
 max   	96	0.9	1.0	1.2	3.5	4.0
 ```
 
-### `--local` - local mode
+### mobile or desktop strategy
+
+`--strategy <mobile|desktop>` sets the Lighthouse strategy (default: mobile)
+
+```
+$ npx pagespeed-score --strategy desktop https://www.google.com
+name  	score	FCP	FMP	SI	FCI	TTI
+run 1 	100	0.5	0.5	0.5	0.9	0.9
+```
+
+### save result JSON to disk
+
+`--save-results` will save all Lighthouse results (from the PSI API response or local Lighthouse run) as JSON files.
+
+```
+$ npx pagespeed-score --save-results --runs=2 https://www.google.com
+name  	score	FCP	FMP	SI	FCI	TTI
+run 1 	96	0.9	1.0	1.2	3.1	3.9
+run 2 	96	0.9	1.0	1.0	3.1	3.7
+
+$ ls
+1-0.result.json
+2-0.result.json
+```
+
+## Local mode
 
 Switches to running Lighthouse locally instead of calling the PSI API. This can be useful for non-public URLs (e.g. staging environment on a private network) or debugging. To ensure the local results are close to the PSI API results this module:
 
-  * uses the same version of LightHouse as PSI (5.0.0 as of 26 June 2019) 
-  * uses the [LightRider mobile config](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/config/lr-mobile-config.js)
-  * allows throttling of CPU with `--cpu-slowdown` (default 4x). Please note that PSI infrastructure already runs on a slower CPU (that's like a mobile device) hence the need to slow our laptops CPU down for local runs.
-  * you can also use the same Chrome version as PSI (76 as of 21 June 2019) by specifying CHROME_PATH
+  * uses the same version of LightHouse as PSI (5.6.0 as of 2020-01-27) 
+  * uses the [LightRider mobile config](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/config/lr-mobile-config.js) like PSI
+  * allows throttling of CPU to better match PSI infrastructure limits
+  * you can also use the same Chrome version as PSI (78 as of 2020-01-27) by specifying CHROME_PATH (and ensuring you have the correct version installed)
 
 ```sh
-CHROME_PATH="/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary" \
+CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
 npx pagespeed-score --local "<url>"
 ```
 
 Local results will still differ from the PSI API because of local hardware and network variability.
 
+### set CPU slowdown multiplier
 
-### `LANTERN_DEBUG=true` - save metrics estimation traces
+`--cpu-slowdown` will allow setting CPU throttling multiplier (default 4x). Only available in [local mode](#local-mode).
 
-Setting `LANTERN_DEBUG=true` along with `--save-assets --local` will save traces for how metrics were simulated by Lantern.
+Please note that PSI infrastructure already runs on a slower CPU (that's like a mobile device) hence the need to slow our machines CPU down for local runs.
+
+### save trace & devtools log to disk
+
+`--save-assets` will save trace & devtools log to disk. Only available in [local mode](#local-mode).
+
+```
+$ npx pagespeed-score --save-assets --local https://www.google.com
+name  	score	FCP	FMP	SI	FCI	TTI
+run 1 	95	1.4	1.4	1.7	3.6	3.8
+
+$ ls
+1-0.devtoolslog.json
+1-0.trace.json
+```
+
+### save Lantern metrics estimation traces
+
+Setting the `LANTERN_DEBUG=true` environment variable along with `--save-assets --local` will save traces for how metrics were simulated by Lantern. Only available in [local mode](#local-mode).
 
 ```
 $ LANTERN_DEBUG=true npx pagespeed-score \
@@ -93,7 +128,6 @@ run 1 	95	1.4	1.4	1.7	3.6	3.8
 
 $ ls
 1-0.devtoolslog.json
-1-0.report.json
 1-0.trace.json
 1-optimisticFirstContentfulPaint.trace.json
 1-optimisticFirstMeaningfulPaint.trace.json
