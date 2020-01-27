@@ -28,10 +28,11 @@ async function* main({url, runs, saveResults, strategy, local}) {
 
 if (require.main === module) {
   const {argv} = process;
+  const options = parseArgs({argv});
   const samples = [];
 
   (async () => {
-    for await (const sample of main(parseArgs({argv}))) {
+    for await (const sample of main(options)) {
       samples.push(sample);
 
       if(samples.length === 1) {
@@ -42,9 +43,8 @@ if (require.main === module) {
     }
 
     if (samples.length > 1) {
-      console.log();
-      stats(samples).map(formatRow)
-        .forEach(stat => console.log(stat));
+      ['', ...stats(samples).map(formatRow)]
+        .forEach(line => console.log(line));
     }
 
   })();
