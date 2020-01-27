@@ -42,16 +42,9 @@ Use `--help` see the list of all options.
 `--strategy <mobile|desktop>` sets the lighthouse strategy (default: mobile)
 
 ```
-$ npx pagespeed-score --strategy desktop --runs 3 https://www.google.com
+$ npx pagespeed-score --strategy desktop https://www.google.com
 name  	score	FCP	FMP	SI	FCI	TTI
 run 1 	100	0.5	0.5	0.5	0.9	0.9
-run 2 	100	0.5	0.5	0.5	0.8	0.9
-run 3 	100	0.5	0.5	0.5	0.8	0.9
-
-median	100	0.5	0.5	0.5	0.8	0.9
-stddev	0.0	0.0	0.0	0.0	0.1	0.0
-min   	100	0.5	0.5	0.5	0.8	0.9
-max   	100	0.5	0.5	0.5	0.9	0.9
 ```
 
 ### `--runs` - multiple runs
