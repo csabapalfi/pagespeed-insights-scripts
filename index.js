@@ -10,7 +10,6 @@ const stats = require('./lib/stats');
 
 async function* main({url, runs, saveResults, strategy, local}) {
   let run = 0;
-  const samples = [];
   while (run < runs) {
     run++;
 
@@ -22,30 +21,32 @@ async function* main({url, runs, saveResults, strategy, local}) {
 
     await saveFiles(run, saveResults, local, result, artifacts);
 
-    const sample = sampleResult(run, result);
-    samples.push(sample);
-
-    if (run === 1) {
-      yield [formatHeading(sample)];
-    }
-
-    yield [formatRow(sample)];
-
-    if (run === runs && samples.length > 1) {
-      yield ['', ...stats(samples).map(formatRow)];
-    }
+    yield sampleResult(run, result);
   }
 
 }
 
 if (require.main === module) {
   const {argv} = process;
+  const samples = [];
 
   (async () => {
-    for await (const lines of main(parseArgs({argv}))) {
-      /* eslint-disable-next-line no-console */
-      lines.forEach(line => console.log(line));
+    for await (const sample of main(parseArgs({argv}))) {
+      samples.push(sample);
+
+      if(samples.length === 1) {
+        console.log(formatHeading(sample))
+      }
+
+      console.log(formatRow(sample))
     }
+
+    if (samples.length > 1) {
+      console.log();
+      stats(samples).map(formatRow)
+        .forEach(stat => console.log(stat));
+    }
+
   })();
 }
 
