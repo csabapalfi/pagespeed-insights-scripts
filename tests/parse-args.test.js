@@ -19,6 +19,17 @@ describe('parse-args', () => {
       expect(check({_:mockArgv([url])}))
         .toBeTruthy()
     });
+
+    it('throws if --save-assets used without --local', () => {
+      expect(() => check({_:mockArgv([url]), saveAssets: true}))
+        .toThrow('--save-assets only works with --local');
+    });
+
+    it('throws if --cpu-slowdown set without --local', () => {
+      expect(() => check({_:mockArgv([url]), cpuSlowdown: 6}))
+        .toThrow('--cpu-slowdown only works with --local');
+    });
+
   });
 
   describe('parseArgs', () => {
