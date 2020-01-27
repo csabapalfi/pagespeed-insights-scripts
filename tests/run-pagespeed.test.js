@@ -1,4 +1,4 @@
-const {runPagespeed} = require('../lib/run-pagespeed');
+const runPagespeed = require('../lib/run-pagespeed');
 const wreck = require('wreck');
 jest.mock('wreck');
 

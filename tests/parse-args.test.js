@@ -1,6 +1,6 @@
-const {check, parseArgs} = require('../lib/cli-options');
+const {check, parseArgs} = require('../lib/parse-args');
 
-describe('cli-options', () => {
+describe('parse-args', () => {
   const url = 'https://www.google.com';
   const mockArgv = (args = []) => ['node', 'pagespeed-score', ...args];
 
@@ -20,25 +20,16 @@ describe('cli-options', () => {
         .toBeTruthy()
     });
 
-    it('allows if local + lantern-debug', () => {
-      expect(check({_:mockArgv([url]), lanternDebug: true, local: true}))
-        .toBeTruthy()
+    it('throws if --save-assets used without --local', () => {
+      expect(() => check({_:mockArgv([url]), saveAssets: true}))
+        .toThrow('--save-assets only works with --local');
     });
 
-    it('allows if local + !lantern-debug', () => {
-      expect(check({_:mockArgv([url]), lanternDebug: false, local: true}))
-        .toBeTruthy()
+    it('throws if --cpu-slowdown set without --local', () => {
+      expect(() => check({_:mockArgv([url]), cpuSlowdown: 6}))
+        .toThrow('--cpu-slowdown only works with --local');
     });
 
-    it('allows if !local + !lantern-debug', () => {
-      expect(check({_:mockArgv([url]), lanternDebug: false, local: false}))
-        .toBeTruthy()
-    });
-
-    it('throws if !local + lantern-debug', () => {
-      expect(() => check({_:mockArgv([url]), lanternDebug: true, local: false}))
-        .toThrow('--lantern-debug only works with --local')
-    });
   });
 
   describe('parseArgs', () => {

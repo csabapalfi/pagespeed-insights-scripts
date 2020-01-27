@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parse-args parseArgs returns defaults based on argv 1`] = `
+Object {
+  "local": Object {
+    "cpuSlowDown": undefined,
+    "enabled": false,
+    "saveAssets": false,
+  },
+  "runs": 1,
+  "saveResults": false,
+  "strategy": "mobile",
+  "url": "https://www.google.com",
+}
+`;
