@@ -84,7 +84,7 @@ $ ls
 
 Switches to running Lighthouse locally instead of calling the PSI API. This can be useful for non-public URLs (e.g. staging environment on a private network) or debugging. To ensure the local results are close to the PSI API results this module:
 
-  * uses the same version of LightHouse as PSI (5.6.0 as of 2020-01-27) 
+  * uses the same version of LightHouse as PSI (5.6.0 as of 2020-01-27)
   * uses the [LightRider mobile config](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/config/lr-mobile-config.js) like PSI
   * allows throttling of CPU to better match PSI infrastructure limits
   * you can also use the same Chrome version as PSI (78 as of 2020-01-27) by specifying CHROME_PATH (and ensuring you have the correct version installed)
@@ -122,7 +122,7 @@ Setting the `LANTERN_DEBUG=true` environment variable along with `--save-assets 
 
 ```
 $ LANTERN_DEBUG=true npx pagespeed-score \
-> --local --save-assets https://www.google.com
+ --local --save-assets https://www.google.com
 name  	score	FCP	FMP	SI	FCI	TTI
 run 1 	95	1.4	1.4	1.7	3.6	3.8
 
