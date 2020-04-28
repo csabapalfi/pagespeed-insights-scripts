@@ -90,8 +90,7 @@ Switches to running Lighthouse locally instead of calling the PSI API. This can 
   * you can also use the same Chrome version as PSI (78 as of 2020-01-27) by specifying CHROME_PATH (and ensuring you have the correct version installed)
 
 ```sh
-CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-npx pagespeed-score --local "<url>"
+CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" npx pagespeed-score --local "<url>"
 ```
 
 Local results will still differ from the PSI API because of local hardware and network variability.
@@ -121,8 +120,7 @@ $ ls
 Setting the `LANTERN_DEBUG=true` environment variable along with `--save-assets --local` will save traces for how metrics were simulated by Lantern. Only available in [local mode](#local-mode).
 
 ```
-$ LANTERN_DEBUG=true npx pagespeed-score \
- --local --save-assets https://www.google.com
+$ LANTERN_DEBUG=true npx pagespeed-score --local --save-assets https://www.google.com
 name  	score	FCP	FMP	SI	FCI	TTI
 run 1 	95	1.4	1.4	1.7	3.6	3.8
 
