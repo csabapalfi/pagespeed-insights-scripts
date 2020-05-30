@@ -2,8 +2,8 @@
 
 exports[`format results heading row is formatted as expected 1`] = `"name  	score	FCP	SI	LCP	TTI	TBT	CLS"`;
 
-exports[`format results results are formatted as expected 1`] = `"run 1 	95	0.9	1.1	1.0	4.0	5.0	0.00"`;
+exports[`format results results are formatted as expected 1`] = `"run 1 	[32m95[39m	0.9	1.1	1.0	4.0	5.0	0.00"`;
 
-exports[`format stats stats are formatted as expected 1`] = `"median	95	0.9	1.1	1.0	4.0	5.0	0.00"`;
+exports[`format stats stats are formatted as expected 1`] = `"median	[32m95[39m	0.9	1.1	1.0	4.0	5.0	0.00"`;
 
-exports[`format stats stddev uses custom precision for score (1 digit) 1`] = `"stddev	95.0	0.9	1.1	1.0	4.0	5.0	0.00"`;
+exports[`format stats stddev uses custom precision for score (1 digit) 1`] = `"stddev	[32m95.0[39m	0.9	1.1	1.0	4.0	5.0	0.00"`;

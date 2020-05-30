@@ -14,7 +14,7 @@ async function* main({url, runs, saveResults, strategy, local}) {
     run++;
 
     const {result, artifacts} = await (
-      local.enabled ? 
+      local.enabled ?
         runLighthouse(local, url) :
         runPagespeed(url, strategy)
     );

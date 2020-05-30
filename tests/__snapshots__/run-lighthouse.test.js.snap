@@ -24,10 +24,11 @@ Array [
     "settings": Object {
       "onlyAudits": Array [
         "first-contentful-paint",
-        "first-meaningful-paint",
         "speed-index",
-        "first-cpu-idle",
+        "largest-contentful-paint",
         "interactive",
+        "total-blocking-time",
+        "cumulative-layout-shift",
       ],
     },
   },
