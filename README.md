@@ -82,10 +82,10 @@ $ ls
 
 Switches to running Lighthouse locally instead of calling the PSI API. This can be useful for non-public URLs (e.g. staging environment on a private network) or debugging. To ensure the local results are close to the PSI API results this module:
 
-  * uses the same version of LightHouse as PSI (5.6.0 as of 2020-01-27)
+  * uses the same version of LightHouse as PSI (6.0.0 as of 2020-05-30)
   * uses the [LightRider mobile config](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/config/lr-mobile-config.js) like PSI
   * allows throttling of CPU to better match PSI infrastructure limits
-  * you can also use the same Chrome version as PSI (78 as of 2020-01-27) by specifying CHROME_PATH (and ensuring you have the correct version installed)
+  * you can also use the same Chrome version as PSI (81 as of 2020-05-30) by specifying CHROME_PATH (and ensuring you have the correct version installed)
 
 ```sh
 CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" npx pagespeed-score --local "<url>"
