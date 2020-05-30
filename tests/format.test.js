@@ -6,10 +6,11 @@ describe('format', () => {
       name: 'run 1',
       score: 95,
       FCP: 0.9,
-      FMP: 1,
       SI: 1.1,
-      FCI: 3.2,
-      TTI: 4
+      LCP: 1,
+      TTI: 4,
+      TBT: 5,
+      CLS: 0.0
     };
 
     it('results are formatted as expected', () => {
@@ -26,10 +27,11 @@ describe('format', () => {
       name: 'median',
       score: 95,
       FCP: 0.9,
-      FMP: 1,
       SI: 1.1,
-      FCI: 3.2,
-      TTI: 4
+      LCP: 1,
+      TTI: 4,
+      TBT: 5,
+      CLS: 0.0
     };
   
     it('stats are formatted as expected', () => {

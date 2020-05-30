@@ -7,8 +7,6 @@ Google PageSpeed score command line toolkit
 
 Get a score and metrics via the Google PageSpeed Insights API or a local Lighthouse run.
 
-> For recommendations about using the score check out my blog post: [What's in the Google PageSpeed score?](https://medium.com/expedia-group-tech/whats-in-the-google-pagespeed-score-a5fc93f91e91)
-
   - [Requirements](#requirements)
   - [Usage](#usage)
     - [multiple runs](#multiple-runs)
@@ -29,12 +27,12 @@ Get a score and metrics via the Google PageSpeed Insights API or a local Lightho
 `npx` is the quickest way to try:
 
 ```
-$ npx pagespeed-score https://www.google.com
-name  	score	FCP	FMP	SI	FCI	TTI
-run 1 	96	1.2	1.2	1.2	3.3	3.7
+$ npx pagespeed-score http://example.com/
+name  	score	FCP	SI	LCP	TTI	TBT	CLS
+run 1 	100	0.7	0.7	0.7	0.7	0.0	0.00
 ```
 
-FCP, FMP, SI, FCI, TTI are the values (in seconds) for the 5 metrics that affect the score.
+FCP, SI, LCP, TTI, TBT and CLS are the values for the 6 metrics that affect the score.
 
 Use `--help` see the list of all options.
 
@@ -43,16 +41,16 @@ Use `--help` see the list of all options.
 `--runs <N>` overrides the number of runs (default: 1). For more than 1 runs stats will be calculated.
 
 ```
-$ npx pagespeed-score --runs 3 https://www.google.com
-name  	score	FCP	FMP	SI	FCI	TTI
-run 1 	96	0.9	1.0	1.2	3.1	3.9
-run 2 	96	0.9	1.0	1.0	3.1	3.7
-run 3 	95	0.9	1.0	1.2	3.5	4.0
+$ npx pagespeed-score --runs 3 https://www.ft.com/
+name  	score	FCP	SI	LCP	TTI	TBT	CLS
+run 1 	36	6.3	7.1	7.9	10.8	0.4	0.00
+run 2 	36	6.3	7.1	8.0	10.8	0.4	0.00
+run 3 	36	6.3	7.3	7.9	10.8	0.4	0.00
 
-median	96	0.9	1.0	1.2	3.1	3.9
-stddev	0.6	0.0	0.0	0.1	0.2	0.2
-min   	95	0.9	1.0	1.0	3.1	3.7
-max   	96	0.9	1.0	1.2	3.5	4.0
+median	36	6.3	7.1	7.9	10.8	0.4	0.00
+stddev	0.0	0.0	0.1	0.0	0.0	0.0	0.00
+min   	36	6.3	7.1	7.9	10.8	0.4	0.00
+max   	36	6.3	7.3	8.0	10.8	0.4	0.00
 ```
 
 ### mobile or desktop strategy
