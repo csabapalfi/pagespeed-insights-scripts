@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.2] - 2020-05-30
+### Fixed
+- .npmignore local saved results
+
 ## [1.2.1] - 2020-05-30
 ### Fixed
 - Don't color stddev

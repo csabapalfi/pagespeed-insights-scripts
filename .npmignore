@@ -5,4 +5,4 @@ jest.config.js
 tests
 *.trace.json
 *.devtoolslog.json
-*.report.json
+*.result.json
