@@ -6,19 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.2.3] - 2020-05-30
-### Fixed
-- Don't color stddev (for real)
-
-## [1.2.2] - 2020-05-30
-### Fixed
-- .npmignore local saved results
-
-## [1.2.1] - 2020-05-30
-### Fixed
-- Don't color stddev
-
-## [1.2.0] - 2020-05-30
+## [1.2.4] - 2020-05-30
 ### Added
 - Colored score and metric output
 
@@ -27,10 +15,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Lighthouse v6 support (new metrics/weights)
 
 ## [1.0.1] - 2020-01-27
-### Fixed
-- docs: add CHANGELOG
-- docs: better README
-
-## [1.0.0] - 2020-01-27
 ### Added
 - Initial stable version
