@@ -1,3 +1,5 @@
+# DEPRECATED - Please use [GoogleChrome/lighthouse-ci](https://github.com/GoogleChrome/lighthouse-ci) instead
+
 # pagespeed-score
 
 [![Build Status](https://travis-ci.org/csabapalfi/pagespeed-score.svg?branch=master)](https://travis-ci.org/csabapalfi/pagespeed-score/)
