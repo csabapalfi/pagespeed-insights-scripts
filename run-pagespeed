@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+const https = require("https");
+const baseUrl = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed";
+
+const getPsiResult = async (url, key) => {
+  const query = new URLSearchParams({ url, key, strategy: "mobile" });
+  const apiUrl = `${baseUrl}/?${query.toString()}`;
+  https.get(apiUrl, (response) => response.pipe(process.stdout));
+};
+
+(async () => {
+  const key = process.env.PSI_API_KEY;
+  const [, , url] = process.argv;
+  await getPsiResult(url, key);
+})();

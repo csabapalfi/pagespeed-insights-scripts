@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+
+const path = require("path");
+const {
+  promises: { writeFile },
+} = require("fs");
+
+const readStdIn = async () => {
+  const chunks = [];
+  for await (const chunk of process.stdin) {
+    chunks.push(chunk);
+  }
+  return Buffer.concat(chunks).toString("utf8");
+};
+
+const stripOrigin = (url) => url.replace(new URL(url).origin, "");
+
+const snapshotFileName = (url, name) => {
+  const pathSlug = stripOrigin(url)
+    .replace(/^\//, "") // "/path" -> "path"
+    .replace(/\/$/, "") // "path/" -> "path"
+    .replaceAll(/[^a-zA-Z0-9]+/g, "-");
+
+  return `${name ? name : pathSlug}.json`;
+};
+
+(async () => {
+  const [, , snapshotsPath = "", url, name] = process.argv;
+
+  const psiResult = {
+    name: name ? name : undefined,
+    ...JSON.parse(await readStdIn()),
+  };
+
+  const fileName = snapshotFileName(url, name);
+  const filePath = path.resolve(__dirname, snapshotsPath, fileName);
+  await writeFile(filePath, JSON.stringify(psiResult, null, 2), "utf-8");
+})();

@@ -1,8 +1,0 @@
-.eslintrc.js
-.travis.yml
-coverage
-jest.config.js
-tests
-*.trace.json
-*.devtoolslog.json
-*.result.json

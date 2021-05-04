@@ -1,144 +1,168 @@
-# DEPRECATED - Please use [GoogleChrome/lighthouse-ci](https://github.com/GoogleChrome/lighthouse-ci) instead
+# PageSpeed Insights scripts
 
-# pagespeed-score
+Small scripts and recipes to run PageSpeed Insights via the API, save results, summarise and export to tsv.
 
-[![Build Status](https://travis-ci.org/csabapalfi/pagespeed-score.svg?branch=master)](https://travis-ci.org/csabapalfi/pagespeed-score/)
-[![Coverage Status](https://coveralls.io/repos/github/csabapalfi/pagespeed-score/badge.svg?2)](https://coveralls.io/github/csabapalfi/pagespeed-score)
-
-Google PageSpeed score command line toolkit
-
-Get a score and metrics via the Google PageSpeed Insights API or a local Lighthouse run.
-
-  - [Requirements](#requirements)
+- [PageSpeed Insights scripts](#pagespeed-insights-scripts)
+  - [Setup](#setup)
+    - [Dependencies](#dependencies)
+    - [Get an API key and set `PSI_API_KEY`](#get-an-api-key-and-set-psi_api_key)
+    - [Save your URLs to test in `urls.tsv`](#save-your-urls-to-test-in-urlstsv)
   - [Usage](#usage)
-    - [multiple runs](#multiple-runs)
-    - [mobile or desktop strategy](#mobile-or-desktop-strategy)
-    - [save result JSON to disk](#save-result-json-to-disk)
-  - [Local mode](#local-mode)
-    - [set CPU slowdown multiplier](#set-cpu-slowdown-multiplier)
-    - [save trace & devtools log to disk](#save-trace--devtools-log-to-disk)
-    - [save Lantern metrics estimation traces](#save-lantern-metrics-estimation-traces)
+    - [Capture a snapshot](#capture-a-snapshot)
+    - [Capture snapshots every 5 mins](#capture-snapshots-every-5-mins)
+    - [Show lab data report](#show-lab-data-report)
+    - [Save lab data report as tsv](#save-lab-data-report-as-tsv)
+  - [Caveats](#caveats)
 
-## Requirements
+## Setup
 
-* **node.js 10+** - because of [`for-await...of`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of)
-* (**Google Chrome**) - in case you want to run [local mode](#local-mode)
+### Dependencies
+
+- `bash`
+- `node>12`
+- no node modules or anything else to install
+
+### Get an API key and set `PSI_API_KEY`
+
+See https://developers.google.com/speed/docs/insights/v5/get-started
+
+`export PSI_API_KEY=<api-key>`
+
+### Save your URLs to test in `urls.tsv`
+
+- the expected format is `url\tname`, e.g. `https://web.dev/ homepage`
+- name is optional, the default name is the URL path
+
+```bash
+cat > urls.tsv <<EOF
+https://web.dev/	homepage
+https://web.dev/fast/
+EOF
+```
 
 ## Usage
 
-`npx` is the quickest way to try:
+### Capture a snapshot
 
-```
-$ npx pagespeed-score http://example.com/
-name  	score	FCP	SI	LCP	TTI	TBT	CLS
-run 1 	100	0.7	0.7	0.7	0.7	0.0	0.00
-```
+`./captute-snapshot [snapshotsDirectory] [urlsTsvFile]`
 
-FCP, SI, LCP, TTI, TBT and CLS are the values for the 6 metrics that affect the score.
+Save PageSpeed Insights API results
 
-Use `--help` see the list of all options.
+- in `snapshotsDirectory` (default: `snapshots`)
+- for all URLs in `urlsTsvFile` (default: `urls.tsv`)
+- then show PageSpeed Insights **lab data** summary for current snapshot
 
-### multiple runs
+Example:
 
-`--runs <N>` overrides the number of runs (default: 1). For more than 1 runs stats will be calculated.
-
-```
-$ npx pagespeed-score --runs 3 https://www.ft.com/
-name  	score	FCP	SI	LCP	TTI	TBT	CLS
-run 1 	36	6.3	7.1	7.9	10.8	0.4	0.00
-run 2 	36	6.3	7.1	8.0	10.8	0.4	0.00
-run 3 	36	6.3	7.3	7.9	10.8	0.4	0.00
-
-median	36	6.3	7.1	7.9	10.8	0.4	0.00
-stddev	0.0	0.0	0.1	0.0	0.0	0.0	0.00
-min   	36	6.3	7.1	7.9	10.8	0.4	0.00
-max   	36	6.3	7.3	8.0	10.8	0.4	0.00
+```bash
+./capture-snapshot
 ```
 
-### mobile or desktop strategy
-
-`--strategy <mobile|desktop>` sets the Lighthouse strategy (default: mobile)
+Output:
 
 ```
-$ npx pagespeed-score --strategy desktop https://www.google.com
-name  	score	FCP	FMP	SI	FCI	TTI
-run 1 	100	0.5	0.5	0.5	0.9	0.9
+created snapshots/2021-03-19_21-34-27/
+running pagespeed insights for https://web.dev/...
+running pagespeed insights for https://web.dev/fast/...
+
+Score	FCP	LCP	TBT	CLS	Timestamp			URL
+95	1.1 s	2.8 s	70 ms	0	2021-03-19T21:34:28.785Z	/fast/
+99	1.1 s	1.6 s	30 ms	0	2021-03-19T21:34:29.159Z	homepage
 ```
 
-### save result JSON to disk
-
-`--save-results` will save all Lighthouse results (from the PSI API response or local Lighthouse run) as JSON files.
+Files created:
 
 ```
-$ npx pagespeed-score --save-results --runs=2 https://www.google.com
-name  	score	FCP	FMP	SI	FCI	TTI
-run 1 	96	0.9	1.0	1.2	3.1	3.9
-run 2 	96	0.9	1.0	1.0	3.1	3.7
-
-$ ls
-1-0.result.json
-2-0.result.json
+snapshots/2021-03-19_21-34-27/homepage.json
+snapshots/2021-03-19_21-34-27/fast.json
 ```
 
-## Local mode
+### Capture snapshots every 5 mins
 
-Switches to running Lighthouse locally instead of calling the PSI API. This can be useful for non-public URLs (e.g. staging environment on a private network) or debugging. To ensure the local results are close to the PSI API results this module:
+Example:
 
-  * uses the same version of LightHouse as PSI (6.0.0 as of 2020-05-30)
-  * uses the [LightRider mobile config](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/config/lr-mobile-config.js) like PSI
-  * allows throttling of CPU to better match PSI infrastructure limits
-  * you can also use the same Chrome version as PSI (81 as of 2020-05-30) by specifying CHROME_PATH (and ensuring you have the correct version installed)
-
-```sh
-CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" npx pagespeed-score --local "<url>"
+```bash
+watch -c -n 300 ./capture-snapshot
 ```
 
-Local results will still differ from the PSI API because of local hardware and network variability.
-
-### set CPU slowdown multiplier
-
-`--cpu-slowdown` will allow setting CPU throttling multiplier (default 4x). Only available in [local mode](#local-mode).
-
-Please note that PSI infrastructure already runs on a slower CPU (that's like a mobile device) hence the need to slow our machines CPU down for local runs.
-
-### save trace & devtools log to disk
-
-`--save-assets` will save trace & devtools log to disk. Only available in [local mode](#local-mode).
+Output:
 
 ```
-$ npx pagespeed-score --save-assets --local https://www.google.com
-name  	score	FCP	FMP	SI	FCI	TTI
-run 1 	95	1.4	1.4	1.7	3.6	3.8
+Every 300.0s: ./capture-snapshot
 
-$ ls
-1-0.devtoolslog.json
-1-0.trace.json
+created snapshots/2021-03-20_00-28-01/
+running pagespeed insights for https://web.dev/...
+running pagespeed insights for https://web.dev/fast/...
+
+Timestamp               FCP     LCP     CLS     TBT             Score   URL
+2021-03-20 00:28:02      1.8 s   2.1 s   0.001      30 ms          98   /fast/
+2021-03-20 00:28:02      1.8 s   2.6 s       0      40 ms          96   homepage
 ```
 
-### save Lantern metrics estimation traces
+Files created:
 
-Setting the `LANTERN_DEBUG=true` environment variable along with `--save-assets --local` will save traces for how metrics were simulated by Lantern. Only available in [local mode](#local-mode).
+- Every 5 minutes a timestamp directory is created with the latest results
+
+### Show lab data report
+
+`./lab-report [snapshotsDirectory] [filter]`
+
+Show PageSpeed Insights **lab data** summary:
+
+- for all results in `snapshotsDirectory` recursively (default: current directory)
+- if `filter` is set then only show results where URL or path or name matches `filter` (default: show all URLs)
+
+The summary shows:
+
+- `Timestamp`: human readable timestamp
+- `FCP`, `LCP`, `CLS` and `TBT` formatted (and colored) lab data values
+- `Score` 0-100 colored performance score
+- `URL` the requested URL path (or name), or in case of a redirect `<requestPathOrName> -> <finalPath>`
+
+Example:
+
+```bash
+./lab-report snapshots/ /fast/
+```
+
+Output:
 
 ```
-$ LANTERN_DEBUG=true npx pagespeed-score --local --save-assets https://www.google.com
-name  	score	FCP	FMP	SI	FCI	TTI
-run 1 	95	1.4	1.4	1.7	3.6	3.8
-
-$ ls
-1-0.devtoolslog.json
-1-0.trace.json
-1-optimisticFirstContentfulPaint.trace.json
-1-optimisticFirstMeaningfulPaint.trace.json
-1-optimisticFlexFirstContentfulPaint.trace.json
-1-optimisticFlexFirstMeaningfulPaint.trace.json
-1-optimisticFlexInteractive.trace.json
-1-optimisticInteractive.trace.json
-1-pessimisticFirstContentfulPaint.trace.json
-1-pessimisticFirstMeaningfulPaint.trace.json
-1-pessimisticInteractive.trace.json
-
+Timestamp          	FCP   	LCP   	CLS  	TBT      	Score 	URL
+2021-03-19 21:48:49	 1.8 s	 2.0 s	     0	    60 ms	   98	/fast/
+2021-03-19 21:49:00	 1.8 s	 2.1 s	     0	    70 ms	   98	/fast/
 ```
 
-You can drag and drop these traces on the Chrome Devtools Performance tab.
+### Save lab data report as tsv
 
-See also [lighthouse#5844 Better visualization of Lantern simulation](https://github.com/GoogleChrome/lighthouse/issues/5844).
+`NO_FORMAT=1 NO_COLOR=1 ./summarize-reports [snapshotsDirectory] [filter] > tsvFileName`
+
+Save PageSpeed Insights **lab data** report into `tsvFileName`:
+
+- without colors or formatting
+- ready to be imported into e.g. Google Sheets
+
+The tsv rows will have the following fields:
+
+- `Timestamp`: ISO date time value
+- `FCP`, `LCP`, `CLS` and `TBT` lab data raw numeric values
+- `Score` 0-100 performance score
+- `URL` the requested URL path (or name), or in case of a redirect `<requestPathOrName> -> <finalPath>`
+
+Example:
+
+```bash
+NO_FORMAT=1 NO_COLOR=1 ./lab-report snapshots/ > data.csv
+```
+
+Files created:
+
+```
+data.tsv
+```
+
+## Caveats
+
+- few nights hack
+- no tests
+- not originally intended for public consumption

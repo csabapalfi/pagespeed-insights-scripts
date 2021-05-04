@@ -1,5 +1,2 @@
-node_modules
-coverage
-*.trace.json
-*.devtoolslog.json
-*.result.json
+snapshots/*
+*.tsv

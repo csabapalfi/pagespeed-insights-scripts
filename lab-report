@@ -1,0 +1,167 @@
+#!/usr/bin/env node
+
+const path = require("path");
+const {
+  promises: { readdir, readFile },
+} = require("fs");
+
+const noFormat = process.env.NO_FORMAT;
+const noColor = process.env.NO_COLOR;
+
+const padValue = (key, value = key) => {
+  if (noFormat) {
+    return value;
+  }
+
+  const widths = {
+    TBT: "99,999 ms".length,
+    CLS: "0.999".length,
+    Timestamp: "2021-03-19 21:48:49".length,
+    score: "Score".length,
+    "total-blocking-time": "99,999 ms".length,
+    default: "99.9 s".length,
+  };
+  const width = widths[key] || widths.default;
+
+  const isHeading = key === value;
+  return isHeading ? value.padEnd(width, " ") : value.padStart(width, " ");
+};
+
+const formatMetric = ({ id, score, displayValue, numericValue }) => {
+  const colorReset = () => (noColor ? "" : "\x1b[0m");
+
+  const scoreColor = (score) => {
+    if (noColor) {
+      return "";
+    }
+    if (score < 0.5) {
+      return "\x1b[31m"; // red
+    }
+    if (score < 0.9) {
+      return "\x1b[33m"; // yellow
+    }
+    return "\x1b[32m"; // green
+  };
+
+  const metricValue = noFormat ? numericValue : padValue(id, displayValue);
+
+  return `${scoreColor(score)}${metricValue}${colorReset()}`;
+};
+
+const formatTimeStamp = (isoDateString) =>
+  noFormat
+    ? isoDateString
+    : isoDateString.replace("T", " ").replace(/\..*/, "");
+
+const formatNameOrPath = ({
+  name,
+  requestedUrl,
+  requestedOrigin,
+  requestedPath,
+  finalUrl,
+  finalOrigin,
+  finalPath,
+}) => {
+  const requestedNameOrPath = name ? name : requestedPath;
+  if (requestedUrl === finalUrl) {
+    return requestedNameOrPath;
+  } else {
+    if (requestedOrigin === finalOrigin) {
+      return `${requestedNameOrPath} -> ${finalPath}`;
+    } else {
+      return `${requestedNameOrPath} -> ${finalUrl}`;
+    }
+  }
+};
+
+async function* getFiles(dir) {
+  const dirents = await readdir(path.resolve(__dirname, dir), {
+    withFileTypes: true,
+  });
+  for (const dirent of dirents) {
+    const res = path.join(dir, dirent.name);
+    if (dirent.isDirectory()) {
+      yield* getFiles(res);
+    } else {
+      yield res;
+    }
+  }
+}
+
+const origin = (url) => new URL(url).origin;
+
+const stripOrigin = (url) => url.replace(origin(url), "");
+
+const getPaths = ({ requestedUrl, finalUrl }) => ({
+  requestedOrigin: origin(requestedUrl),
+  requestedPath: stripOrigin(requestedUrl),
+  finalOrigin: origin(requestedUrl),
+  finalPath: stripOrigin(finalUrl),
+});
+
+const AUDITS = {
+  FCP: "first-contentful-paint",
+  LCP: "largest-contentful-paint",
+  CLS: "cumulative-layout-shift",
+  TBT: "total-blocking-time",
+};
+
+const HEADINGS = ["Timestamp", ...Object.keys(AUDITS), "Score", "URL"];
+
+const getScoreAsMetric = ({ categories: { performance } }) => ({
+  id: "score",
+  score: performance.score,
+  displayValue: Math.floor(performance.score * 100).toString(),
+  numericValue: Math.floor(performance.score * 100),
+});
+
+(async () => {
+  const [, , snapshotsPath = "", filter] = process.argv;
+
+  console.log(HEADINGS.map((key) => padValue(key)).join("\t"));
+
+  for await (const resultPath of getFiles(snapshotsPath)) {
+    if (!resultPath.endsWith(".json")) {
+      continue;
+    }
+
+    try {
+      const absoluteResultPath = path.resolve(__dirname, resultPath);
+      const psiResult = JSON.parse(await readFile(absoluteResultPath, "utf-8"));
+      const { name, error, lighthouseResult } = psiResult;
+
+      if (error) {
+        console.error(`${resultPath}:`, error.code || error.message);
+        continue;
+      }
+
+      const paths = getPaths(lighthouseResult);
+
+      if (
+        filter &&
+        filter !== name &&
+        filter !== lighthouseResult.requestedUrl &&
+        filter !== paths.requestedPath
+      ) {
+        continue;
+      }
+
+      const audits = Object.values(AUDITS).map(
+        (key) => lighthouseResult.audits[key]
+      );
+      const score = getScoreAsMetric(lighthouseResult);
+      const timeStamp = psiResult.analysisUTCTimestamp;
+
+      console.log(
+        [
+          formatTimeStamp(timeStamp),
+          ...[...audits, score].map(formatMetric),
+          formatNameOrPath({ name, ...lighthouseResult, ...paths }),
+        ].join("\t")
+      );
+    } catch (e) {
+      console.error(`${resultPath}:`, e.message);
+      continue;
+    }
+  }
+})();

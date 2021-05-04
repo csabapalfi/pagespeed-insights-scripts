@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euo pipefail
+IFS=$'\n\t'
+
+SNAPSHOTS_BASE="${1:-snapshots}"
+URLS="${2:-urls.tsv}"
+
+
+snapshotsPath="$SNAPSHOTS_BASE/$(printf '%(%Y-%m-%d_%H-%M-%S)T' -1)"
+mkdir -p "$snapshotsPath"
+echo "created $snapshotsPath/"
+
+run() {
+  ./run-pagespeed "$url" | ./save-result "$snapshotsPath" "$url" "$name"
+}
+
+while IFS=$'\t' read -r url name
+do
+  echo "running pagespeed insights for ${url}..."
+  run "$url" "$name" &
+done < <(grep -v '^ *#' < "$URLS")
+
+wait
+echo ""
+./lab-report "$snapshotsPath"
